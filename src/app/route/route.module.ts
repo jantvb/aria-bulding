@@ -5,10 +5,7 @@ import { RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {path: 'admin', loadChildren: () =>
                                       import('./admin/admin.module')
-                                      .then(m => m.AdminModule)},
-  {path: 'admin/user', loadChildren: () =>
-                                          import('./admin/user/user.module')
-                                          .then(m => m.UserModule)}
+                                      .then(m => m.AdminModule)}
 ];
 
 @NgModule({
