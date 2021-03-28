@@ -4,6 +4,6 @@ export class Role {
 
   id?:            number;
   role?:          string;
-  users?:         Array<User> = [];
+  users?:         Array<User> = new Array<User>();
 
 }

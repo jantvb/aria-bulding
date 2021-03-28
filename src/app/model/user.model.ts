@@ -10,6 +10,6 @@ export class User {
   active?:            number;
   phoneNumber?:       string;
   socialSecurity?:    number;
-  roles?:             Array<Role> = [];
+  roles?:             Array<Role> = new Array<Role>();
 
 }

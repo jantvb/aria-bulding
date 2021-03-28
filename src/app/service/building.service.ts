@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 })
 export class BuildingService {
 
-  path = 'data/buildingGroup';
+  path = 'building';
 
   constructor(private httpC: HttpClient) { }
 

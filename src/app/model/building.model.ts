@@ -5,6 +5,6 @@ export class Building {
   id?:                 number;
   name?:               string;
   description?:        string;
-  apartments?:         Array<Apartment> = [];
+  apartments?:         Array<Apartment> = new Array<Apartment>();
 
 }

@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   title: 'Local Environment',
-  apiURL: 'http://localhost:8888',
+  apiURL: 'http://localhost:8086/',
   version: '1.0'
 };
 

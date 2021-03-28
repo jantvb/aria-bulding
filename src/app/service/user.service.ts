@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 })
 export class UserService {
 
-  path = 'data/userGroup';
+  path = 'user';
 
   constructor(private httpC: HttpClient) { }
 

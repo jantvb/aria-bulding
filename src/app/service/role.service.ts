@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 })
 export class RoleService {
 
-  path = 'data/roleGroup';
+  path = 'role';
 
   constructor(private httpC: HttpClient) { }
 

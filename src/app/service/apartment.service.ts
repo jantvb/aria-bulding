@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 })
 export class ApartmentService {
 
-  path = 'data/apartmentGroup';
+  path = 'apartment';
 
   constructor(private httpC: HttpClient) { }
 
@@ -30,7 +30,7 @@ export class ApartmentService {
   }
 
   listByBuildingId(id: number): Observable <Array<Apartment>> {
-    return this.httpC.get<Array<Apartment>>(environment.apiURL + this.path + '/' + id);
+    return this.httpC.get<Array<Apartment>>(environment.apiURL + this.path + '/building/' + id);
   }
 
 }

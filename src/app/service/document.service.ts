@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 })
 export class DocumentService {
 
-  path = 'data/documentGroup';
+  path = 'document';
 
   constructor(private httpC: HttpClient) { }
 
