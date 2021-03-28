@@ -5,7 +5,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   { path: '', component: AdminComponent },
-  { path: 'user', component: UserComponent }
+  { path: 'admin/user', component: UserComponent }
 ];
 
 @NgModule({
