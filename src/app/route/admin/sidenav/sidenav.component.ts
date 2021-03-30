@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy } from '@angular/core';
 import { MediaMatcher } from '@angular/cdk/layout';
 
 @Component({
@@ -11,12 +11,12 @@ export class SidenavComponent implements OnDestroy {
   mobileQuery: MediaQueryList;
 
   fillerNav = [
-    { name: 'Home',         route: 'home',        icon: 'home'},
-    { name: 'Building',     route: 'building',    icon: 'house'},
-    { name: 'Apartment',    route: 'apartment',   icon: 'house'},
-    { name: 'Document',     route: 'document',    icon: 'insert_drive_file'},
-    { name: 'User',         route: 'user',        icon: 'supervisor_account'},
-    { name: 'Role',         route: 'role',        icon: 'rule'}
+    { name: 'Home',         route: '/admin',        icon: 'home'},
+    { name: 'Building',     route: 'building',      icon: 'house'},
+    { name: 'Apartment',    route: 'apartment',     icon: 'house'},
+    { name: 'Document',     route: 'document',      icon: 'insert_drive_file'},
+    { name: 'User',         route: 'user',          icon: 'supervisor_account'},
+    { name: 'Role',         route: 'role',          icon: 'rule'}
   ]
 
   private _mobileQueryListener: () => void;
@@ -30,7 +30,5 @@ export class SidenavComponent implements OnDestroy {
   ngOnDestroy(): void {
     this.mobileQuery.removeListener(this._mobileQueryListener);
   }
-
-  shouldRun = true;
 
 }

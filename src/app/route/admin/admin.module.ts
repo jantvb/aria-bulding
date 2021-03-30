@@ -10,10 +10,13 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { SidenavComponent } from './sidenav/sidenav.component';
 import { AdminComponent } from './admin.component';
+import { MenuComponent } from './menu/menu.component';
+
 @NgModule({
   declarations: [
     SidenavComponent,
-    AdminComponent
+    AdminComponent,
+    MenuComponent
   ],
   imports: [
     CommonModule,
