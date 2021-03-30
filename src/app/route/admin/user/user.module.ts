@@ -4,14 +4,17 @@ import { CommonModule } from '@angular/common';
 
 import { UserRoutingModule } from './user-routing.module';
 import { AddDialogComponent } from './add-dialog/add-dialog.component';
+import { MatButtonModule } from '@angular/material/button';
+import { UserComponent } from './user.component';
 
 
 @NgModule({
-  declarations: [AddDialogComponent],
+  declarations: [UserComponent, AddDialogComponent],
   imports: [
     CommonModule,
     UserRoutingModule,
-    MatIconModule
+    MatIconModule,
+    MatButtonModule
   ]
 })
 export class UserModule { }
