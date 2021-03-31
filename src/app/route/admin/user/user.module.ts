@@ -7,21 +7,21 @@ import { AddDialogComponent } from './add-dialog/add-dialog.component';
 import { MatButtonModule } from '@angular/material/button';
 import { UserComponent } from './user.component';
 import { TableComponent } from './table/table.component';
-
-import {MatPaginator} from '@angular/material/paginator';
-import {MatSort} from '@angular/material/sort';
-
-
+import { MatSortModule } from '@angular/material/sort';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 @NgModule({
-  declarations: [UserComponent, AddDialogComponent, TableComponent],
+  declarations: [
+    UserComponent,
+    AddDialogComponent,
+    TableComponent],
   imports: [
     CommonModule,
     UserRoutingModule,
     MatIconModule,
     MatButtonModule,
-    MatPaginator,
-    MatSort
+    MatPaginatorModule,
+    MatSortModule
   ]
 })
 export class UserModule { }
