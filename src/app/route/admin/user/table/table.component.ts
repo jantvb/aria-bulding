@@ -25,8 +25,8 @@ const NAMES: string[] = [
  */
 @Component({
   selector: 'app-table-user',
-  styleUrls: ['table-overview-example.css'],
-  templateUrl: 'table-overview-example.html',
+  styleUrls: ['table.component.scss'],
+  templateUrl: 'table.component.html',
 })
 export class TableComponent implements AfterViewInit {
   displayedColumns: string[] = ['id', 'name', 'progress', 'color'];

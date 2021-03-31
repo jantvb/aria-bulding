@@ -9,6 +9,9 @@ import { UserComponent } from './user.component';
 import { TableComponent } from './table/table.component';
 import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatTableModule } from '@angular/material/table';
+import { MatInputModule } from '@angular/material/input';
+import { MatCardModule } from '@angular/material/card';
 
 @NgModule({
   declarations: [
@@ -21,7 +24,10 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     MatIconModule,
     MatButtonModule,
     MatPaginatorModule,
-    MatSortModule
+    MatSortModule,
+    MatTableModule,
+    MatInputModule,
+    MatCardModule
   ]
 })
 export class UserModule { }
