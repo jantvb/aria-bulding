@@ -8,6 +8,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { UserComponent } from './user.component';
 import { TableComponent } from './table/table.component';
 
+import {MatPaginator} from '@angular/material/paginator';
+import {MatSort} from '@angular/material/sort';
+
 
 
 @NgModule({
@@ -16,7 +19,9 @@ import { TableComponent } from './table/table.component';
     CommonModule,
     UserRoutingModule,
     MatIconModule,
-    MatButtonModule
+    MatButtonModule,
+    MatPaginator,
+    MatSort
   ]
 })
 export class UserModule { }
