@@ -1,20 +1,32 @@
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+import { MatTableModule } from '@angular/material/table';
+import { MatInputModule } from '@angular/material/input';
+import { MatCardModule } from '@angular/material/card';
 import { RoleComponent } from './role.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
 import { RoleRoutingModule } from './role-routing.module';
 import { AddDialogComponent } from './add-dialog/add-dialog.component';
+import { TableComponent } from './table/table.component';
 
 
 @NgModule({
-  declarations: [RoleComponent, AddDialogComponent],
+  declarations: [RoleComponent, AddDialogComponent, TableComponent],
   imports: [
     CommonModule,
     RoleRoutingModule,
     MatIconModule,
-    MatButtonModule
+    MatButtonModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatTableModule,
+    MatInputModule,
+    MatCardModule,
+    MatDialogModule
   ]
 })
 export class RoleModule { }
