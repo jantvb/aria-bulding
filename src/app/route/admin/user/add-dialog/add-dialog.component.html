@@ -12,9 +12,34 @@
       <input matInput type="text" placeholder="Last Name" [formControl]="lastNameControl" required>
       <mat-error *ngIf="lastNameControl.invalid">Please enter user last name</mat-error>
     </mat-form-field>
+
+    <mat-form-field appearance="legacy">
+      <mat-label>Enter your email</mat-label>
+      <input matInput placeholder="pat@example.com" [formControl]="emailControl" required>
+      <mat-error *ngIf="emailControl.invalid">{{getErrorMessage()}}</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="legacy">
+      <mat-label>Password</mat-label>
+      <input matInput [type]="hide ? 'password' : 'text'" placeholder="Password" [formControl]="passwordControl" required>
+      <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </button>
+      <mat-error *ngIf="passwordControl.invalid">Please enter your password</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="legacy">
+      <mat-label>Select Role</mat-label>
+      <mat-select [formControl]="roleControl" required>
+        <div *ngFor = "let role of roles">
+          <mat-option value="{{role.id}}">{{role.role}}</mat-option>
+        </div>
+      </mat-select>
+      <mat-error *ngIf="roleControl.invalid">Please select an user role</mat-error>
+    </mat-form-field>
   </form>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
   <button mat-button mat-dialog-close>Cancel</button>
-  <button mat-button [mat-dialog-close]="true" cdkFocusInitial >Save</button>
+  <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Save</button>
 </mat-dialog-actions>
