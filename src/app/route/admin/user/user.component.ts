@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { AddDialogComponent } from './add-dialog/add-dialog.component';
-
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { User } from 'src/app/model/user.model';
+import { TableComponent } from './table/table.component';
 @Component({
   selector: 'app-user',
   templateUrl: './user.component.html',
@@ -9,17 +8,15 @@ import { AddDialogComponent } from './add-dialog/add-dialog.component';
 })
 export class UserComponent implements OnInit {
 
-  constructor(public dialog: MatDialog) { }
+  @ViewChild(TableComponent) table!: TableComponent;
+
+  constructor() { }
 
   ngOnInit(): void {
   }
 
-  openDialog() {
-    const dialogRef = this.dialog.open(AddDialogComponent);
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
-    });
+  openDialog(): void {
+    this.table.openDialog(new User());
   }
 
 }

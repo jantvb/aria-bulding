@@ -1,51 +1,109 @@
-import {AfterViewInit, Component, ViewChild} from '@angular/core';
+import {  Component,
+          OnInit,
+          ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 
-export interface UserData {
-  id: string;
-  name: string;
-  progress: string;
-  color: string;
-}
+import { User } from 'src/app/model/user.model';
+import { UserService } from 'src/app/service/user.service';
+import { AddDialogComponent } from '../add-dialog/add-dialog.component';
 
-/** Constants used to fill up our data base. */
-const COLORS: string[] = [
-  'maroon', 'red', 'orange', 'yellow', 'olive', 'green', 'purple', 'fuchsia', 'lime', 'teal',
-  'aqua', 'blue', 'navy', 'black', 'gray'
-];
-const NAMES: string[] = [
-  'Maia', 'Asher', 'Olivia', 'Atticus', 'Amelia', 'Jack', 'Charlotte', 'Theodore', 'Isla', 'Oliver',
-  'Isabella', 'Jasper', 'Cora', 'Levi', 'Violet', 'Arthur', 'Mia', 'Thomas', 'Elizabeth'
-];
-
-/**
- * @title Data table with sorting, pagination, and filtering.
- */
 @Component({
   selector: 'app-table-user',
   styleUrls: ['table.component.scss'],
   templateUrl: 'table.component.html',
 })
-export class TableComponent implements AfterViewInit {
-  displayedColumns: string[] = ['id', 'name', 'progress', 'color'];
-  dataSource: MatTableDataSource<UserData>;
+export class TableComponent implements OnInit {
+
+  displayedColumns: string[] = ['id', 'name', 'email', 'phone', 'status'];
+  dataSource!: MatTableDataSource<User>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor() {
-    // Create 100 users
-    const users = Array.from({length: 100}, (_, k) => createNewUser(k + 1));
+  users: Array<User> = new Array<User>();
 
-    // Assign the data to the data source for the table to render
-    this.dataSource = new MatTableDataSource(users);
+  constructor(private userService: UserService,
+              public  dialog:      MatDialog) {}
+
+  ngOnInit(): void {
+    this.loadUsers();
   }
 
-  ngAfterViewInit(): void {
+  private loadUsers(): void {
+
+    this.userService.list().subscribe(uList => {
+
+      this.users = new Array<User>();
+
+      Object.assign(this.users, uList);
+
+      this.refreshTable();
+
+    }, err => {
+      console.log(err);
+    });
+
+  }
+
+  private refreshTable(): void {
+
+    this.dataSource = new MatTableDataSource(this.users);
+
     this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
+    this.dataSource.sort      = this.sort;
+
+  }
+
+  protected delete(userId: number): void {
+    this.userService
+        .delete(userId)
+        .subscribe(() => {
+
+          this.users
+              .splice(this.users
+                         .findIndex(u => u.id === userId),
+                      1);
+
+          this.refreshTable();
+
+        }, err => console.log(err));
+  }
+
+  editOrCreate(user: User): void {
+
+    this.userService
+        .createOrUpdate(user)
+        .subscribe(uResponse => {
+
+          if (user.id !== undefined) {
+
+            Object.assign(this.users.find(u => u.id === user.id), uResponse);
+
+          } else {
+
+            this.users.unshift(uResponse);
+
+          }
+
+          this.refreshTable();
+
+        }, err => console.log(err));
+
+  }
+
+
+  openDialog(user: User): void {
+
+    const dialogRef = this.dialog.open(AddDialogComponent, {
+      data: user});
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
   }
 
   applyFilter(event: Event): void {
@@ -56,17 +114,4 @@ export class TableComponent implements AfterViewInit {
       this.dataSource.paginator.firstPage();
     }
   }
-}
-
-/** Builds and returns a new User. */
-function createNewUser(id: number): UserData {
-  const name = NAMES[Math.round(Math.random() * (NAMES.length - 1))] + ' ' +
-      NAMES[Math.round(Math.random() * (NAMES.length - 1))].charAt(0) + '.';
-
-  return {
-    id: id.toString(),
-    name,
-    progress: Math.round(Math.random() * 100).toString(),
-    color: COLORS[Math.round(Math.random() * (COLORS.length - 1))]
-  };
 }
