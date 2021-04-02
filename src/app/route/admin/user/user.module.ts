@@ -17,7 +17,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
 import { MatOptionModule } from '@angular/material/core';
-
+import { TextMaskModule } from 'angular2-text-mask';
 
 @NgModule({
   declarations: [
@@ -25,6 +25,7 @@ import { MatOptionModule } from '@angular/material/core';
     AddDialogComponent,
     TableComponent],
   imports: [
+    TextMaskModule,
     CommonModule,
     UserRoutingModule,
     MatIconModule,

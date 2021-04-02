@@ -10,6 +10,8 @@ import { User } from 'src/app/model/user.model';
 })
 export class AddDialogComponent implements OnInit {
 
+  mask = ['(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
+
   options!: FormGroup;
   firstNameControl!: FormControl;
   lastNameControl!: FormControl;
