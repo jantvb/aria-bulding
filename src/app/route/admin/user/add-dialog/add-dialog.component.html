@@ -16,7 +16,8 @@
     <mat-form-field class="example-full-width">
       <mat-label>Phone</mat-label>
       <span matPrefix>+1 &nbsp;</span>
-      <input type="tel" matInput placeholder="555-555-1234">
+      <input type="tel" matInput placeholder="555-555-1234" [formControl]="phoneControl" required>
+      <mat-error *ngIf="phoneControl.invalid">Please enter your phone number</mat-error>
     </mat-form-field>
 
     <mat-form-field appearance="legacy">

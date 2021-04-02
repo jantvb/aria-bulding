@@ -13,6 +13,7 @@ export class AddDialogComponent implements OnInit {
   options!: FormGroup;
   firstNameControl!: FormControl;
   lastNameControl!: FormControl;
+  phoneControl!: FormControl;
   emailControl!: FormControl;
   passwordControl!: FormControl;
   roleControl!: FormControl;
@@ -38,6 +39,7 @@ export class AddDialogComponent implements OnInit {
 
     this.firstNameControl    = new FormControl(this.user.firstname);
     this.lastNameControl     = new FormControl(this.user.lastname);
+    this.phoneControl        = new FormControl(this.user.phoneNumber);
     this.emailControl        = new FormControl(this.user.email);
     this.passwordControl     = new FormControl(this.user.password);
     this.roleControl         = new FormControl(this.user.roles);
@@ -45,6 +47,7 @@ export class AddDialogComponent implements OnInit {
     this.options = fb.group({
       firstName:     this.firstNameControl,
       lastName:      this.lastNameControl,
+      phone:         this.phoneControl,
       email:         this.emailControl,
       password:      this.passwordControl,
       role:          this.roleControl
