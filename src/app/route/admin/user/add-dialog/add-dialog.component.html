@@ -13,6 +13,12 @@
       <mat-error *ngIf="lastNameControl.invalid">Please enter user last name</mat-error>
     </mat-form-field>
 
+    <mat-form-field class="example-full-width">
+      <mat-label>Phone</mat-label>
+      <span matPrefix>+1 &nbsp;</span>
+      <input type="tel" matInput placeholder="555-555-1234">
+    </mat-form-field>
+
     <mat-form-field appearance="legacy">
       <mat-label>Enter your email</mat-label>
       <input matInput placeholder="pat@example.com" [formControl]="emailControl" required>

@@ -1,4 +1,3 @@
-import { Role } from './../../../../model/role.model';
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -22,7 +21,7 @@ export class AddDialogComponent implements OnInit {
 
   title: string = 'Create New User';
 
-  roles: Array<Role> = new Array<Role>();
+  roles = this.user.roles;
 
   hide = true;
 
