@@ -22,7 +22,7 @@
 
     <mat-form-field appearance="legacy">
       <mat-label>Enter your email</mat-label>
-      <input matInput placeholder="pat@example.com" [formControl]="emailControl" required>
+      <input matInput placeholder="user@example.com" [formControl]="emailControl" required>
       <mat-error *ngIf="emailControl.invalid">{{getErrorMessage()}}</mat-error>
     </mat-form-field>
 

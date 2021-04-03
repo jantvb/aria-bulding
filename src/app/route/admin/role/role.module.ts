@@ -1,3 +1,4 @@
+import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
@@ -15,7 +16,11 @@ import { TableComponent } from './table/table.component';
 
 
 @NgModule({
-  declarations: [RoleComponent, AddDialogComponent, TableComponent],
+  declarations: [
+    RoleComponent,
+    AddDialogComponent,
+    TableComponent
+  ],
   imports: [
     CommonModule,
     RoleRoutingModule,
@@ -26,7 +31,9 @@ import { TableComponent } from './table/table.component';
     MatTableModule,
     MatInputModule,
     MatCardModule,
-    MatDialogModule
+    MatDialogModule,
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class RoleModule { }
