@@ -57,7 +57,7 @@ export class AddDialogComponent implements OnInit {
 
   }
 
-  getErrorMessage() {
+  getErrorMessage(): string {
     if (this.emailControl.hasError('required')) {
       return 'Please enter an email';
     }

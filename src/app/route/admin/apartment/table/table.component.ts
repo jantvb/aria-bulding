@@ -1,24 +1,11 @@
-import {AfterViewInit, Component, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
-
-export interface UserData {
-  id: string;
-  name: string;
-  progress: string;
-  color: string;
-}
-
-/** Constants used to fill up our data base. */
-const COLORS: string[] = [
-  'maroon', 'red', 'orange', 'yellow', 'olive', 'green', 'purple', 'fuchsia', 'lime', 'teal',
-  'aqua', 'blue', 'navy', 'black', 'gray'
-];
-const NAMES: string[] = [
-  'Maia', 'Asher', 'Olivia', 'Atticus', 'Amelia', 'Jack', 'Charlotte', 'Theodore', 'Isla', 'Oliver',
-  'Isabella', 'Jasper', 'Cora', 'Levi', 'Violet', 'Arthur', 'Mia', 'Thomas', 'Elizabeth'
-];
+import { Apartment } from 'src/app/model/apartment.model';
+import { ApartmentService } from 'src/app/service/apartment.service';
+import { AddDialogComponent } from '../add-dialog/add-dialog.component';
 
 /**
  * @title Data table with sorting, pagination, and filtering.
@@ -28,24 +15,20 @@ const NAMES: string[] = [
   styleUrls: ['table.component.scss'],
   templateUrl: 'table.component.html',
 })
-export class TableComponent implements AfterViewInit {
-  displayedColumns: string[] = ['id', 'name', 'progress', 'color'];
-  dataSource: MatTableDataSource<UserData>;
+export class TableComponent implements OnInit {
+  displayedColumns: string[] = ['display', 'description', 'building', 'actions'];
+  dataSource!: MatTableDataSource<Apartment>;
+
+  apartments: Array<Apartment> = new Array<Apartment>();
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor() {
-    // Create 100 users
-    const users = Array.from({length: 100}, (_, k) => createNewUser(k + 1));
+  constructor(private apartmentService: ApartmentService,
+              public dialog: MatDialog) {}
 
-    // Assign the data to the data source for the table to render
-    this.dataSource = new MatTableDataSource(users);
-  }
-
-  ngAfterViewInit(): void {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
+  ngOnInit(): void {
+    this.load();
   }
 
   applyFilter(event: Event): void {
@@ -56,17 +39,74 @@ export class TableComponent implements AfterViewInit {
       this.dataSource.paginator.firstPage();
     }
   }
-}
 
-/** Builds and returns a new User. */
-function createNewUser(id: number): UserData {
-  const name = NAMES[Math.round(Math.random() * (NAMES.length - 1))] + ' ' +
-      NAMES[Math.round(Math.random() * (NAMES.length - 1))].charAt(0) + '.';
+  private refreshTable(): void {
 
-  return {
-    id: id.toString(),
-    name,
-    progress: Math.round(Math.random() * 100).toString(),
-    color: COLORS[Math.round(Math.random() * (COLORS.length - 1))]
-  };
+    this.dataSource = new MatTableDataSource(this.apartments);
+
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+
+  }
+
+  private load(): void {
+    this.apartmentService
+        .list()
+        .subscribe( rApartments => {
+
+          this.apartments = new Array<Apartment>();
+
+          Object.assign(this.apartments, rApartments);
+
+          this.refreshTable();
+
+        }, err => console.log(err));
+  }
+
+  protected delete(apartmentId: number): void {
+
+    this.apartmentService
+        .delete(apartmentId)
+        .subscribe(() => {
+
+          this.apartments
+              .splice(this.apartments
+                          .findIndex(a => a.id === apartmentId),
+                      1);
+
+          this.refreshTable();
+
+        }, err => console.log(err));
+  }
+
+  protected createOrUpdate(apartment: Apartment): void {
+
+    this.apartmentService
+        .createOrUpdate(apartment)
+        .subscribe(aR => {
+
+          if (apartment.id === undefined || apartment.id == null) {
+
+            this.apartments.unshift(aR);
+
+          } else {
+
+            Object.assign(this.apartments.find(a => a.id === apartment.id), aR);
+
+          }
+
+          this.refreshTable();
+
+        }, err => console.log(err));
+  }
+
+  openDialog(apartment: Apartment): void {
+
+    const dialogRef = this.dialog.open(AddDialogComponent, {data: apartment});
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result);
+    });
+  }
+
 }

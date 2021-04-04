@@ -1,6 +1,8 @@
 import { AddDialogComponent } from './add-dialog/add-dialog.component';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { TableComponent } from './table/table.component';
+import { Apartment } from 'src/app/model/apartment.model';
 
 
 @Component({
@@ -10,17 +12,15 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class ApartmentComponent implements OnInit {
 
-  constructor(public dialog: MatDialog) { }
+  @ViewChild(TableComponent) table!: TableComponent;
+
+  constructor() { }
 
   ngOnInit(): void {
   }
 
-  openDialog() {
-    const dialogRef = this.dialog.open(AddDialogComponent);
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
-    });
+  openDialog(): void {
+    this.table.openDialog(new Apartment());
   }
 
 }
