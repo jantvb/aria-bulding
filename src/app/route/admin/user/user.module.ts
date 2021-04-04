@@ -23,7 +23,8 @@ import { TextMaskModule } from 'angular2-text-mask';
   declarations: [
     UserComponent,
     AddDialogComponent,
-    TableComponent],
+    TableComponent
+  ],
   imports: [
     TextMaskModule,
     CommonModule,
