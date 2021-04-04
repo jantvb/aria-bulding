@@ -45,11 +45,11 @@ export class AddDialogComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  protected cancel(): void {
+  cancel(): void {
     this.dialogRef.close();
   }
 
-  protected submit(): void {
+  submit(): void {
     this.dialogRef.close(this.apartment);
   }
 
