@@ -106,7 +106,10 @@ export class TableComponent implements OnInit {
     const dialogRef = this.dialog.open(AddDialogComponent, {data: apartment});
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
+
+      if (result !== undefined ){
+        this.createOrUpdate(result);
+      }
     });
   }
 
