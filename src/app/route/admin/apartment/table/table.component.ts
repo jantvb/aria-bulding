@@ -16,16 +16,17 @@ import { AddDialogComponent } from '../add-dialog/add-dialog.component';
   templateUrl: 'table.component.html',
 })
 export class TableComponent implements OnInit {
-  displayedColumns: string[] = ['display', 'description', 'building', 'actions'];
-  dataSource!: MatTableDataSource<Apartment>;
 
-  apartments: Array<Apartment> = new Array<Apartment>();
+  displayedColumns:                         string[] = ['display', 'description', 'building', 'actions'];
+  dataSource!:                              MatTableDataSource<Apartment>;
 
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
-  @ViewChild(MatSort) sort!: MatSort;
+  apartments:                               Array<Apartment> = new Array<Apartment>();
 
-  constructor(private apartmentService: ApartmentService,
-              public dialog: MatDialog) {}
+  @ViewChild(MatPaginator) paginator!:      MatPaginator;
+  @ViewChild(MatSort) sort!:                MatSort;
+
+  constructor(private apartmentService:    ApartmentService,
+              public  dialog:              MatDialog) {}
 
   ngOnInit(): void {
     this.load();

@@ -1,12 +1,8 @@
-import {  Component,
-          OnInit,
-          ViewChild } from '@angular/core';
+import { Component,OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-
-import {MatPaginator} from '@angular/material/paginator';
-import {MatSort} from '@angular/material/sort';
-import {MatTableDataSource} from '@angular/material/table';
-
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 import { Document } from 'src/app/model/document.model';
 import { DocumentService } from 'src/app/service/document.service';
 import { AddDialogComponent } from '../add-dialog/add-dialog.component';
@@ -18,35 +14,33 @@ import { AddDialogComponent } from '../add-dialog/add-dialog.component';
 })
 export class TableComponent implements OnInit {
 
-  displayedColumns:   string[] = ['id', 'name', 'path', 'created', 'updated'];
-  dataSource!:         MatTableDataSource<Document>;
+  displayedColumns:                       string[] = ['name', 'path', 'created', 'updated', 'actions'];
+  dataSource!:                            MatTableDataSource<Document>;
 
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
-  @ViewChild(MatSort) sort!: MatSort;
+  @ViewChild(MatPaginator) paginator!:    MatPaginator;
+  @ViewChild(MatSort) sort!:              MatSort;
 
-  documents: Array<Document> = new Array<Document>();
+  documents:                              Array<Document> = new Array<Document>();
 
   constructor(private documentService:  DocumentService,
               public  dialog:           MatDialog) { }
 
   ngOnInit(): void {
-    this.loadRoles();
+    this.load();
   }
 
-  private loadRoles(): void {
+  private load(): void {
+    this.documentService
+        .list()
+        .subscribe( rDocuments => {
 
-    this.documentService.list().subscribe(uList => {
+          this.documents = new Array<Document>();
 
-      this.documents = new Array<Document>();
+          Object.assign(this.documents, rDocuments);
 
-      Object.assign(this.documents, uList);
+          this.refreshTable();
 
-      this.refreshTable();
-
-    }, err => {
-        console.log(err);
-    });
-
+        }, err => console.log(err));
   }
 
   private refreshTable(): void {
@@ -65,7 +59,7 @@ export class TableComponent implements OnInit {
 
           this.documents
               .splice(this.documents
-                          .findIndex(u => u.id === documentId),
+                          .findIndex(d => d.id === documentId),
                       1);
 
           this.refreshTable();
@@ -73,35 +67,33 @@ export class TableComponent implements OnInit {
         }, err => console.log(err));
   }
 
-  editOrCreate(document: Document): void {
+  protected createOrUpdate(document: Document): void {
 
     this.documentService
         .createOrUpdate(document)
-        .subscribe(uResponse => {
+        .subscribe(aD => {
 
-          if (document.id !== undefined) {
+          if (document.id === undefined || document.id == null) {
 
-            Object.assign(this.documents.find(u => u.id === document.id), uResponse);
+            this.documents.unshift(aD);
 
           } else {
 
-            this.documents.unshift(uResponse);
+            Object.assign(this.documents.find(d => d.id === document.id), aD);
 
           }
 
           this.refreshTable();
 
         }, err => console.log(err));
-
   }
 
   openDialog(document: Document): void {
 
-    const dialogRef = this.dialog.open(AddDialogComponent, {
-      data: document});
+    const dialogRef = this.dialog.open(AddDialogComponent, {data: document});
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
+      console.log(result);
     });
   }
 

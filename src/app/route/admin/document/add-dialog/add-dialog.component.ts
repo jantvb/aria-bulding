@@ -1,4 +1,4 @@
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Document } from 'src/app/model/document.model';
 import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
 import { Component, OnInit, Inject } from '@angular/core';
@@ -20,25 +20,28 @@ export class AddDialogComponent implements OnInit {
   title:                string = 'Create New Document';
   srcResult:            any;
 
-  constructor(fb: FormBuilder,
+  constructor(public dialogRef: MatDialogRef<AddDialogComponent>,
+    fb: FormBuilder,
     @Inject(MAT_DIALOG_DATA) public data: Document) {
+
+    this.document = new Document();
 
     Object.assign(this.document, data);
 
     if (this.document.id === undefined) {
-    this.title = 'Create New Document';
+      this.title = 'Create New Document';
     } else {
-    this.title = 'Editing: ' + this.document.name;
+        this.title = 'Editing: ' + this.document.name;
     }
 
-    this.nameControl            = new FormControl(this.document.name);
-    this.pathControl            = new FormControl(this.document.path);
-    this.descriptionControl     = new FormControl(this.document.description);
+    this.nameControl           = new FormControl(this.document.name);
+    this.pathControl           = new FormControl(this.document.path);
+    this.descriptionControl    = new FormControl(this.document.description);
 
     this.options = fb.group({
-      name:            this.nameControl,
-      path:            this.pathControl,
-      description:     this.descriptionControl
+      name:           this.nameControl,
+      path:           this.pathControl,
+      description:    this.descriptionControl
     });
 
   }
@@ -58,6 +61,14 @@ export class AddDialogComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  }
+
+  cancel(): void {
+    this.dialogRef.close();
+  }
+
+  submit(): void {
+    this.dialogRef.close(this.document);
   }
 
 }

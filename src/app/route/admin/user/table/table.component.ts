@@ -18,7 +18,7 @@ import { AddDialogComponent } from '../add-dialog/add-dialog.component';
 })
 export class TableComponent implements OnInit {
 
-  displayedColumns: string[] = ['id', 'name', 'email', 'phone', 'status'];
+  displayedColumns: string[] = ['name', 'email', 'phone', 'status', 'actions'];
   dataSource!: MatTableDataSource<User>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -30,22 +30,22 @@ export class TableComponent implements OnInit {
               public  dialog:      MatDialog) {}
 
   ngOnInit(): void {
-    this.loadUsers();
+    this.load();
   }
 
-  private loadUsers(): void {
+  private load(): void {
 
-    this.userService.list().subscribe(uList => {
+    this.userService
+        .list()
+        .subscribe( rUser => {
 
-      this.users = new Array<User>();
+          this.users = new Array<User>();
 
-      Object.assign(this.users, uList);
+          Object.assign(this.users, rUser);
 
-      this.refreshTable();
+          this.refreshTable();
 
-    }, err => {
-      console.log(err);
-    });
+        }, err => console.log(err));
 
   }
 
@@ -73,19 +73,19 @@ export class TableComponent implements OnInit {
         }, err => console.log(err));
   }
 
-  editOrCreate(user: User): void {
+  protected createOrUpdate(user: User): void {
 
     this.userService
         .createOrUpdate(user)
-        .subscribe(uResponse => {
+        .subscribe(uR => {
 
-          if (user.id !== undefined) {
+          if (user.id === undefined || user.id == null) {
 
-            Object.assign(this.users.find(u => u.id === user.id), uResponse);
+            this.users.unshift(uR);
 
           } else {
 
-            this.users.unshift(uResponse);
+            Object.assign(this.users.find(u => u.id === user.id), uR);
 
           }
 
@@ -98,11 +98,10 @@ export class TableComponent implements OnInit {
 
   openDialog(user: User): void {
 
-    const dialogRef = this.dialog.open(AddDialogComponent, {
-      data: user});
+    const dialogRef = this.dialog.open(AddDialogComponent, {data: user});
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
+      console.log(result);
     });
   }
 

@@ -1,12 +1,8 @@
-import {  Component,
-          OnInit,
-          ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-
-import {MatPaginator} from '@angular/material/paginator';
-import {MatSort} from '@angular/material/sort';
-import {MatTableDataSource} from '@angular/material/table';
-
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 import { Role } from 'src/app/model/role.model';
 import { RoleService } from 'src/app/service/role.service';
 import { AddDialogComponent } from '../add-dialog/add-dialog.component';
@@ -18,35 +14,33 @@ import { AddDialogComponent } from '../add-dialog/add-dialog.component';
 })
 export class TableComponent implements OnInit {
 
-  displayedColumns:   string[] = ['id', 'role'];
-  dataSource!:        MatTableDataSource<Role>;
+  displayedColumns:                         string[] = ['role', 'actions'];
+  dataSource!:                              MatTableDataSource<Role>;
 
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
-  @ViewChild(MatSort) sort!: MatSort;
+  @ViewChild(MatPaginator) paginator!:      MatPaginator;
+  @ViewChild(MatSort) sort!:                MatSort;
 
-  roles: Array<Role> = new Array<Role>();
+  roles:                                    Array<Role> = new Array<Role>();
 
-  constructor(private roleService: RoleService,
-              public  dialog:      MatDialog) { }
+  constructor(private   roleService:    RoleService,
+              public    dialog:         MatDialog) {}
 
   ngOnInit(): void {
-    this.loadRoles();
+    this.load();
   }
 
-  private loadRoles(): void {
+  private load(): void {
+    this.roleService
+        .list()
+        .subscribe( rRoles => {
 
-    this.roleService.list().subscribe(uList => {
+          this.roles = new Array<Role>();
 
-      this.roles = new Array<Role>();
+          Object.assign(this.roles, rRoles);
 
-      Object.assign(this.roles, uList);
+          this.refreshTable();
 
-      this.refreshTable();
-
-    }, err => {
-        console.log(err);
-    });
-
+        }, err => console.log(err));
   }
 
   private refreshTable(): void {
@@ -65,7 +59,7 @@ export class TableComponent implements OnInit {
 
           this.roles
               .splice(this.roles
-                          .findIndex(u => u.id === roleId),
+                          .findIndex(r => r.id === roleId),
                       1);
 
           this.refreshTable();
@@ -73,35 +67,33 @@ export class TableComponent implements OnInit {
         }, err => console.log(err));
   }
 
-  editOrCreate(role: Role): void {
+  protected createOrUpdate(role: Role): void {
 
     this.roleService
         .createOrUpdate(role)
-        .subscribe(uResponse => {
+        .subscribe(aR => {
 
-          if (role.id !== undefined) {
+          if (role.id === undefined || role.id == null) {
 
-            Object.assign(this.roles.find(u => u.id === role.id), uResponse);
+            this.roles.unshift(aR);
 
           } else {
 
-            this.roles.unshift(uResponse);
+            Object.assign(this.roles.find(a => a.id === role.id), aR);
 
           }
 
           this.refreshTable();
 
         }, err => console.log(err));
-
   }
 
   openDialog(role: Role): void {
 
-    const dialogRef = this.dialog.open(AddDialogComponent, {
-      data: role});
+    const dialogRef = this.dialog.open(AddDialogComponent, {data: role});
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
+      console.log(result);
     });
   }
 

@@ -10,13 +10,13 @@ import { Apartment } from 'src/app/model/apartment.model';
 })
 export class AddDialogComponent implements OnInit {
 
-  options!:             FormGroup;
-  displayControl!:      FormControl;
-  descriptionControl!:  FormControl;
+  options!:                   FormGroup;
+  displayControl!:            FormControl;
+  descriptionControl!:        FormControl;
 
-  title: string = 'Create New Apartment';
+  title:                      string = 'Create New Apartment';
 
-  apartment!: Apartment;
+  apartment!:                 Apartment;
 
   constructor(public dialogRef: MatDialogRef<AddDialogComponent>,
               fb: FormBuilder,

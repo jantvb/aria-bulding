@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
 import { AddDialogComponent } from './add-dialog/add-dialog.component';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { TableComponent } from './table/table.component';
+import { Building } from 'src/app/model/building.model';
+
 
 @Component({
   selector: 'app-building',
@@ -8,6 +11,8 @@ import { AddDialogComponent } from './add-dialog/add-dialog.component';
   styleUrls: ['./building.component.scss']
 })
 export class BuildingComponent implements OnInit {
+
+  @ViewChild(TableComponent) table!: TableComponent;
 
   constructor(public dialog: MatDialog) { }
 

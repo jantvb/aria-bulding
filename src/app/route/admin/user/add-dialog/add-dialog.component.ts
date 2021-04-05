@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { User } from 'src/app/model/user.model';
 
 @Component({
@@ -28,8 +28,9 @@ export class AddDialogComponent implements OnInit {
 
   hide = true;
 
-  constructor(fb: FormBuilder,
-              @Inject(MAT_DIALOG_DATA) public data: User) {
+  constructor(public dialogRef: MatDialogRef<AddDialogComponent>,
+                    fb: FormBuilder,
+                    @Inject(MAT_DIALOG_DATA) public data: User) {
 
     Object.assign(this.user, data);
 
@@ -67,6 +68,14 @@ export class AddDialogComponent implements OnInit {
 
 
   ngOnInit(): void {
+  }
+
+  cancel(): void {
+    this.dialogRef.close();
+  }
+
+  submit(): void {
+    this.dialogRef.close(this.user);
   }
 
 }

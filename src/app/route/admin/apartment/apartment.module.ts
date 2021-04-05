@@ -17,8 +17,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
 import { MatOptionModule } from '@angular/material/core';
 
+
 @NgModule({
-  declarations: [ApartmentComponent, AddDialogComponent, TableComponent],
+  declarations: [
+    ApartmentComponent,
+    AddDialogComponent,
+    TableComponent
+  ],
   imports: [
     CommonModule,
     ApartmentRoutingModule,
