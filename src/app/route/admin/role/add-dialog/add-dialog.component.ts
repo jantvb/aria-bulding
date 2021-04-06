@@ -10,29 +10,31 @@ import { Component, OnInit, Inject } from '@angular/core';
 })
 export class AddDialogComponent implements OnInit {
 
-  options!:     FormGroup;
-  roleControl!: FormControl;
+  options!:                 FormGroup;
+  roleControl!:             FormControl;
 
-  role:         Role = new Role();
+  title:                    string = 'Create New Role';
 
-  title:        string = 'Create New Role';
+  role!:                    Role;
 
   constructor(public dialogRef: MatDialogRef<AddDialogComponent>,
-    fb: FormBuilder,
-    @Inject(MAT_DIALOG_DATA) public data: Role) {
+              fb: FormBuilder,
+              @Inject(MAT_DIALOG_DATA) public data: Role) {
+
+    this.role = new Role();
 
     Object.assign(this.role, data);
 
     if (this.role.id === undefined) {
       this.title = 'Create New Role';
     } else {
-        this.title = 'Editing: ' + this.role.role;
+      this.title = 'Editing: ' + this.role.role;
     }
 
-    this.roleControl    = new FormControl(this.role.role);
+    this.roleControl              = new FormControl(this.role.role);
 
     this.options = fb.group({
-      role:     this.roleControl
+      roleName:             this.roleControl,
     });
 
   }

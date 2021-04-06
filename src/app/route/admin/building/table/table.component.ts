@@ -21,7 +21,7 @@ export class TableComponent implements OnInit {
   displayedColumns:                         string[] = ['name', 'description', 'actions'];
   dataSource!:                              MatTableDataSource<Building>;
 
-  buildings:                               Array<Building> = new Array<Building>();
+  buildings:                                Array<Building> = new Array<Building>();
 
   @ViewChild(MatPaginator) paginator!:      MatPaginator;
   @ViewChild(MatSort) sort!:                MatSort;

@@ -36,8 +36,8 @@ export class AddDialogComponent implements OnInit {
     this.descriptionControl = new FormControl(this.apartment.description);
 
     this.options = fb.group({
-      display:     this.displayControl,
-      description: this.descriptionControl
+      display:        this.displayControl,
+      description:    this.descriptionControl
     });
 
   }

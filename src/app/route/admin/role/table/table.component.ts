@@ -14,19 +14,38 @@ import { AddDialogComponent } from '../add-dialog/add-dialog.component';
 })
 export class TableComponent implements OnInit {
 
+
   displayedColumns:                         string[] = ['role', 'actions'];
   dataSource!:                              MatTableDataSource<Role>;
+
+  roles:                                    Array<Role> = new Array<Role>();
 
   @ViewChild(MatPaginator) paginator!:      MatPaginator;
   @ViewChild(MatSort) sort!:                MatSort;
 
-  roles:                                    Array<Role> = new Array<Role>();
-
-  constructor(private   roleService:    RoleService,
-              public    dialog:         MatDialog) {}
+  constructor(private roleService:        RoleService,
+              public  dialog:             MatDialog) {}
 
   ngOnInit(): void {
     this.load();
+  }
+
+  applyFilter(event: Event): void {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
+  }
+
+  private refreshTable(): void {
+
+    this.dataSource             = new MatTableDataSource(this.roles);
+
+    this.dataSource.paginator   = this.paginator;
+    this.dataSource.sort        = this.sort;
+
   }
 
   private load(): void {
@@ -43,23 +62,15 @@ export class TableComponent implements OnInit {
         }, err => console.log(err));
   }
 
-  private refreshTable(): void {
-
-    this.dataSource = new MatTableDataSource(this.roles);
-
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort      = this.sort;
-
-  }
-
   protected delete(roleId: number): void {
+
     this.roleService
         .delete(roleId)
         .subscribe(() => {
 
           this.roles
               .splice(this.roles
-                          .findIndex(r => r.id === roleId),
+                          .findIndex(b => b.id === roleId),
                       1);
 
           this.refreshTable();
@@ -79,7 +90,7 @@ export class TableComponent implements OnInit {
 
           } else {
 
-            Object.assign(this.roles.find(a => a.id === role.id), aR);
+            Object.assign(this.roles.find(r => r.id === role.id), aR);
 
           }
 
@@ -93,18 +104,11 @@ export class TableComponent implements OnInit {
     const dialogRef = this.dialog.open(AddDialogComponent, {data: role});
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
+      if (result !== undefined) {
+        this.createOrUpdate(result);
+      }
+
     });
   }
-
-  applyFilter(event: Event): void {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
-  }
-
 
 }

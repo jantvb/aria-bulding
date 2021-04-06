@@ -6,7 +6,7 @@
       <input  matInput
               type="text"
               [(ngModel)]="building.name"
-              placeholder="Display"
+              placeholder="Name"
               [formControl]="nameControl"
               required>
       <mat-error *ngIf="nameControl.invalid">Please enter building name</mat-error>
