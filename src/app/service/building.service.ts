@@ -22,7 +22,7 @@ export class BuildingService {
   }
 
   createOrUpdate(building: Building): Observable<Building> {
-    return this.httpC.put<Building>(environment.apiURL + this.path, building);
+    return this.httpC.post<Building>(environment.apiURL + this.path, building);
   }
 
   delete(id: number): Observable<Building> {
