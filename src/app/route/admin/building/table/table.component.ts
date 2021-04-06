@@ -17,6 +17,7 @@ import { AddDialogComponent } from '../add-dialog/add-dialog.component';
 })
 export class TableComponent implements OnInit {
 
+
   displayedColumns:                         string[] = ['name', 'description', 'actions'];
   dataSource!:                              MatTableDataSource<Building>;
 
