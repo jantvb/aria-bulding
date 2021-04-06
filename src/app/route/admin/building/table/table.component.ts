@@ -107,7 +107,7 @@ export class TableComponent implements OnInit {
     const dialogRef = this.dialog.open(AddDialogComponent, {data: building});
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
+      this.createOrUpdate(result);
     });
   }
 
