@@ -22,7 +22,7 @@ export class DocumentService {
   }
 
   createOrUpdate(document: Document): Observable<Document> {
-    return this.httpC.put<Document>(environment.apiURL + this.path, document);
+    return this.httpC.post<Document>(environment.apiURL + this.path, document);
   }
 
   delete(id: number): Observable<Document> {

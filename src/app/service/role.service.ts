@@ -22,7 +22,7 @@ export class RoleService {
   }
 
   createOrUpdate(role: Role): Observable<Role> {
-    return this.httpC.put<Role>(environment.apiURL + this.path, role);
+    return this.httpC.post<Role>(environment.apiURL + this.path, role);
   }
 
   delete(id: number): Observable<Role> {
