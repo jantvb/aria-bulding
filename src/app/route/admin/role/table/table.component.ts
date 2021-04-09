@@ -6,6 +6,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Role } from 'src/app/model/role.model';
 import { RoleService } from 'src/app/service/role.service';
 import { AddDialogComponent } from '../add-dialog/add-dialog.component';
+import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
 
 @Component({
   selector: 'app-table-role',
@@ -106,6 +107,18 @@ export class TableComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result !== undefined) {
         this.createOrUpdate(result);
+      }
+
+    });
+  }
+
+  openDeleteDialog(roleId: number): void {
+
+    const dialogRef = this.dialog.open(DeleteDialogComponent, {data: roleId});
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result !== undefined) {
+        this.delete(result);
       }
 
     });

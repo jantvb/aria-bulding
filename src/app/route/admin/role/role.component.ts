@@ -20,4 +20,5 @@ export class RoleComponent implements OnInit {
     this.table.openDialog(new Role());
   }
 
+
 }
