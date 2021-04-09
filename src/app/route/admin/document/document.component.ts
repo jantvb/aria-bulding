@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { AddDialogComponent } from './add-dialog/add-dialog.component';
+import { TableComponent } from './../user/table/table.component';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { Document } from 'src/app/model/document.model';
 
 @Component({
   selector: 'app-document',
@@ -9,17 +9,15 @@ import { AddDialogComponent } from './add-dialog/add-dialog.component';
 })
 export class DocumentComponent implements OnInit {
 
-  constructor(public dialog: MatDialog) { }
+  @ViewChild(TableComponent) table!: TableComponent;
+
+  constructor() { }
 
   ngOnInit(): void {
   }
 
   openDialog() {
-    const dialogRef = this.dialog.open(AddDialogComponent);
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
-    });
+    this.table.openDialog(new Document());
   }
 
 }

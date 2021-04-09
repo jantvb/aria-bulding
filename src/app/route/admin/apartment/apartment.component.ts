@@ -1,6 +1,4 @@
-import { AddDialogComponent } from './add-dialog/add-dialog.component';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
 import { TableComponent } from './table/table.component';
 import { Apartment } from 'src/app/model/apartment.model';
 
