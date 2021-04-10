@@ -1,4 +1,4 @@
-import { DeleteDialogComponent } from '../../delete-dialog/delete-dialog.component';
+import { DeleteDialogComponent } from '../../../../common/delete-dialog/delete-dialog.component';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';

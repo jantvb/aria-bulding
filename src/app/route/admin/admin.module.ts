@@ -9,7 +9,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { SidenavComponent } from './sidenav/sidenav.component';
 import { AdminComponent } from './admin.component';
 import { MenuComponent } from './menu/menu.component';
-import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
+import { DeleteDialogComponent } from '../../common/delete-dialog/delete-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
