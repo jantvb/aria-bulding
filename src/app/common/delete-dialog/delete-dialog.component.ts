@@ -8,9 +8,9 @@ import { Component, OnInit, Inject } from '@angular/core';
 })
 export class DeleteDialogComponent implements OnInit {
 
-  type: string;
-  id!:  number;
-  name!: string;
+  type:     string;
+  id!:      number;
+  name!:    string;
 
   constructor(public dialogRef: MatDialogRef<DeleteDialogComponent>,
                     @Inject(MAT_DIALOG_DATA) public data: {id: number, name: string, type: string}) {

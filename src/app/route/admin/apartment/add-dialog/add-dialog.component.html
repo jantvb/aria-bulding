@@ -22,6 +22,15 @@
               required>
       <mat-error *ngIf="descriptionControl.invalid">Please enter apartment description</mat-error>
     </mat-form-field>
+
+    <mat-form-field appearance="legacy">
+      <mat-label>Select Building</mat-label>
+      <mat-select [(ngModel)]="apartment.building" [formControl]="buildingControl" required>
+          <mat-option *ngFor = "let building of buildings" [value]="building.id">{{building.name}}</mat-option>
+      </mat-select>
+      <mat-error *ngIf="buildingControl.invalid">Please select a building</mat-error>
+    </mat-form-field>
+
   </form>
 </mat-dialog-content>
 

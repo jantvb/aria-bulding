@@ -1,3 +1,4 @@
+import { Building } from 'src/app/model/building.model';
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -13,16 +14,17 @@ export class AddDialogComponent implements OnInit {
   options!:                   FormGroup;
   displayControl!:            FormControl;
   descriptionControl!:        FormControl;
+  buildingControl!:           FormControl;
 
   title:                      string = 'Create New Apartment';
 
-  apartment!:                 Apartment;
+  apartment:                 Apartment = new Apartment();
+
+  buildings:                  Array<Building> = new Array<Building>();
 
   constructor(public dialogRef: MatDialogRef<AddDialogComponent>,
               fb: FormBuilder,
               @Inject(MAT_DIALOG_DATA) public data: Apartment) {
-
-    this.apartment = new Apartment();
 
     Object.assign(this.apartment, data);
 
@@ -34,10 +36,12 @@ export class AddDialogComponent implements OnInit {
 
     this.displayControl     = new FormControl(this.apartment.display);
     this.descriptionControl = new FormControl(this.apartment.description);
+    this.buildingControl    = new FormControl(this.apartment.building);
 
     this.options = fb.group({
       display:        this.displayControl,
-      description:    this.descriptionControl
+      description:    this.descriptionControl,
+      building:       this.buildingControl
     });
 
   }

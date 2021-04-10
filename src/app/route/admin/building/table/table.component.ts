@@ -1,3 +1,4 @@
+import { DeleteDialogComponent } from './../../../../common/delete-dialog/delete-dialog.component';
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
@@ -109,6 +110,18 @@ export class TableComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result !== undefined) {
         this.createOrUpdate(result);
+      }
+
+    });
+  }
+
+  openDeleteDialog(building: Building): void {
+
+    const dialogRef = this.dialog.open(DeleteDialogComponent, {data: {id: building.id, name: building.name, type: 'building'}});
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result !== undefined) {
+        this.delete(result);
       }
 
     });

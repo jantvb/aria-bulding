@@ -16,7 +16,7 @@ import { AddDialogComponent } from '../add-dialog/add-dialog.component';
 export class TableComponent implements OnInit {
 
 
-  displayedColumns:                         string[] = ['role', 'actions'];
+  displayedColumns:                         string[] = ['name', 'actions'];
   dataSource!:                              MatTableDataSource<Role>;
 
   roles:                                    Array<Role> = new Array<Role>();
@@ -114,7 +114,7 @@ export class TableComponent implements OnInit {
 
   openDeleteDialog(role: Role): void {
 
-    const dialogRef = this.dialog.open(DeleteDialogComponent, {data: {id: role.id, name: role.role, type: 'Role'}});
+    const dialogRef = this.dialog.open(DeleteDialogComponent, {data: {id: role.id, name: role.name, type: 'role'}});
 
     dialogRef.afterClosed().subscribe(result => {
       if (result !== undefined) {

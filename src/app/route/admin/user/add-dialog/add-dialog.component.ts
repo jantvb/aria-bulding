@@ -2,6 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { User } from 'src/app/model/user.model';
+import { Role } from 'src/app/model/role.model';
 
 @Component({
   selector: 'app-add-dialog',
@@ -12,19 +13,19 @@ export class AddDialogComponent implements OnInit {
 
   mask = ['(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
 
-  options!: FormGroup;
-  firstNameControl!: FormControl;
-  lastNameControl!: FormControl;
-  phoneControl!: FormControl;
-  emailControl!: FormControl;
-  passwordControl!: FormControl;
-  roleControl!: FormControl;
+  options!:                 FormGroup;
+  firstNameControl!:        FormControl;
+  lastNameControl!:         FormControl;
+  phoneControl!:            FormControl;
+  emailControl!:            FormControl;
+  passwordControl!:         FormControl;
+  roleControl!:             FormControl;
 
-  user: User = new User();
+  user:                     User = new User();
 
-  title: string = 'Create New User';
+  title:                    string = 'Create New User';
 
-  roles = this.user.roles;
+  roles:                    Array<Role> = new Array<Role>();
 
   hide = true;
 

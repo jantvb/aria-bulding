@@ -3,13 +3,13 @@
   <form class="example-container" [formGroup]="options">
     <mat-form-field appearance="legacy" >
       <mat-label>Role Name</mat-label>
-      <input  matInput
+      <input  style="text-transform:uppercase" matInput
               type="text"
-              [(ngModel)]="role.role"
+              [(ngModel)]="role.name"
               placeholder="Role Name"
-              [formControl]="roleControl"
+              [formControl]="nameControl"
               required>
-      <mat-error *ngIf="roleControl.invalid">Please enter a role name</mat-error>
+      <mat-error *ngIf="nameControl.invalid">Please enter a role name</mat-error>
     </mat-form-field>
   </form>
 </mat-dialog-content>

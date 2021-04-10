@@ -11,7 +11,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 export class AddDialogComponent implements OnInit {
 
   options!:                 FormGroup;
-  roleControl!:             FormControl;
+  nameControl!:             FormControl;
 
   title:                    string = 'Create New Role';
 
@@ -28,13 +28,13 @@ export class AddDialogComponent implements OnInit {
     if (this.role.id === undefined) {
       this.title = 'Create New Role';
     } else {
-      this.title = 'Editing: ' + this.role.role;
+      this.title = 'Editing: ' + this.role.name;
     }
 
-    this.roleControl              = new FormControl(this.role.role);
+    this.nameControl              = new FormControl(this.role.name);
 
     this.options = fb.group({
-      roleName:             this.roleControl,
+      roleName:             this.nameControl,
     });
 
   }
