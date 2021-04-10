@@ -13,15 +13,13 @@ import { CommonModule } from '@angular/common';
 import { RoleRoutingModule } from './role-routing.module';
 import { AddDialogComponent } from './add-dialog/add-dialog.component';
 import { TableComponent } from './table/table.component';
-import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
 
 
 @NgModule({
   declarations: [
     RoleComponent,
     AddDialogComponent,
-    TableComponent,
-    DeleteDialogComponent
+    TableComponent
   ],
   imports: [
     CommonModule,

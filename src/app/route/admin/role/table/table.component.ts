@@ -1,3 +1,4 @@
+import { DeleteDialogComponent } from '../../delete-dialog/delete-dialog.component';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
@@ -6,7 +7,6 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Role } from 'src/app/model/role.model';
 import { RoleService } from 'src/app/service/role.service';
 import { AddDialogComponent } from '../add-dialog/add-dialog.component';
-import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
 
 @Component({
   selector: 'app-table-role',
@@ -112,9 +112,9 @@ export class TableComponent implements OnInit {
     });
   }
 
-  openDeleteDialog(roleId: number): void {
+  openDeleteDialog(roleId: number, roleName: string, type: string): void {
 
-    const dialogRef = this.dialog.open(DeleteDialogComponent, {data: roleId});
+    const dialogRef = this.dialog.open(DeleteDialogComponent, {data: {roleId, roleName, type}});
 
     dialogRef.afterClosed().subscribe(result => {
       if (result !== undefined) {
