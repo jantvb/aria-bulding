@@ -1,5 +1,10 @@
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Component, OnInit, Inject } from '@angular/core';
+import { Role } from 'src/app/model/role.model';
+import { User } from 'src/app/model/user.model';
+import { Apartment } from 'src/app/model/apartment.model';
+import { Building } from 'src/app/model/building.model';
+import { Document } from 'src/app/model/document.model';
 
 @Component({
   selector: 'app-delete-dialog',
@@ -8,25 +13,17 @@ import { Component, OnInit, Inject } from '@angular/core';
 })
 export class DeleteDialogComponent implements OnInit {
 
-  title:      string = 'Delete ';
-  text:       string = 'Are you sure you want to delete ';
-
-  id:     number;
-  name:   string;
-  type:   string;
-
+  type: string;
+  id!:  number;
+  name!: string;
 
   constructor(public dialogRef: MatDialogRef<DeleteDialogComponent>,
-                    @Inject(MAT_DIALOG_DATA) public data: {idData: number, nameData: string, typeData: string}) {
+                    @Inject(MAT_DIALOG_DATA) public data: {id: number, name: string, type: string}) {
 
-    this.id       = data.idData;
-    this.name     = data.nameData;
-    this.type     = data.typeData;
+    this.type = data.type;
+    this.id   = data.id;
+    this.name = data.name;
 
-    if(this.type === 'role') {
-      this.title = this.title + 'role';
-      this.text  = this.text + 'the role ' + this.name;
-    }
   }
 
   ngOnInit(): void {

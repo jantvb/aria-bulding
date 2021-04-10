@@ -112,9 +112,9 @@ export class TableComponent implements OnInit {
     });
   }
 
-  openDeleteDialog(roleId: number, roleName: string, type: string): void {
+  openDeleteDialog(role: Role): void {
 
-    const dialogRef = this.dialog.open(DeleteDialogComponent, {data: {roleId, roleName, type}});
+    const dialogRef = this.dialog.open(DeleteDialogComponent, {data: {id: role.id, name: role.role, type: 'Role'}});
 
     dialogRef.afterClosed().subscribe(result => {
       if (result !== undefined) {
