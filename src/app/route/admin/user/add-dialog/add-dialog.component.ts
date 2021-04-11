@@ -1,3 +1,4 @@
+import { RoleService } from './../../../../service/role.service';
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
@@ -11,27 +12,37 @@ import { Role } from 'src/app/model/role.model';
 })
 export class AddDialogComponent implements OnInit {
 
-  mask = ['(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
+  maskPhone           = ['(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
+  maskSocialSecurity  = [ /[1-9]/, /\d/, /\d/, '-', /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
 
-  options!:                 FormGroup;
-  firstNameControl!:        FormControl;
-  lastNameControl!:         FormControl;
-  phoneControl!:            FormControl;
-  emailControl!:            FormControl;
-  passwordControl!:         FormControl;
-  roleControl!:             FormControl;
+  options!:                     FormGroup;
+  firstNameControl!:            FormControl;
+  lastNameControl!:             FormControl;
+  phoneControl!:                FormControl;
+  socialSecurityControl!:       FormControl;
+  emailControl!:                FormControl;
+  passwordControl!:             FormControl;
+  roleControl!:                 FormControl;
 
-  user:                     User = new User();
+  user:                         User = new User();
 
-  title:                    string = 'Create New User';
+  title:                        string = 'Create New User';
 
-  roles:                    Array<Role> = new Array<Role>();
+  roles:                        Array<Role> = new Array<Role>();
 
   hide = true;
 
   constructor(public dialogRef: MatDialogRef<AddDialogComponent>,
                     fb: FormBuilder,
-                    @Inject(MAT_DIALOG_DATA) public data: User) {
+                    @Inject(MAT_DIALOG_DATA) public data: User,
+                    private roleService: RoleService) {
+
+    this.roleService
+                    .list()
+                    .subscribe( rRoles => {
+                    this.roles = new Array<Role>();
+                    Object.assign(this.roles, rRoles);
+    })
 
     Object.assign(this.user, data);
 
@@ -41,20 +52,22 @@ export class AddDialogComponent implements OnInit {
       this.title = 'Editing: ' + this.user.firstname + ' ' + this.user.lastname;
     }
 
-    this.firstNameControl    = new FormControl(this.user.firstname);
-    this.lastNameControl     = new FormControl(this.user.lastname);
-    this.phoneControl        = new FormControl(this.user.phoneNumber);
-    this.emailControl        = new FormControl(this.user.email);
-    this.passwordControl     = new FormControl(this.user.password);
-    this.roleControl         = new FormControl(this.user.roles);
+    this.firstNameControl             = new FormControl(this.user.firstname);
+    this.lastNameControl              = new FormControl(this.user.lastname);
+    this.phoneControl                 = new FormControl(this.user.phoneNumber);
+    this.socialSecurityControl        = new FormControl(this.user.socialSecurity);
+    this.emailControl                 = new FormControl(this.user.email);
+    this.passwordControl              = new FormControl(this.user.password);
+    this.roleControl                  = new FormControl(this.user.roles);
 
     this.options = fb.group({
-      firstName:     this.firstNameControl,
-      lastName:      this.lastNameControl,
-      phone:         this.phoneControl,
-      email:         this.emailControl,
-      password:      this.passwordControl,
-      role:          this.roleControl
+      firstName:              this.firstNameControl,
+      lastName:               this.lastNameControl,
+      phone:                  this.phoneControl,
+      socialSecurity:         this.socialSecurityControl,
+      email:                  this.emailControl,
+      password:               this.passwordControl,
+      role:                   this.roleControl
     });
 
   }

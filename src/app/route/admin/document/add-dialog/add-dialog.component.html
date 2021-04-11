@@ -8,10 +8,10 @@
       <mat-error *ngIf="nameControl.invalid">Please enter a name</mat-error>
     </mat-form-field>
 
-    <mat-form-field appearance="legacy" >
-      <mat-label>Document</mat-label>
-      <button type="button" mat-raised-button (click)="fileInput.click()">Choose File</button>
-      <input hidden (change)="onFileSelected()" #fileInput type="file" id="file" [formControl]="pathControl" required>
+    <mat-form-field appearance="outline">
+      <mat-label>Basic outline input</mat-label>
+      <ngx-mat-file-input placeholder="Choose file" [formControl]="pathControl" required></ngx-mat-file-input>
+      <mat-icon matSuffix>folder</mat-icon>
       <mat-error *ngIf="pathControl.invalid">Please choose a file</mat-error>
     </mat-form-field>
 

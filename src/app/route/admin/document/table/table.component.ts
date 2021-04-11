@@ -1,3 +1,4 @@
+import { DeleteDialogComponent } from './../../../../common/delete-dialog/delete-dialog.component';
 import { Component,OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
@@ -29,6 +30,15 @@ export class TableComponent implements OnInit {
     this.load();
   }
 
+  private refreshTable(): void {
+
+    this.dataSource = new MatTableDataSource(this.documents);
+
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort      = this.sort;
+
+  }
+
   private load(): void {
     this.documentService
         .list()
@@ -43,16 +53,8 @@ export class TableComponent implements OnInit {
         }, err => console.log(err));
   }
 
-  private refreshTable(): void {
-
-    this.dataSource = new MatTableDataSource(this.documents);
-
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort      = this.sort;
-
-  }
-
   protected delete(documentId: number): void {
+
     this.documentService
         .delete(documentId)
         .subscribe(() => {
@@ -88,15 +90,6 @@ export class TableComponent implements OnInit {
         }, err => console.log(err));
   }
 
-  openDialog(document: Document): void {
-
-    const dialogRef = this.dialog.open(AddDialogComponent, {data: document});
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
-    });
-  }
-
   applyFilter(event: Event): void {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
@@ -104,6 +97,30 @@ export class TableComponent implements OnInit {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+
+  openDialog(document: Document): void {
+
+    const dialogRef = this.dialog.open(AddDialogComponent, {data: document});
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result !== undefined) {
+        this.createOrUpdate(result);
+      }
+
+    });
+  }
+
+  openDeleteDialog(document: Document): void {
+
+    const dialogRef = this.dialog.open(DeleteDialogComponent, {data: {id: document.id, name: document.path, type: 'document'}});
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result !== undefined) {
+        this.delete(result);
+      }
+
+    });
   }
 
 }

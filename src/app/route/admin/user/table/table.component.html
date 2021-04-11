@@ -37,12 +37,12 @@
         <div class="example-button-row">
           <div class="example-flex-container">
             <div class="example-button-container">
-              <button mat-mini-fab color="primary" title="Edit Role">
+              <button mat-mini-fab color="primary" title="Edit User" (click)="openDialog(user)">
                 <mat-icon>edit</mat-icon>
               </button>
             </div>
             <div class="example-button-container">
-              <button mat-mini-fab color="warn" title="Delete Role">
+              <button mat-mini-fab color="warn" title="Delete user" (click)="openDeleteDialog(user)">
                 <mat-icon>delete</mat-icon>
               </button>
             </div>

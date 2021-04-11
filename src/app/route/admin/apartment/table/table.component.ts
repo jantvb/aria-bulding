@@ -1,3 +1,4 @@
+import { DeleteDialogComponent } from './../../../../common/delete-dialog/delete-dialog.component';
 import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import {MatPaginator} from '@angular/material/paginator';
@@ -84,15 +85,15 @@ export class TableComponent implements OnInit {
 
     this.apartmentService
         .createOrUpdate(apartment)
-        .subscribe(aR => {
+        .subscribe(aA => {
 
           if (apartment.id === undefined || apartment.id == null) {
 
-            this.apartments.unshift(aR);
+            this.apartments.unshift(aA);
 
           } else {
 
-            Object.assign(this.apartments.find(a => a.id === apartment.id), aR);
+            Object.assign(this.apartments.find(a => a.id === apartment.id), aA);
 
           }
 
@@ -106,10 +107,22 @@ export class TableComponent implements OnInit {
     const dialogRef = this.dialog.open(AddDialogComponent, {data: apartment});
 
     dialogRef.afterClosed().subscribe(result => {
-
-      if (result !== undefined ){
+      if (result !== undefined) {
         this.createOrUpdate(result);
       }
+
+    });
+  }
+
+  openDeleteDialog(apartment: Apartment): void {
+
+    const dialogRef = this.dialog.open(DeleteDialogComponent, {data: {id: apartment.id, name: apartment.display, type: 'apartment'}});
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result !== undefined) {
+        this.delete(result);
+      }
+
     });
   }
 

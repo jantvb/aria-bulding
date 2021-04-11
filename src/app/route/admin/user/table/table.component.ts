@@ -1,3 +1,4 @@
+import { DeleteDialogComponent } from './../../../../common/delete-dialog/delete-dialog.component';
 import {  Component,
           OnInit,
           ViewChild } from '@angular/core';
@@ -77,15 +78,15 @@ export class TableComponent implements OnInit {
 
     this.userService
         .createOrUpdate(user)
-        .subscribe(uR => {
+        .subscribe(aU => {
 
           if (user.id === undefined || user.id == null) {
 
-            this.users.unshift(uR);
+            this.users.unshift(aU);
 
           } else {
 
-            Object.assign(this.users.find(u => u.id === user.id), uR);
+            Object.assign(this.users.find(u => u.id === user.id), aU);
 
           }
 
@@ -101,7 +102,22 @@ export class TableComponent implements OnInit {
     const dialogRef = this.dialog.open(AddDialogComponent, {data: user});
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
+      if (result !== undefined) {
+        this.createOrUpdate(result);
+      }
+
+    });
+  }
+
+  openDeleteDialog(user: User): void {
+
+    const dialogRef = this.dialog.open(DeleteDialogComponent, {data: {id: user.id, name: user.firstname, type: 'user'}});
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result !== undefined) {
+        this.delete(result);
+      }
+
     });
   }
 

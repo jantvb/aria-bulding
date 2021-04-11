@@ -71,7 +71,7 @@ export class TableComponent implements OnInit {
 
           this.roles
               .splice(this.roles
-                          .findIndex(b => b.id === roleId),
+                          .findIndex(r => r.id === roleId),
                       1);
 
           this.refreshTable();
