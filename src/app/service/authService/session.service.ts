@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Session } from 'src/app/model/auth/session.model';
 import { Building } from 'src/app/model/building.model';
+import { Role } from 'src/app/model/role.model';
 import { User } from 'src/app/model/user.model';
 
 @Injectable({
@@ -44,6 +45,10 @@ export class SessionService {
 
   loadBuilding(): Building {
     return this.load().building;
+  }
+
+  loadRole(): Role {
+    return this.load().role;
   }
 
 }
