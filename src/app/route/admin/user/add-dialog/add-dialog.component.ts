@@ -84,4 +84,12 @@ export class AddDialogComponent implements OnInit {
     this.dialogRef.close(this.user);
   }
 
+  getErrorMessage(): string {
+    if (this.usernameControl.hasError('required')) {
+      return 'Please enter an email';
+    }
+
+    return this.usernameControl.hasError('emailControl') ? 'Not a valid email' : '';
+  }
+
 }

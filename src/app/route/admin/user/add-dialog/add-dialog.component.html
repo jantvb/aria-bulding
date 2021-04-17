@@ -28,8 +28,8 @@
 
     <mat-form-field appearance="legacy" >
       <mat-label>Username</mat-label>
-      <input matInput type="text" placeholder="Username" [formControl]="usernameControl" required>
-      <mat-error *ngIf="usernameControl.invalid">Please enter an username</mat-error>
+      <input matInput type="text" placeholder="username@example.com" [formControl]="usernameControl" required>
+      <mat-error *ngIf="usernameControl.invalid">{{getErrorMessage()}}</mat-error>
     </mat-form-field>
 
     <mat-form-field appearance="legacy">
