@@ -1,9 +1,10 @@
+import { Building } from './building.model';
 import { Role } from './role.model';
 
 export class User {
 
   id!:                  number;
-  email!:               string;
+  username!:            string;
   firstname!:           string;
   lastname!:            string;
   password!:            string;
@@ -11,5 +12,6 @@ export class User {
   phoneNumber!:         string;
   socialSecurity!:      number;
   roles:                Array<Role> = new Array<Role>();
+  buildings:            Array<Building> = new Array<Building>();
 
 }

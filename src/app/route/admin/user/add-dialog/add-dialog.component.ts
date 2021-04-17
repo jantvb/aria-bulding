@@ -20,7 +20,7 @@ export class AddDialogComponent implements OnInit {
   lastNameControl!:             FormControl;
   phoneControl!:                FormControl;
   socialSecurityControl!:       FormControl;
-  emailControl!:                FormControl;
+  usernameControl!:             FormControl;
   passwordControl!:             FormControl;
   roleControl!:                 FormControl;
 
@@ -56,7 +56,7 @@ export class AddDialogComponent implements OnInit {
     this.lastNameControl              = new FormControl(this.user.lastname);
     this.phoneControl                 = new FormControl(this.user.phoneNumber);
     this.socialSecurityControl        = new FormControl(this.user.socialSecurity);
-    this.emailControl                 = new FormControl(this.user.email);
+    this.usernameControl              = new FormControl(this.user.username);
     this.passwordControl              = new FormControl(this.user.password);
     this.roleControl                  = new FormControl(this.user.roles);
 
@@ -65,19 +65,11 @@ export class AddDialogComponent implements OnInit {
       lastName:               this.lastNameControl,
       phone:                  this.phoneControl,
       socialSecurity:         this.socialSecurityControl,
-      email:                  this.emailControl,
+      username:               this.usernameControl,
       password:               this.passwordControl,
       role:                   this.roleControl
     });
 
-  }
-
-  getErrorMessage(): string {
-    if (this.emailControl.hasError('required')) {
-      return 'Please enter an email';
-    }
-
-    return this.emailControl.hasError('emailControl') ? 'Not a valid email' : '';
   }
 
 

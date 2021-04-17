@@ -26,10 +26,10 @@
       <mat-error *ngIf="socialSecurityControl.invalid">Please enter your social security number</mat-error>
     </mat-form-field>
 
-    <mat-form-field appearance="legacy">
-      <mat-label>Enter your email</mat-label>
-      <input matInput placeholder="user@example.com" [formControl]="emailControl" required>
-      <mat-error *ngIf="emailControl.invalid">{{getErrorMessage()}}</mat-error>
+    <mat-form-field appearance="legacy" >
+      <mat-label>Username</mat-label>
+      <input matInput type="text" placeholder="Username" [formControl]="usernameControl" required>
+      <mat-error *ngIf="usernameControl.invalid">Please enter an username</mat-error>
     </mat-form-field>
 
     <mat-form-field appearance="legacy">

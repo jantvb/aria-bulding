@@ -1,3 +1,4 @@
+import { User } from 'src/app/model/user.model';
 import { Apartment } from './apartment.model';
 
 export class Building {
@@ -6,5 +7,6 @@ export class Building {
   name!:                string;
   description!:         string;
   apartments:           Array<Apartment> = new Array<Apartment>();
+  users:                Array<User> = new Array<User>();
 
 }

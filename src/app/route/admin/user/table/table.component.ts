@@ -19,7 +19,7 @@ import { AddDialogComponent } from '../add-dialog/add-dialog.component';
 })
 export class TableComponent implements OnInit {
 
-  displayedColumns: string[] = ['name', 'email', 'phone', 'status', 'actions'];
+  displayedColumns: string[] = ['name', 'username', 'phone', 'status', 'actions'];
   dataSource!: MatTableDataSource<User>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -111,7 +111,8 @@ export class TableComponent implements OnInit {
 
   openDeleteDialog(user: User): void {
 
-    const dialogRef = this.dialog.open(DeleteDialogComponent, {data: {id: user.id, name: user.firstname, type: 'user'}});
+    const fullName = user.firstname + ' ' + user.lastname;
+    const dialogRef = this.dialog.open(DeleteDialogComponent, {data: {id: user.id, name: fullName, type: 'user'}});
 
     dialogRef.afterClosed().subscribe(result => {
       if (result !== undefined) {
