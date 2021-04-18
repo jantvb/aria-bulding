@@ -10,7 +10,6 @@ import { Component, OnInit, Inject } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
-  title   = 'Sign in';
   hide    = true;
 
   user!:                  User;
@@ -22,6 +21,7 @@ export class LoginComponent implements OnInit {
 
   constructor(fb: FormBuilder) {
 
+    this.user = new User();
 
     this.usernameControl     = new FormControl(this.user.username);
     this.passwordControl     = new FormControl(this.user.password);
