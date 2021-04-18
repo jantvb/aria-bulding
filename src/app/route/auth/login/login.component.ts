@@ -1,7 +1,7 @@
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { AuthService } from './../../../service/authService/auth.service';
 import { FormControl, FormGroup, FormBuilder } from '@angular/forms';
 import { User } from './../../../model/user.model';
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-login',
@@ -10,7 +10,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
-  hide    = true;
+  hide = true;
 
   user!:                  User;
 
@@ -19,9 +19,10 @@ export class LoginComponent implements OnInit {
   passwordControl!:       FormControl;
 
 
-  constructor(fb: FormBuilder) {
+  constructor(fb: FormBuilder,
+              private authService: AuthService) {
 
-    this.user = new User();
+    this.user                = new User();
 
     this.usernameControl     = new FormControl(this.user.username);
     this.passwordControl     = new FormControl(this.user.password);
@@ -38,10 +39,32 @@ export class LoginComponent implements OnInit {
 
   getErrorMessage(): string {
     if (this.usernameControl.hasError('required')) {
-      return 'Please enter an email';
+      return 'Please enter your username';
     }
 
     return this.usernameControl.hasError('emailControl') ? 'Not a valid email' : '';
+  }
+
+  protected login(username: string, password: string): void {
+/*
+    this.authService
+        .login(user)
+        .subscribe(u => {
+
+          if (user.username === undefined || user.id == null) {
+
+            this.users.unshift(aU);
+
+          } else {
+
+            Object.assign(this.users.find(u => u.id === user.id), aU);
+
+          }
+
+          this.refreshTable();
+
+        }, err => console.log(err));*/
+
   }
 
 }

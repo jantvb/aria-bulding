@@ -1,13 +1,9 @@
 import { DeleteDialogComponent } from './../../../../common/delete-dialog/delete-dialog.component';
-import {  Component,
-          OnInit,
-          ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-
-import {MatPaginator} from '@angular/material/paginator';
-import {MatSort} from '@angular/material/sort';
-import {MatTableDataSource} from '@angular/material/table';
-
+import { MatPaginator} from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 import { User } from 'src/app/model/user.model';
 import { UserService } from 'src/app/service/user.service';
 import { AddDialogComponent } from '../add-dialog/add-dialog.component';
@@ -19,13 +15,13 @@ import { AddDialogComponent } from '../add-dialog/add-dialog.component';
 })
 export class TableComponent implements OnInit {
 
-  displayedColumns: string[] = ['name', 'username', 'phone', 'status', 'actions'];
-  dataSource!: MatTableDataSource<User>;
+  displayedColumns:                     string[] = ['name', 'username', 'phone', 'status', 'actions'];
+  dataSource!:                          MatTableDataSource<User>;
 
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
-  @ViewChild(MatSort) sort!: MatSort;
+  @ViewChild(MatPaginator) paginator!:  MatPaginator;
+  @ViewChild(MatSort) sort!:            MatSort;
 
-  users: Array<User> = new Array<User>();
+  users:                                Array<User> = new Array<User>();
 
   constructor(private userService: UserService,
               public  dialog:      MatDialog) {}

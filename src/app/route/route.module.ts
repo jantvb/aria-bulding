@@ -8,6 +8,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatDividerModule } from '@angular/material/divider';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
 
 const routes: Routes = [
   { path: 'admin', loadChildren: () => import('./admin/admin.module')
@@ -26,7 +27,8 @@ const routes: Routes = [
     MatIconModule,
     FormsModule,
     ReactiveFormsModule,
-    MatCardModule
+    MatCardModule,
+    MatButtonModule
   ],
   exports: [RouterModule]
 })
