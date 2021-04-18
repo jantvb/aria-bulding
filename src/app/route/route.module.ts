@@ -6,6 +6,7 @@ import { LoginComponent } from './auth/login/login.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatDividerModule } from '@angular/material/divider';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 const routes: Routes = [
   { path: 'admin', loadChildren: () => import('./admin/admin.module')
@@ -21,7 +22,9 @@ const routes: Routes = [
     MatFormFieldModule,
     MatInputModule,
     MatDividerModule,
-    MatIconModule
+    MatIconModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   exports: [RouterModule]
 })

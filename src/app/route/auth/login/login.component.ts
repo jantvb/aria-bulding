@@ -20,10 +20,8 @@ export class LoginComponent implements OnInit {
   passwordControl!:       FormControl;
 
 
-  constructor(fb: FormBuilder,
-              @Inject(MAT_DIALOG_DATA) public data: User) {
+  constructor(fb: FormBuilder) {
 
-    Object.assign(this.user, data);
 
     this.usernameControl     = new FormControl(this.user.username);
     this.passwordControl     = new FormControl(this.user.password);
