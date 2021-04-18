@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { FormControl, FormGroup, FormBuilder } from '@angular/forms';
+import { User } from './../../../model/user.model';
+import { Component, OnInit, Inject } from '@angular/core';
 
 @Component({
   selector: 'app-login',
@@ -7,11 +10,40 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
-  title
+  title   = 'Sign in';
+  hide    = true;
 
-  constructor() { }
+  user!:                  User;
+
+  options!:               FormGroup;
+  usernameControl!:       FormControl;
+  passwordControl!:       FormControl;
+
+
+  constructor(fb: FormBuilder,
+              @Inject(MAT_DIALOG_DATA) public data: User) {
+
+    Object.assign(this.user, data);
+
+    this.usernameControl     = new FormControl(this.user.username);
+    this.passwordControl     = new FormControl(this.user.password);
+
+    this.options = fb.group({
+      username:               this.usernameControl,
+      password:               this.passwordControl
+    });
+
+  }
 
   ngOnInit(): void {
+  }
+
+  getErrorMessage(): string {
+    if (this.usernameControl.hasError('required')) {
+      return 'Please enter an email';
+    }
+
+    return this.usernameControl.hasError('emailControl') ? 'Not a valid email' : '';
   }
 
 }

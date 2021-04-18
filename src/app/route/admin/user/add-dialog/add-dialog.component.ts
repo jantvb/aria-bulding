@@ -1,6 +1,6 @@
 import { RoleService } from './../../../../service/role.service';
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { User } from 'src/app/model/user.model';
 import { Role } from 'src/app/model/role.model';
