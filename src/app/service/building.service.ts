@@ -9,24 +9,24 @@ import { Observable } from 'rxjs';
 })
 export class BuildingService {
 
-  path = 'building';
+  path: string = environment.apiURL + 'building';
 
   constructor(private httpC: HttpClient) { }
 
   list(): Observable <Array<Building>> {
-    return this.httpC.get<Array<Building>>(environment.apiURL + this.path);
+    return this.httpC.get<Array<Building>>(this.path);
   }
 
   get(id: number): Observable<Building> {
-    return this.httpC.get<Building>(environment.apiURL + this.path + '/' + id);
+    return this.httpC.get<Building>(this.path + '/' + id);
   }
 
   createOrUpdate(building: Building): Observable<Building> {
-    return this.httpC.post<Building>(environment.apiURL + this.path, building);
+    return this.httpC.post<Building>(this.path, building);
   }
 
   delete(id: number): Observable<Building> {
-    return this.httpC.delete<Building>(environment.apiURL + this.path + '/' + id);
+    return this.httpC.delete<Building>(this.path + '/' + id);
   }
 
 }

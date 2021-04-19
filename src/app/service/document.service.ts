@@ -9,24 +9,24 @@ import { Observable } from 'rxjs';
 })
 export class DocumentService {
 
-  path = 'document';
+  path:  string = environment.apiURL + 'document';
 
   constructor(private httpC: HttpClient) { }
 
   list(): Observable <Array<Document>> {
-    return this.httpC.get<Array<Document>>(environment.apiURL + this.path);
+    return this.httpC.get<Array<Document>>(this.path);
   }
 
   get(id: number): Observable<Document> {
-    return this.httpC.get<Document>(environment.apiURL + this.path + '/' + id);
+    return this.httpC.get<Document>(this.path + '/' + id);
   }
 
   createOrUpdate(document: Document): Observable<Document> {
-    return this.httpC.post<Document>(environment.apiURL + this.path, document);
+    return this.httpC.post<Document>(this.path, document);
   }
 
   delete(id: number): Observable<Document> {
-    return this.httpC.delete<Document>(environment.apiURL + this.path + '/' + id);
+    return this.httpC.delete<Document>(this.path + '/' + id);
   }
 
 }

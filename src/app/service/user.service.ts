@@ -9,24 +9,24 @@ import { Observable } from 'rxjs';
 })
 export class UserService {
 
-  path = 'user';
+  path:  string = environment.apiURL + 'user';
 
   constructor(private httpC: HttpClient) { }
 
   list(): Observable <Array<User>> {
-    return this.httpC.get<Array<User>>(environment.apiURL + this.path);
+    return this.httpC.get<Array<User>>(this.path);
   }
 
   get(id: number): Observable<User> {
-    return this.httpC.get<User>(environment.apiURL + this.path + '/' + id);
+    return this.httpC.get<User>(this.path + '/' + id);
   }
 
   createOrUpdate(user: User): Observable<User> {
-    return this.httpC.put<User>(environment.apiURL + this.path, user);
+    return this.httpC.put<User>(this.path, user);
   }
 
   delete(id: number): Observable<User> {
-    return this.httpC.delete<User>(environment.apiURL + this.path + '/' + id);
+    return this.httpC.delete<User>(this.path + '/' + id);
   }
 
 }

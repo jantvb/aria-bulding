@@ -45,25 +45,9 @@ export class LoginComponent implements OnInit {
     return this.usernameControl.hasError('emailControl') ? 'Not a valid email' : '';
   }
 
-  protected login(username: string, password: string): void {
-/*
-    this.authService
-        .login(user)
-        .subscribe(u => {
+  login(): void {
 
-          if (user.username === undefined || user.id == null) {
-
-            this.users.unshift(aU);
-
-          } else {
-
-            Object.assign(this.users.find(u => u.id === user.id), aU);
-
-          }
-
-          this.refreshTable();
-
-        }, err => console.log(err));*/
+    this.authService.login(this.user);
 
   }
 

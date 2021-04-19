@@ -9,24 +9,24 @@ import { Observable } from 'rxjs';
 })
 export class RoleService {
 
-  path = 'role';
+  path: string = environment.apiURL + 'role';
 
   constructor(private httpC: HttpClient) { }
 
   list(): Observable <Array<Role>> {
-    return this.httpC.get<Array<Role>>(environment.apiURL + this.path);
+    return this.httpC.get<Array<Role>>(this.path);
   }
 
   get(id: number): Observable<Role> {
-    return this.httpC.get<Role>(environment.apiURL + this.path + '/' + id);
+    return this.httpC.get<Role>(this.path + '/' + id);
   }
 
   createOrUpdate(role: Role): Observable<Role> {
-    return this.httpC.post<Role>(environment.apiURL + this.path, role);
+    return this.httpC.post<Role>(this.path, role);
   }
 
   delete(id: number): Observable<Role> {
-    return this.httpC.delete<Role>(environment.apiURL + this.path + '/' + id);
+    return this.httpC.delete<Role>(this.path + '/' + id);
   }
 
 }

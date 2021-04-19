@@ -9,28 +9,28 @@ import { Observable } from 'rxjs';
 })
 export class ApartmentService {
 
-  path = 'apartment';
+  path:  string = environment.apiURL + 'apartment';
 
   constructor(private httpC: HttpClient) { }
 
   list(): Observable <Array<Apartment>> {
-    return this.httpC.get<Array<Apartment>>(environment.apiURL + this.path);
+    return this.httpC.get<Array<Apartment>>(this.path);
   }
 
   get(id: number): Observable<Apartment> {
-    return this.httpC.get<Apartment>(environment.apiURL + this.path + '/' + id);
+    return this.httpC.get<Apartment>(this.path + '/' + id);
   }
 
   createOrUpdate(apartment: Apartment): Observable<Apartment> {
-    return this.httpC.post<Apartment>(environment.apiURL + this.path, apartment);
+    return this.httpC.post<Apartment>(this.path, apartment);
   }
 
   delete(id: number): Observable<Apartment> {
-    return this.httpC.delete<Apartment>(environment.apiURL + this.path + '/' + id);
+    return this.httpC.delete<Apartment>(this.path + '/' + id);
   }
 
   listByBuildingId(id: number): Observable <Array<Apartment>> {
-    return this.httpC.get<Array<Apartment>>(environment.apiURL + this.path + '/building/' + id);
+    return this.httpC.get<Array<Apartment>>(this.path + '/building/' + id);
   }
 
 }
