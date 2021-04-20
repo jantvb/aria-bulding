@@ -1,3 +1,4 @@
+import { FooterComponent } from './../../common/footer/footer.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AdminRoutingModule } from './admin-routing.module';
@@ -17,7 +18,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     SidenavComponent,
     AdminComponent,
     MenuComponent,
-    DeleteDialogComponent
+    DeleteDialogComponent,
+    FooterComponent
   ],
   imports: [
     CommonModule,
