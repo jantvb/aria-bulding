@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
   passwordControl!:       FormControl;
 
 
-  constructor(fb: FormBuilder,
+  constructor(private fb: FormBuilder,
               private authService: AuthService) {
 
     this.user                = new User();

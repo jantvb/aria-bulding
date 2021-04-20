@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Session } from 'src/app/model/auth/session.model';
 import { environment } from 'src/environments/environment';
 import { User } from '../../model/user.model';
 
@@ -14,9 +13,9 @@ export class AuthService {
 
   constructor(private httpC: HttpClient) { }
 
-  login(user: User): Observable<Session> {
+  login(user: User): Observable<User> {
 
-    return this.httpC.post<Session>(this.path + 'login', user);
+    return this.httpC.post<User>(this.path + 'login', user);
 
   }
 
