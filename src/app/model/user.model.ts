@@ -11,7 +11,9 @@ export class User {
   active!:              number;
   phoneNumber!:         string;
   socialSecurity!:      number;
+  defaultBuilding!:     number;
   roles:                Array<Role> = new Array<Role>();
+  token!:               string;
   buildings:            Array<Building> = new Array<Building>();
 
 }
