@@ -9,13 +9,13 @@
 
       <mat-form-field appearance="legacy" >
         <mat-label>Username</mat-label>
-        <input matInput type="text" placeholder="username@example.com" [formControl]="usernameControl" required>
+        <input [(ngModel)]="user.username" matInput type="text" placeholder="username@example.com" [formControl]="usernameControl" required>
         <mat-error *ngIf="usernameControl.invalid">{{getErrorMessage()}}</mat-error>
       </mat-form-field>
 
       <mat-form-field appearance="legacy">
         <mat-label>Password</mat-label>
-        <input matInput [type]="hide ? 'password' : 'text'" placeholder="Password" [formControl]="passwordControl" required>
+        <input matInput [type]="hide ? 'password' : 'text'" [(ngModel)]="user.password" placeholder="Password" [formControl]="passwordControl" required>
         <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
           <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
         </button>

@@ -47,6 +47,11 @@ export class LoginComponent implements OnInit {
 
   login(): void {
 
+    console.log(this.usernameControl);
+    console.log(this.user);
+    console.log(this.fb);
+    debugger;
+
     this.authService.login(this.user);
 
   }
