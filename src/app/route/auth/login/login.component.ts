@@ -49,12 +49,17 @@ export class LoginComponent implements OnInit {
 
   login(): void {
 
-    this.authService.login(this.user).subscribe(result => {
-      if (result !== undefined) {
-        this.router.navigate(['/admin/home']);
-      }
+    this.authService
+        .login(this.user)
+        .subscribe(user => {
 
-    });
+          this.router.navigate(['/admin/home']);
+
+        }, err => {
+
+          console.log(err)
+
+        });
 
   }
 
