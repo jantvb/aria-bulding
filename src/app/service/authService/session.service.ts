@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Building } from 'src/app/model/building.model';
 import { Role } from 'src/app/model/role.model';
 import { User } from 'src/app/model/user.model';
-import { BuildingService } from '../building.service';
 
 @Injectable({
   providedIn: 'root'

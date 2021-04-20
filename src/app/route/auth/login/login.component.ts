@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { AuthService } from './../../../service/authService/auth.service';
 import { FormControl, FormGroup, FormBuilder } from '@angular/forms';
 import { User } from './../../../model/user.model';
@@ -20,7 +21,8 @@ export class LoginComponent implements OnInit {
 
 
   constructor(private fb: FormBuilder,
-              private authService: AuthService) {
+              private authService: AuthService,
+              private router: Router) {
 
     this.user                = new User();
 
@@ -47,12 +49,8 @@ export class LoginComponent implements OnInit {
 
   login(): void {
 
-    console.log(this.usernameControl);
-    console.log(this.user);
-    console.log(this.fb);
-    debugger;
-
     this.authService.login(this.user);
+    this.router.navigate(['/admin/home']);
 
   }
 
