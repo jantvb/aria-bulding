@@ -15,12 +15,12 @@ export class SidenavComponent implements OnDestroy {
   user:         User = new User();
 
   fillerNav = [
-    { name: 'Home',         route: '/admin/home',        icon: 'home'},
-    { name: 'Building',     route: 'building',           icon: 'house'},
-    { name: 'Apartment',    route: 'apartment',          icon: 'house'},
-    { name: 'Document',     route: 'document',           icon: 'insert_drive_file'},
-    { name: 'User',         route: 'user',               icon: 'supervisor_account'},
-    { name: 'Role',         route: 'role',               icon: 'rule'}
+    { name: 'Home',         route: 'home',          icon: 'home'},
+    { name: 'Building',     route: 'building',      icon: 'house'},
+    { name: 'Apartment',    route: 'apartment',     icon: 'house'},
+    { name: 'Document',     route: 'document',      icon: 'insert_drive_file'},
+    { name: 'User',         route: 'user',          icon: 'supervisor_account'},
+    { name: 'Role',         route: 'role',          icon: 'rule'}
   ]
 
   private _mobileQueryListener: () => void;
@@ -30,7 +30,7 @@ export class SidenavComponent implements OnDestroy {
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
 
-    this.user =  sessionService.load();
+    this.user =  sessionService.load()
   }
 
   ngOnDestroy(): void {
