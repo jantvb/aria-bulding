@@ -1,4 +1,3 @@
-import { FooterComponent } from './../../common/footer/footer.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AdminRoutingModule } from './admin-routing.module';
@@ -12,14 +11,14 @@ import { AdminComponent } from './admin.component';
 import { MenuComponent } from './menu/menu.component';
 import { DeleteDialogComponent } from '../../common/delete-dialog/delete-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatMenuModule } from '@angular/material/menu';
 
 @NgModule({
   declarations: [
     SidenavComponent,
     AdminComponent,
     MenuComponent,
-    DeleteDialogComponent,
-    FooterComponent
+    DeleteDialogComponent
   ],
   imports: [
     CommonModule,
@@ -29,7 +28,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatToolbarModule,
     MatIconModule,
     AdminRoutingModule,
-    MatDialogModule
+    MatDialogModule,
+    MatMenuModule
   ]
 })
 export class AdminModule { }

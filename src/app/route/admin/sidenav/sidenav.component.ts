@@ -1,3 +1,5 @@
+import { User } from 'src/app/model/user.model';
+import { SessionService } from './../../../service/authService/session.service';
 import { ChangeDetectorRef, Component, OnDestroy } from '@angular/core';
 import { MediaMatcher } from '@angular/cdk/layout';
 
@@ -8,7 +10,9 @@ import { MediaMatcher } from '@angular/cdk/layout';
 })
 export class SidenavComponent implements OnDestroy {
 
-  mobileQuery: MediaQueryList;
+  mobileQuery:  MediaQueryList;
+
+  user:         User = new User();
 
   fillerNav = [
     { name: 'Home',         route: '/admin',        icon: 'home'},
@@ -21,10 +25,12 @@ export class SidenavComponent implements OnDestroy {
 
   private _mobileQueryListener: () => void;
 
-  constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher) {
+  constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, sessionService: SessionService) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
+
+    this.user =  sessionService.load();
   }
 
   ngOnDestroy(): void {

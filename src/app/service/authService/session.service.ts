@@ -13,7 +13,7 @@ export class SessionService {
 
     sessionStorage.clear();
 
-    sessionStorage.setItem('user',
+    sessionStorage.setItem('user-aria',
                            JSON.stringify(user));
 
   }
@@ -26,15 +26,11 @@ export class SessionService {
 
   load(): User {
 
-    const storedSession: string | null = sessionStorage.getItem('session');
+    const storedSession: string | null = sessionStorage.getItem('user-aria');
 
     return storedSession !== null
             ? JSON.parse(storedSession) as User
             : new User();
-  }
-
-  loadUser(): User {
-    return this.load();
   }
 
   loadToken(): string {
