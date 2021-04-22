@@ -8,17 +8,19 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { SidenavComponent } from './sidenav/sidenav.component';
 import { AdminComponent } from './admin.component';
-import { MenuComponent } from './menu/menu.component';
+import { MainMenuComponent } from './main-menu/main-menu.component';
 import { DeleteDialogComponent } from '../../common/delete-dialog/delete-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatMenuModule } from '@angular/material/menu';
+import { UserMenuComponent } from './user-menu/user-menu.component';
 
 @NgModule({
   declarations: [
     SidenavComponent,
     AdminComponent,
-    MenuComponent,
-    DeleteDialogComponent
+    MainMenuComponent,
+    DeleteDialogComponent,
+    UserMenuComponent
   ],
   imports: [
     CommonModule,
