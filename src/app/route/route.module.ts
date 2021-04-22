@@ -9,6 +9,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatDividerModule } from '@angular/material/divider';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
+import { FogotPasswordComponent } from './auth/fogot-password/fogot-password.component';
 
 const routes: Routes = [
   { path: 'admin', loadChildren: () => import('./admin/admin.module')
@@ -18,7 +19,8 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [
-    LoginComponent
+    LoginComponent,
+    FogotPasswordComponent
   ],
   imports: [
     RouterModule.forChild(routes),
