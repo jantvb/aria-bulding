@@ -1,7 +1,9 @@
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogRef } from '@angular/material/dialog';
 import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
-import { Component, OnInit, Inject } from '@angular/core';
-import { User } from 'src/app/model/user.model';
+import { Component, OnInit } from '@angular/core';
+import { UserService } from 'src/app/service/user.service';
+import { SessionService } from 'src/app/service/authService/session.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-change-password-dialog',
@@ -17,9 +19,11 @@ export class ChangePasswordDialogComponent implements OnInit {
 
   hide = true;
 
-  constructor(public dialogRef: MatDialogRef<ChangePasswordDialogComponent>,
-                            fb: FormBuilder,
-                            @Inject(MAT_DIALOG_DATA) public data: {oldPassword: string, newPassword: string, confirmPassword: string}) {
+  constructor(public  dialogRef:      MatDialogRef<ChangePasswordDialogComponent>,
+              private userService:    UserService,
+              private matSnackBar:    MatSnackBar,
+              private sessionService: SessionService,
+              public  fb:             FormBuilder) {
 
 
     this.options = fb.group({
@@ -38,8 +42,17 @@ export class ChangePasswordDialogComponent implements OnInit {
   }
 
   changePassword(): void {
-    this.dialogRef.close();
+    this.userService
+        .changePassword(this.sessionService.load().id,
+                        this.oldPasswordControl.value,
+                        this.newPasswordControl.value)
+        .subscribe(r => {
+          this.matSnackBar.open('Password Changed', 'Dismiss', {duration: 3000});
+          this.dialogRef.close();
+        }, err => {
+          console.log(err);
+          this.matSnackBar.open('Error Trying to change Password: ' + err, 'Dismiss', {duration: 3000});
+        })
   }
-
 
 }
