@@ -30,7 +30,14 @@ export class UserService {
   }
 
   changePassword(id: number, oldPassword: string, newPassword: string): Observable<void> {
-    return this.httpC.put<void>(this.path, {}, id, oldPassword, newPassword);
+
+    const changePassword = {
+      oldPassword: oldPassword,
+      newPassword: newPassword
+    };
+
+
+    return this.httpC.put<void>(this.path, changePassword);
   }
 
 }
