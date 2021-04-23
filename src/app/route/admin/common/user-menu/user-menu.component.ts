@@ -1,8 +1,11 @@
+import { ChangePasswordDialogComponent } from './../../user/change-password-dialog/change-password-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../../service/authService/auth.service';
 import { User } from 'src/app/model/user.model';
 import { SessionService } from '../../../../service/authService/session.service';
 import { Component, OnInit } from '@angular/core';
+import { UserService } from 'src/app/service/user.service';
 
 @Component({
   selector: 'app-user-menu',
@@ -15,9 +18,10 @@ export class UserMenuComponent implements OnInit {
 
   constructor(private sessionService:   SessionService,
               private authService:      AuthService,
-              private router:           Router) {
+              private router:           Router,
+              public  dialog:           MatDialog) {
 
-    this.user =  sessionService.load()
+    this.user =  sessionService.load();
 
   }
 
@@ -34,6 +38,12 @@ export class UserMenuComponent implements OnInit {
           this.router.navigate(['/login']);
 
         });
+
+  }
+
+  openChangePasswordDialog(): void {
+
+    const dialogRef = this.dialog.open(ChangePasswordDialogComponent);
 
   }
 

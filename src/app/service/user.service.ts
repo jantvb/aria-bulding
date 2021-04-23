@@ -36,7 +36,6 @@ export class UserService {
       newPassword: newPassword
     };
 
-
     return this.httpC.put<void>(this.path, changePassword);
   }
 
