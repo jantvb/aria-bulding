@@ -16,6 +16,6 @@ export class RequestInterceptor implements HttpInterceptor{
 
     return next.handle(req.clone({headers: req.headers
                                               .set('Authorization',
-                                                   'Bearer ' + this.sessionService.loadToken)}));
+                                                   'Bearer ' + this.sessionService.loadToken())}));
                                                                                 }
 }

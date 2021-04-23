@@ -12,6 +12,7 @@ export class AddDialogComponent implements OnInit {
 
   options!:                 FormGroup;
   nameControl!:             FormControl;
+  levelControl!:            FormControl;
 
   title:                    string = 'Create New Role';
 
@@ -31,10 +32,12 @@ export class AddDialogComponent implements OnInit {
       this.title = 'Editing: ' + this.role.name;
     }
 
-    this.nameControl              = new FormControl(this.role.name);
+    this.nameControl   = new FormControl(this.role.name);
+    this.levelControl  = new FormControl(this.role.level);
 
     this.options = fb.group({
-      roleName:             this.nameControl,
+      name:       this.nameControl,
+      level:      this.levelControl
     });
 
   }

@@ -1,3 +1,5 @@
+import { Router } from '@angular/router';
+import { AuthService } from './../../../../service/authService/auth.service';
 import { User } from 'src/app/model/user.model';
 import { SessionService } from '../../../../service/authService/session.service';
 import { Component, OnInit } from '@angular/core';
@@ -11,13 +13,32 @@ export class UserMenuComponent implements OnInit {
 
   user:         User = new User();
 
-  constructor(sessionService: SessionService) {
+  constructor(private sessionService:   SessionService,
+              private authService:      AuthService,
+              private router:           Router) {
 
     this.user =  sessionService.load()
 
   }
 
   ngOnInit(): void {
+  }
+
+  logout(): void {
+
+    this.authService
+        .logout()
+        .subscribe(res => {
+
+          this.sessionService.remove();
+          this.router.navigate(['/login']);
+
+        }, err => {
+
+          console.log(err)
+
+        });
+
   }
 
 }

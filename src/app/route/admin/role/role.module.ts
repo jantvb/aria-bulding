@@ -1,3 +1,5 @@
+import { MatOptionModule } from '@angular/material/core';
+import { MatSelectModule } from '@angular/material/select';
 import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatPaginatorModule } from '@angular/material/paginator';
@@ -33,7 +35,9 @@ import { TableComponent } from './table/table.component';
     MatCardModule,
     MatDialogModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatSelectModule,
+    MatOptionModule
   ]
 })
 export class RoleModule { }

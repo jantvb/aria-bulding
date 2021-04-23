@@ -17,12 +17,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
 import { MatOptionModule } from '@angular/material/core';
 import { TextMaskModule } from 'angular2-text-mask';
+import { ChangePasswordComponent } from './change-password/change-password.component';
 
 @NgModule({
   declarations: [
     UserComponent,
     AddDialogComponent,
-    TableComponent
+    TableComponent,
+    ChangePasswordComponent
   ],
   imports: [
     TextMaskModule,
