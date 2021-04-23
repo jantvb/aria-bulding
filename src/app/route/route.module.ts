@@ -34,6 +34,6 @@ const routes: Routes = [
     MatCardModule,
     MatButtonModule
   ],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class RouteModule { }

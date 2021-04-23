@@ -14,8 +14,12 @@ export class RequestInterceptor implements HttpInterceptor{
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
-    return next.handle(req.clone({headers: req.headers
-                                              .set('Authorization',
-                                                   'Bearer ' + this.sessionService.loadToken())}));
+    if (!req.url.includes('login')) {
+      return next.handle(req.clone({headers: req.headers
+                            .set('Authorization',
+                                 'Bearer ' + this.sessionService.loadToken())}));
+    } else {
+      return next.handle(req);
+    }
                                                                                 }
 }
