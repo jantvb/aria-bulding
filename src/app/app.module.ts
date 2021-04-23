@@ -22,9 +22,9 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     RouteModule
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: RequestInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: ResponseInterceptor, multi: true},
-    ],
+    { provide: HTTP_INTERCEPTORS, useClass: RequestInterceptor,  multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ResponseInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -29,4 +29,8 @@ export class UserService {
     return this.httpC.delete<User>(this.path + '/' + id);
   }
 
+  changePassword(id: number, oldPassword: string, newPassword: string): Observable<void> {
+    return this.httpC.put<void>(this.path, {}, id, oldPassword, newPassword);
+  }
+
 }

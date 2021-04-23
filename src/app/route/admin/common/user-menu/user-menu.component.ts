@@ -33,10 +33,6 @@ export class UserMenuComponent implements OnInit {
           this.sessionService.remove();
           this.router.navigate(['/login']);
 
-        }, err => {
-
-          console.log(err)
-
         });
 
   }
