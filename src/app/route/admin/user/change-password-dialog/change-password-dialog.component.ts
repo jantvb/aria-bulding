@@ -25,9 +25,12 @@ export class ChangePasswordDialogComponent implements OnInit {
               private sessionService: SessionService,
               public  fb:             FormBuilder) {
 
+    this.oldPasswordControl      = new FormControl();
+    this.newPasswordControl      = new FormControl();
+    this.confirmPasswordControl  = new FormControl();
 
     this.options = fb.group({
-      oldPassword:               this.oldPasswordControl,
+      oldPasswordControl:        this.oldPasswordControl,
       newPasswordControl:        this.newPasswordControl,
       confirmPasswordControl:    this.confirmPasswordControl
     });
@@ -51,7 +54,7 @@ export class ChangePasswordDialogComponent implements OnInit {
           this.dialogRef.close();
         }, err => {
           console.log(err);
-          this.matSnackBar.open('Error Trying to change Password: ' + err, 'Dismiss', {duration: 3000});
+          this.matSnackBar.open('Error trying to change Password: ' + err, 'Dismiss', {duration: 3000});
         })
   }
 
