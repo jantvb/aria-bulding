@@ -75,15 +75,13 @@ export class ChangePasswordDialogComponent implements OnInit {
 
   validateNewPassword(): string {
 
-    if(this.newPasswordControl.hasError('required')) {
-      return 'Plase enter a new password';
-    }
-
-    if(this.newPasswordControl.hasError('minLength') || this.newPasswordControl.hasError('maxLength')) {
+    if((this.newPasswordControl.hasError('minLength') || this.newPasswordControl.hasError('maxLength')) && !(this.newPasswordControl.hasError('required'))) {
       return 'Password must have between 6 and 12 characters';
     }
 
-
+    if(this.newPasswordControl.hasError('required')) {
+      return 'Please enter a new password';
+    }
 
     return '';
 
