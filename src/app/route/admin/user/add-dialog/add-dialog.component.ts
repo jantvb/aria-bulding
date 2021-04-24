@@ -1,6 +1,6 @@
 import { RoleService } from './../../../../service/role.service';
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { User } from 'src/app/model/user.model';
 import { Role } from 'src/app/model/role.model';
@@ -56,7 +56,8 @@ export class AddDialogComponent implements OnInit {
     this.lastNameControl              = new FormControl(this.user.lastname);
     this.phoneControl                 = new FormControl(this.user.phoneNumber);
     this.socialSecurityControl        = new FormControl(this.user.socialSecurity);
-    this.usernameControl              = new FormControl(this.user.username);
+    this.usernameControl              = new FormControl(this.user.username, [Validators.required,
+                                                                             Validators.email,]);
     this.passwordControl              = new FormControl(this.user.password);
     this.roleControl                  = new FormControl(this.user.roles);
 
@@ -84,12 +85,5 @@ export class AddDialogComponent implements OnInit {
     this.dialogRef.close(this.user);
   }
 
-  getErrorMessage(): string {
-    if (this.usernameControl.hasError('required')) {
-      return 'Please enter an email';
-    }
-
-    return this.usernameControl.hasError('emailControl') ? 'Not a valid email' : '';
-  }
 
 }
