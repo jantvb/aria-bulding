@@ -8,18 +8,19 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RequestInterceptor } from './service/authService/request.interceptor.service';
 import { ResponseInterceptor } from './service/authService/response.interceptor.service';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 @NgModule({
   declarations: [
     AppComponent
   ],
   imports: [
+    SweetAlert2Module.forRoot(),
     BrowserModule,
     HttpClientModule,
     BrowserAnimationsModule,
     AppRoutingModule,
     MatSnackBarModule,
-    RouteModule
+    RouteModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: RequestInterceptor,  multi: true },

@@ -7,6 +7,7 @@ import { AuthService } from './auth.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 
+import swal from 'sweetalert2';
 @Injectable({
   providedIn: 'root'
 })
@@ -27,10 +28,12 @@ export class ResponseInterceptor implements HttpInterceptor {
                       this.authService.logout();
                     }
 
-                    this.snackBar
-                          .open(error.message,
-                                'Dismiss',
-                                {duration: 3500});
+                    swal.fire('Opps something happen', error.message, 'error');
+
+                    // this.snackBar
+                    //       .open(error.message,
+                    //             'Dismiss',
+                    //             {duration: 3500});
 
                     return throwError(error);
                   })
