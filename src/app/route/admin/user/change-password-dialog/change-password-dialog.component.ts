@@ -1,9 +1,10 @@
 import { MatDialogRef } from '@angular/material/dialog';
-import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
+import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/service/user.service';
 import { SessionService } from 'src/app/service/authService/session.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+
 
 @Component({
   selector: 'app-change-password-dialog',
@@ -26,8 +27,12 @@ export class ChangePasswordDialogComponent implements OnInit {
               public  fb:             FormBuilder) {
 
     this.oldPasswordControl      = new FormControl();
-    this.newPasswordControl      = new FormControl();
+    this.newPasswordControl      = new FormControl('', [Validators.required,
+                                                        Validators.minLength(6),
+                                                        Validators.maxLength(12)
+                                                      ]);
     this.confirmPasswordControl  = new FormControl();
+
 
     this.options = fb.group({
       oldPasswordControl:        this.oldPasswordControl,
@@ -57,5 +62,31 @@ export class ChangePasswordDialogComponent implements OnInit {
           this.matSnackBar.open('Error trying to change Password: ' + err, 'Dismiss', {duration: 3000});
         })
   }
+
+  validateSamePassword(): string {
+
+    if(this.newPasswordControl.value !== this.confirmPasswordControl.value) {
+      return 'Passwords do not match';
+    }
+
+    return '';
+
+  }
+
+  validateNewPassword(): string {
+
+    if((this.newPasswordControl.hasError('minLength') || this.newPasswordControl.hasError('maxLength')) && !(this.newPasswordControl.hasError('required'))) {
+      return 'Password must have between 6 and 12 characters';
+    }
+
+    if(this.newPasswordControl.hasError('required')) {
+      return 'Please enter a new password';
+    }
+
+    return '';
+
+  }
+
+
 
 }

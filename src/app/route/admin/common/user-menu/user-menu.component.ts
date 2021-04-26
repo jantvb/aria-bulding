@@ -43,7 +43,7 @@ export class UserMenuComponent implements OnInit {
 
   openChangePasswordDialog(): void {
 
-    const dialogRef = this.dialog.open(ChangePasswordDialogComponent);
+    this.dialog.open(ChangePasswordDialogComponent);
 
   }
 
