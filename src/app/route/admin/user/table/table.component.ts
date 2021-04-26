@@ -7,6 +7,9 @@ import { MatTableDataSource } from '@angular/material/table';
 import { User } from 'src/app/model/user.model';
 import { UserService } from 'src/app/service/user.service';
 import { AddDialogComponent } from '../add-dialog/add-dialog.component';
+import { BuildingService } from 'src/app/service/building.service';
+import { Observable } from 'rxjs';
+import { Building } from 'src/app/model/building.model';
 
 @Component({
   selector: 'app-table-user',
@@ -15,7 +18,7 @@ import { AddDialogComponent } from '../add-dialog/add-dialog.component';
 })
 export class TableComponent implements OnInit {
 
-  displayedColumns:                     string[] = ['name', 'username', 'phone', 'status', 'actions'];
+  displayedColumns:                     string[] = ['name', 'username', 'phone', 'building', 'status', 'actions'];
   dataSource!:                          MatTableDataSource<User>;
 
   @ViewChild(MatPaginator) paginator!:  MatPaginator;

@@ -19,6 +19,7 @@ import { MatOptionModule } from '@angular/material/core';
 import { TextMaskModule } from 'angular2-text-mask';
 import { ChangePasswordDialogComponent } from './change-password-dialog/change-password-dialog.component';
 
+
 @NgModule({
   declarations: [
     UserComponent,
