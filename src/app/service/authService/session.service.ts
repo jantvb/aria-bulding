@@ -45,4 +45,9 @@ export class SessionService {
     return this.load().roles;
   }
 
+  hasToken(): boolean {
+    return this.load() !== undefined &&
+            this.load().token !== undefined
+  }
+
 }

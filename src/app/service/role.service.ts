@@ -22,6 +22,9 @@ export class RoleService {
   }
 
   createOrUpdate(role: Role): Observable<Role> {
+
+    role.name = role.name.toUpperCase();
+
     return this.httpC.post<Role>(this.path, role);
   }
 

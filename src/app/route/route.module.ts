@@ -10,10 +10,11 @@ import { MatDividerModule } from '@angular/material/divider';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { FogotPasswordComponent } from './auth/fogot-password/fogot-password.component';
+import { AuthGuard } from '../service/authService/auth-guard.service';
 
 const routes: Routes = [
   { path: 'admin', loadChildren: () => import('./admin/admin.module')
-                                       .then(m => m.AdminModule) },
+                                       .then(m => m.AdminModule), canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent }
 ];
 
