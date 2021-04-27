@@ -4,8 +4,6 @@ import { Observable, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 
 import { AuthService } from './auth.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { Router } from '@angular/router';
 
 import swal from 'sweetalert2';
 @Injectable({
@@ -13,9 +11,7 @@ import swal from 'sweetalert2';
 })
 export class ResponseInterceptor implements HttpInterceptor {
 
-  constructor(private authService: AuthService,
-              private snackBar: MatSnackBar,
-              private router: Router) {}
+  constructor(private authService: AuthService) {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 

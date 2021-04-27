@@ -22,7 +22,7 @@ export class UserService {
   }
 
   createOrUpdate(user: User): Observable<User> {
-    return this.httpC.put<User>(this.path, user);
+    return this.httpC.post<User>(this.path, user);
   }
 
   delete(id: number): Observable<User> {
