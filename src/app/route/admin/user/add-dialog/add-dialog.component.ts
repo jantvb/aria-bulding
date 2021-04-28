@@ -4,7 +4,6 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { User } from 'src/app/model/user.model';
 import { Role } from 'src/app/model/role.model';
-import { Observable } from 'rxjs';
 import { Building } from 'src/app/model/building.model';
 import { BuildingService } from 'src/app/service/building.service';
 
@@ -37,17 +36,17 @@ export class AddDialogComponent implements OnInit {
 
   hide = true;
 
-  constructor(public dialogRef: MatDialogRef<AddDialogComponent>,
-                    fb: FormBuilder,
-                    @Inject(MAT_DIALOG_DATA) public data: User,
-                    private buildingService:  BuildingService,
-                    private roleService:      RoleService) {
+  constructor(public dialogRef:         MatDialogRef<AddDialogComponent>,
+                            fb:         FormBuilder,
+              private buildingService:  BuildingService,
+              private roleService:      RoleService,
+              @Inject(MAT_DIALOG_DATA) public data: User) {
 
     this.roleService
         .list()
         .subscribe( rRoles => {
-        this.roles = new Array<Role>();
-          Object.assign(this.roles, rRoles);
+            this.roles = new Array<Role>();
+            Object.assign(this.roles, rRoles);
         });
 
     Object.assign(this.user, data);

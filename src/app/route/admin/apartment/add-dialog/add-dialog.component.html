@@ -1,6 +1,7 @@
 <h2 mat-dialog-title>{{title}}</h2>
 <mat-dialog-content class="mat-typography">
   <form class="example-container" [formGroup]="options">
+
     <mat-form-field appearance="legacy" >
       <mat-label>Display</mat-label>
       <input  matInput
@@ -12,14 +13,17 @@
       <mat-error *ngIf="displayControl.invalid">Please enter apartment display</mat-error>
     </mat-form-field>
 
+    <mat-form-field>
+      <mat-label>Building</mat-label>
+      <mat-select (selectionChange)="buildingChanged($event)" [formControl]="buildingControl" required>
+        <mat-option *ngFor="let building of buildings" [value]="building.id">{{building.name}}</mat-option>
+      </mat-select>
+      <mat-error *ngIf="buildingControl.hasError('required')">Please select a building</mat-error>
+    </mat-form-field>
+
     <mat-form-field appearance="legacy" >
       <mat-label>Description</mat-label>
-      <input  matInput
-              type="text"
-              [(ngModel)]="apartment.description"
-              placeholder="Description"
-              [formControl]="descriptionControl"
-              required>
+      <input matInput type="text" [(ngModel)]="apartment.description" placeholder="Description" [formControl]="descriptionControl" required>
       <mat-error *ngIf="descriptionControl.invalid">Please enter apartment description</mat-error>
     </mat-form-field>
 

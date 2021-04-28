@@ -1,6 +1,7 @@
+import { BuildingService } from './../../../../service/building.service';
 import { Building } from 'src/app/model/building.model';
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Apartment } from 'src/app/model/apartment.model';
 
@@ -18,13 +19,16 @@ export class AddDialogComponent implements OnInit {
 
   title:                      string = 'Create New Apartment';
 
-  apartment:                 Apartment = new Apartment();
+  apartment:                  Apartment = new Apartment();
 
   buildings:                  Array<Building> = new Array<Building>();
 
-  constructor(public dialogRef: MatDialogRef<AddDialogComponent>,
+  constructor(public dialogRef:         MatDialogRef<AddDialogComponent>,
+              private buildingService:  BuildingService,
               fb: FormBuilder,
               @Inject(MAT_DIALOG_DATA) public data: Apartment) {
+
+
 
     Object.assign(this.apartment, data);
 
@@ -34,9 +38,9 @@ export class AddDialogComponent implements OnInit {
       this.title = 'Editing: ' + this.apartment.display;
     }
 
-    this.displayControl     = new FormControl(this.apartment.display);
+    this.displayControl     = new FormControl(this.apartment.display, [Validators.required]);
     this.descriptionControl = new FormControl(this.apartment.description);
-    this.buildingControl    = new FormControl(this.apartment.building);
+    this.buildingControl    = new FormControl(this.apartment.building, [Validators.required]);
 
     this.options = fb.group({
       display:        this.displayControl,
@@ -47,6 +51,7 @@ export class AddDialogComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.loadBuildings();
   }
 
   cancel(): void {
@@ -55,6 +60,17 @@ export class AddDialogComponent implements OnInit {
 
   submit(): void {
     this.dialogRef.close(this.apartment);
+  }
+
+  buildingChanged(event: any): void {
+    this.apartment.building = event.value;
+  }
+
+  loadBuildings(): void {
+    this.buildingService
+        .list()
+        .subscribe(b => this.buildings = b,
+                   err => console.log(err));
   }
 
 }
