@@ -16,13 +16,13 @@ import Swal from 'sweetalert2';
 export class TableComponent implements OnInit {
 
 
-  displayedColumns:                         string[] = ['name', 'actions'];
-  dataSource!:                              MatTableDataSource<Role>;
+  displayedColumns:                       string[] = ['name', 'level', 'actions'];
+  dataSource!:                            MatTableDataSource<Role>;
 
-  roles:                                    Array<Role> = new Array<Role>();
+  roles:                                  Array<Role> = new Array<Role>();
 
-  @ViewChild(MatPaginator) paginator!:      MatPaginator;
-  @ViewChild(MatSort) sort!:                MatSort;
+  @ViewChild(MatPaginator) paginator!:    MatPaginator;
+  @ViewChild(MatSort) sort!:              MatSort;
 
   constructor(private roleService:        RoleService,
               public  dialog:             MatDialog) {}
@@ -131,19 +131,18 @@ export class TableComponent implements OnInit {
   openDeleteDialog(role: Role): void {
 
       Swal.fire({
-        title: 'Are you sure you want to delete the role ' + role.name + '?',
-        text: "You won't be able to revert this!",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, delete it!'
-      }).then((result) => {
-        if (result.isConfirmed) {
-          this.delete(role.id);
-        }
-      })
-
+                  title: 'Are you sure you want to delete the role ' + role.name + '?',
+                  text: "You won't be able to revert this!",
+                  icon: 'warning',
+                  showCancelButton: true,
+                  confirmButtonColor: '#3085d6',
+                  cancelButtonColor: '#d33',
+                  confirmButtonText: 'Yes, delete it!'
+                }).then((result) => {
+                  if (result.isConfirmed) {
+                    this.delete(role.id);
+                  }
+                })
 
   }
 

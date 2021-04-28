@@ -134,18 +134,18 @@ export class TableComponent implements OnInit {
   openDeleteDialog(apartment: Apartment): void {
 
     Swal.fire({
-      title: 'Are you sure you want to delete the apartment ' + apartment.description + '?',
-      text: "You won't be able to revert this!",
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, delete it!'
-    }).then((result) => {
-      if (result.isConfirmed) {
-        this.delete(apartment.id);
-      }
-    })
+                  title: 'Are you sure you want to delete the apartment ' + apartment.display + '?',
+                  text: "You won't be able to revert this!",
+                  icon: 'warning',
+                  showCancelButton: true,
+                  confirmButtonColor: '#3085d6',
+                  cancelButtonColor: '#d33',
+                  confirmButtonText: 'Yes, delete it!'
+                }).then((result) => {
+                  if (result.isConfirmed) {
+                    this.delete(apartment.id);
+                  }
+              })
   }
 
 }
