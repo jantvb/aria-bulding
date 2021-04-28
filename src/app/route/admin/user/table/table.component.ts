@@ -132,18 +132,23 @@ export class TableComponent implements OnInit {
 
   findBuilding(buildingId: number): string {
 
-    if (this.buildings.some(b => b.id === buildingId)) {
-      return this.buildings.filter(b => b.id === buildingId)[0].name;
+    if (buildingId) {
+      if (this.buildings.some(b => b.id === buildingId)) {
+        return this.buildings.filter(b => b.id === buildingId)[0].name;
+      } else {
+        this.buildingService
+            .get(buildingId)
+            .subscribe(b => {
+              if (!this.buildings.some(b => b.id === buildingId)) {
+                this.buildings.push(b);
+              }
+            });
+        return 'No Yet';
+      }
     } else {
-      this.buildingService
-          .get(buildingId)
-          .subscribe(b => {
-            if (!this.buildings.some(b => b.id === buildingId)) {
-              this.buildings.push(b);
-            }
-          });
-      return 'No Yet';
+      return 'No Default Building';
     }
+
   }
 
   applyFilter(event: Event): void {
