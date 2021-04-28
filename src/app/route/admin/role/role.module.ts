@@ -15,6 +15,7 @@ import { CommonModule } from '@angular/common';
 import { RoleRoutingModule } from './role-routing.module';
 import { AddDialogComponent } from './add-dialog/add-dialog.component';
 import { TableComponent } from './table/table.component';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import { TableComponent } from './table/table.component';
     FormsModule,
     ReactiveFormsModule,
     MatSelectModule,
-    MatOptionModule
+    MatOptionModule,
+    MatTooltipModule
   ]
 })
 export class RoleModule { }

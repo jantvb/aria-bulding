@@ -1,3 +1,4 @@
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatPaginatorModule } from '@angular/material/paginator';
@@ -13,6 +14,7 @@ import { CommonModule } from '@angular/common';
 import { DocumentRoutingModule } from './document-routing.module';
 import { AddDialogComponent } from './add-dialog/add-dialog.component';
 import { TableComponent } from './table/table.component';
+
 
 
 @NgModule({
@@ -33,7 +35,8 @@ import { TableComponent } from './table/table.component';
     MatCardModule,
     MatDialogModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatTooltipModule
   ]
 })
 export class DocumentModule { }

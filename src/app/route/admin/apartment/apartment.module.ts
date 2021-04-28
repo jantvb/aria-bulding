@@ -1,3 +1,4 @@
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ApartmentComponent } from './apartment.component';
 import { MatButtonModule } from '@angular/material/button';
@@ -39,7 +40,8 @@ import { MatOptionModule } from '@angular/material/core';
     ReactiveFormsModule,
     FormsModule,
     MatSelectModule,
-    MatOptionModule
+    MatOptionModule,
+    MatTooltipModule
   ]
 })
 export class ApartmentModule { }
