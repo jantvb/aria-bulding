@@ -9,6 +9,7 @@ import { UserService } from 'src/app/service/user.service';
 import { AddDialogComponent } from '../add-dialog/add-dialog.component';
 import { BuildingService } from 'src/app/service/building.service';
 import { Building } from 'src/app/model/building.model';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-table-user',
@@ -28,6 +29,7 @@ export class TableComponent implements OnInit {
   buildings: Array<Building> = new Array<Building>();
 
   constructor(private userService: UserService,
+              private snackBar: MatSnackBar,
               private buildingService: BuildingService,
               public  dialog:      MatDialog) {}
 
@@ -60,17 +62,21 @@ export class TableComponent implements OnInit {
 
   }
 
-  protected delete(userId: number): void {
+  protected delete(user: User): void {
     this.userService
-        .delete(userId)
+        .delete(user.id)
         .subscribe(() => {
 
           this.users
               .splice(this.users
-                         .findIndex(u => u.id === userId),
+                         .findIndex(u => u.id === user.id),
                       1);
 
           this.refreshTable();
+
+          this.snackBar
+              .open('User: ' + user.firstname + ' ' + user.lastname + ' deleted', 'Dismiss',
+                    {duration: 3500}  );
 
         }, err => console.log(err));
   }
@@ -93,6 +99,10 @@ export class TableComponent implements OnInit {
           }
 
           this.refreshTable();
+
+          this.snackBar
+              .open('User: ' + aU.firstname + ' ' + aU.lastname +  (user.id ? ' updated' : ' created'), 'Dismiss',
+                    {duration: 3500}  );
 
         }, err => console.log(err));
 
@@ -118,7 +128,7 @@ export class TableComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result !== undefined) {
-        this.delete(result);
+        this.delete(user);
       }
 
     });
