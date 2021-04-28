@@ -7,6 +7,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Document } from 'src/app/model/document.model';
 import { DocumentService } from 'src/app/service/document.service';
 import { AddDialogComponent } from '../add-dialog/add-dialog.component';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-table-document',
@@ -64,6 +65,14 @@ export class TableComponent implements OnInit {
                           .findIndex(d => d.id === documentId),
                       1);
 
+          Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Document deleted successfully',
+                        showConfirmButton: true,
+                        timer: 3000
+                    })
+
           this.refreshTable();
 
         }, err => console.log(err));
@@ -84,6 +93,14 @@ export class TableComponent implements OnInit {
             Object.assign(this.documents.find(d => d.id === document.id), aD);
 
           }
+
+          Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Document saved successfully',
+                        showConfirmButton: true,
+                        timer: 3000
+                    })
 
           this.refreshTable();
 

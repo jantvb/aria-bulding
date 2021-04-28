@@ -7,6 +7,7 @@ import {MatTableDataSource} from '@angular/material/table';
 import { Apartment } from 'src/app/model/apartment.model';
 import { ApartmentService } from 'src/app/service/apartment.service';
 import { AddDialogComponent } from '../add-dialog/add-dialog.component';
+import Swal from 'sweetalert2';
 
 /**
  * @title Data table with sorting, pagination, and filtering.
@@ -62,6 +63,7 @@ export class TableComponent implements OnInit {
 
           this.refreshTable();
 
+
         }, err => console.log(err));
   }
 
@@ -75,6 +77,14 @@ export class TableComponent implements OnInit {
               .splice(this.apartments
                           .findIndex(a => a.id === apartmentId),
                       1);
+
+          Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Apartment deleted successfully',
+                        showConfirmButton: true,
+                        timer: 3000
+                    })
 
           this.refreshTable();
 
@@ -96,6 +106,14 @@ export class TableComponent implements OnInit {
             Object.assign(this.apartments.find(a => a.id === apartment.id), aA);
 
           }
+
+          Swal.fire({
+                      position: 'top-end',
+                      icon: 'success',
+                      title: 'Apartment saved successfully',
+                      showConfirmButton: true,
+                      timer: 3000
+                    })
 
           this.refreshTable();
 

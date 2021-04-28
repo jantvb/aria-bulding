@@ -7,6 +7,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Role } from 'src/app/model/role.model';
 import { RoleService } from 'src/app/service/role.service';
 import { AddDialogComponent } from '../add-dialog/add-dialog.component';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-table-role',
@@ -74,6 +75,14 @@ export class TableComponent implements OnInit {
                           .findIndex(r => r.id === roleId),
                       1);
 
+          Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Role deleted successfully',
+                        showConfirmButton: true,
+                        timer: 3000
+                    })
+
           this.refreshTable();
 
         }, err => console.log(err));
@@ -94,6 +103,14 @@ export class TableComponent implements OnInit {
             Object.assign(this.roles.find(r => r.id === role.id), aR);
 
           }
+
+          Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Role saved successfully',
+                        showConfirmButton: true,
+                        timer: 3000
+                    })
 
           this.refreshTable();
 

@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/service/user.service';
 import { SessionService } from 'src/app/service/authService/session.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -55,7 +56,15 @@ export class ChangePasswordDialogComponent implements OnInit {
                         this.oldPasswordControl.value,
                         this.newPasswordControl.value)
         .subscribe(r => {
-          this.matSnackBar.open('Password Changed', 'Dismiss', {duration: 3000});
+
+          Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Password changed successfully',
+                        showConfirmButton: true,
+                        timer: 3000
+                    })
+
           this.dialogRef.close();
         }, err => {
           console.log(err);
