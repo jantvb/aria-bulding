@@ -79,7 +79,6 @@ export class AddDialogComponent implements OnInit {
 
   }
 
-
   ngOnInit(): void {
     this.loadBuildings();
   }
@@ -96,6 +95,13 @@ export class AddDialogComponent implements OnInit {
   }
 
   submit(): void {
+
+    this.user.firstname       = this.firstNameControl.value;
+    this.user.lastname        = this.lastNameControl.value;
+    this.user.phoneNumber     = this.phoneControl.value;
+    this.user.socialSecurity  = this.socialSecurityControl.value.replace(/-/gi, '');
+    this.user.username        = this.usernameControl.value;
+
     this.dialogRef.close(this.user);
   }
 
@@ -105,7 +111,15 @@ export class AddDialogComponent implements OnInit {
   }
 
   roleChanged(event: any): void {
-    this.user.roles = event.value;
+    const arr: Array<number> = event.value;
+
+    this.user.roles = [];
+
+    arr.forEach(id => {
+      const r: Role = new Role();
+      r.id = id;
+      this.user.roles.push(r);
+    });
   }
 
 }

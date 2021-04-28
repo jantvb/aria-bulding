@@ -8,7 +8,6 @@ import { User } from 'src/app/model/user.model';
 import { UserService } from 'src/app/service/user.service';
 import { AddDialogComponent } from '../add-dialog/add-dialog.component';
 import { BuildingService } from 'src/app/service/building.service';
-import { Observable } from 'rxjs';
 import { Building } from 'src/app/model/building.model';
 
 @Component({
@@ -78,6 +77,7 @@ export class TableComponent implements OnInit {
 
   protected createOrUpdate(user: User): void {
 
+    console.log(user);
     this.userService
         .createOrUpdate(user)
         .subscribe(aU => {
