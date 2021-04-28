@@ -1,4 +1,3 @@
-import { DeleteDialogComponent } from '../../../../common/delete-dialog/delete-dialog.component';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
@@ -131,14 +130,21 @@ export class TableComponent implements OnInit {
 
   openDeleteDialog(role: Role): void {
 
-    const dialogRef = this.dialog.open(DeleteDialogComponent, {data: {id: role.id, name: role.name, type: 'role'}});
+      Swal.fire({
+        title: 'Are you sure you want to delete the role ' + role.name + '?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.delete(role.id);
+        }
+      })
 
-    dialogRef.afterClosed().subscribe(result => {
-      if (result !== undefined) {
-        this.delete(result);
-      }
 
-    });
   }
 
 }

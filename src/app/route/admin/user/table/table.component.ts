@@ -1,4 +1,3 @@
-import { DeleteDialogComponent } from './../../../../common/delete-dialog/delete-dialog.component';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator} from '@angular/material/paginator';
@@ -10,6 +9,7 @@ import { AddDialogComponent } from '../add-dialog/add-dialog.component';
 import { BuildingService } from 'src/app/service/building.service';
 import { Building } from 'src/app/model/building.model';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-table-user',
@@ -18,7 +18,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class TableComponent implements OnInit {
 
-  displayedColumns:                     string[] = ['name', 'username', 'phone', 'building', 'status', 'actions'];
+  displayedColumns:                     string[] = ['name', 'username', 'phone', 'defaultBuilding', 'status', 'actions'];
   dataSource!:                          MatTableDataSource<User>;
 
   @ViewChild(MatPaginator) paginator!:  MatPaginator;
@@ -72,6 +72,14 @@ export class TableComponent implements OnInit {
                          .findIndex(u => u.id === user.id),
                       1);
 
+          Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'User deleted successfully',
+                        showConfirmButton: true,
+                        timer: 3000
+                    })
+
           this.refreshTable();
 
           this.snackBar
@@ -98,6 +106,14 @@ export class TableComponent implements OnInit {
 
           }
 
+          Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'User saved successfully',
+            showConfirmButton: true,
+            timer: 3000
+        })
+
           this.refreshTable();
 
           this.snackBar
@@ -123,15 +139,19 @@ export class TableComponent implements OnInit {
 
   openDeleteDialog(user: User): void {
 
-    const fullName = user.firstname + ' ' + user.lastname;
-    const dialogRef = this.dialog.open(DeleteDialogComponent, {data: {id: user.id, name: fullName, type: 'user'}});
-
-    dialogRef.afterClosed().subscribe(result => {
-      if (result !== undefined) {
+    Swal.fire({
+      title: 'Are you sure you want to delete the user ' + user.username + '?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+      if (result.isConfirmed) {
         this.delete(user);
       }
-
-    });
+    })
   }
 
   changeEnable(user: User): void {

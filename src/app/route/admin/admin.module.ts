@@ -9,7 +9,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { SidenavComponent } from './common/sidenav/sidenav.component';
 import { AdminComponent } from './admin.component';
 import { MainMenuComponent } from './common/main-menu/main-menu.component';
-import { DeleteDialogComponent } from '../../common/delete-dialog/delete-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatMenuModule } from '@angular/material/menu';
 import { UserMenuComponent } from './common/user-menu/user-menu.component';
@@ -19,7 +18,6 @@ import { UserMenuComponent } from './common/user-menu/user-menu.component';
     SidenavComponent,
     AdminComponent,
     MainMenuComponent,
-    DeleteDialogComponent,
     UserMenuComponent
   ],
   imports: [
