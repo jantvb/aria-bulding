@@ -18,15 +18,9 @@
       <td mat-cell *matCellDef="let user"> {{user.username}} </td>
     </ng-container>
 
-    <!-- Phone Column -->
-    <ng-container matColumnDef="phone">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> PHONE </th>
-      <td mat-cell *matCellDef="let user" > {{user.phoneNumber}} </td>
-    </ng-container>
-
-    <!-- Phone Column -->
-    <ng-container matColumnDef="building">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> BUILDING </th>
+    <!-- Default Building Column -->
+    <ng-container matColumnDef="defaultBuilding">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> DEFAULT BUILDING </th>
       <td mat-cell *matCellDef="let user" > {{user.defaultBuilding}} </td>
     </ng-container>
 

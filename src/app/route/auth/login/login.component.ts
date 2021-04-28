@@ -1,6 +1,6 @@
 import { Router } from '@angular/router';
 import { AuthService } from './../../../service/authService/auth.service';
-import { FormControl, FormGroup, FormBuilder } from '@angular/forms';
+import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { User } from './../../../model/user.model';
 import { Component, OnInit } from '@angular/core';
 
@@ -20,13 +20,14 @@ export class LoginComponent implements OnInit {
   passwordControl!:       FormControl;
 
 
-  constructor(private fb: FormBuilder,
+  constructor(private fb:          FormBuilder,
               private authService: AuthService,
-              private router: Router) {
+              private router:      Router) {
 
     this.user                = new User();
 
-    this.usernameControl     = new FormControl(this.user.username);
+    this.usernameControl     = new FormControl(this.user.username, [Validators.required,
+                                                                    Validators.email,]);
     this.passwordControl     = new FormControl(this.user.password);
 
     this.options = fb.group({
@@ -37,14 +38,6 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
-  }
-
-  getErrorMessage(): string {
-    if (this.usernameControl.hasError('required')) {
-      return 'Please enter your username';
-    }
-
-    return this.usernameControl.hasError('emailControl') ? 'Not a valid email' : '';
   }
 
   login(): void {

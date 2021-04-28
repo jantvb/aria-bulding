@@ -7,6 +7,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Building } from 'src/app/model/building.model';
 import { BuildingService } from 'src/app/service/building.service';
 import { AddDialogComponent } from '../add-dialog/add-dialog.component';
+import Swal from 'sweetalert2';
 
 /**
  * @title Data table with sorting, pagination, and filtering.
@@ -77,6 +78,14 @@ export class TableComponent implements OnInit {
                           .findIndex(b => b.id === buildingId),
                       1);
 
+          Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Building deleted successfully',
+                        showConfirmButton: true,
+                        timer: 3000
+                    })
+
           this.refreshTable();
 
         }, err => console.log(err));
@@ -97,6 +106,14 @@ export class TableComponent implements OnInit {
             Object.assign(this.buildings.find(b => b.id === building.id), aB);
 
           }
+
+          Swal.fire({
+                      position: 'top-end',
+                      icon: 'success',
+                      title: 'Building saved successfully',
+                      showConfirmButton: true,
+                      timer: 3000
+                  })
 
           this.refreshTable();
 

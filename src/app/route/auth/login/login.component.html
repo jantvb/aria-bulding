@@ -9,7 +9,8 @@
       <mat-form-field appearance="legacy" >
         <mat-label>Username</mat-label>
         <input [(ngModel)]="user.username" matInput type="text" placeholder="username@example.com" [formControl]="usernameControl" required>
-        <mat-error *ngIf="usernameControl.invalid">{{getErrorMessage()}}</mat-error>
+        <mat-error *ngIf="usernameControl.hasError('email') && !usernameControl.hasError('required')">Please enter a valid email address</mat-error>
+        <mat-error *ngIf="usernameControl.hasError('required')">Plase enter an email</mat-error>
       </mat-form-field>
 
       <mat-form-field appearance="legacy">
