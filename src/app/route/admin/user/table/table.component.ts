@@ -7,8 +7,8 @@ import { User } from 'src/app/model/user.model';
 import { UserService } from 'src/app/service/user.service';
 import { AddDialogComponent } from '../add-dialog/add-dialog.component';
 import { BuildingService } from 'src/app/service/building.service';
-import { Observable } from 'rxjs';
 import { Building } from 'src/app/model/building.model';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -29,6 +29,7 @@ export class TableComponent implements OnInit {
   buildings: Array<Building> = new Array<Building>();
 
   constructor(private userService: UserService,
+              private snackBar: MatSnackBar,
               private buildingService: BuildingService,
               public  dialog:      MatDialog) {}
 
@@ -61,14 +62,14 @@ export class TableComponent implements OnInit {
 
   }
 
-  protected delete(userId: number): void {
+  protected delete(user: User): void {
     this.userService
-        .delete(userId)
+        .delete(user.id)
         .subscribe(() => {
 
           this.users
               .splice(this.users
-                         .findIndex(u => u.id === userId),
+                         .findIndex(u => u.id === user.id),
                       1);
 
           Swal.fire({
@@ -81,11 +82,16 @@ export class TableComponent implements OnInit {
 
           this.refreshTable();
 
+          this.snackBar
+              .open('User: ' + user.firstname + ' ' + user.lastname + ' deleted', 'Dismiss',
+                    {duration: 3500}  );
+
         }, err => console.log(err));
   }
 
   protected createOrUpdate(user: User): void {
 
+    console.log(user);
     this.userService
         .createOrUpdate(user)
         .subscribe(aU => {
@@ -110,6 +116,10 @@ export class TableComponent implements OnInit {
 
           this.refreshTable();
 
+          this.snackBar
+              .open('User: ' + aU.firstname + ' ' + aU.lastname +  (user.id ? ' updated' : ' created'), 'Dismiss',
+                    {duration: 3500}  );
+
         }, err => console.log(err));
 
   }
@@ -130,18 +140,18 @@ export class TableComponent implements OnInit {
   openDeleteDialog(user: User): void {
 
     Swal.fire({
-                title: 'Are you sure you want to delete the user ' + user.username + '?',
-                text: "You won't be able to revert this!",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, delete it!'
-              }).then((result) => {
-                if (result.isConfirmed) {
-                  this.delete(user.id);
-                }
-              })
+      title: 'Are you sure you want to delete the user ' + user.username + '?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.delete(user);
+      }
+    })
   }
 
   changeEnable(user: User): void {

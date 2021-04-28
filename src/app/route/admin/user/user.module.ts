@@ -18,7 +18,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatOptionModule } from '@angular/material/core';
 import { TextMaskModule } from 'angular2-text-mask';
 import { ChangePasswordDialogComponent } from './change-password-dialog/change-password-dialog.component';
-
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [
@@ -37,6 +37,7 @@ import { ChangePasswordDialogComponent } from './change-password-dialog/change-p
     MatSortModule,
     MatTableModule,
     MatInputModule,
+    MatTooltipModule,
     MatCardModule,
     MatDialogModule,
     MatFormFieldModule,

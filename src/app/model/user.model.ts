@@ -10,7 +10,7 @@ export class User {
   password!:            string;
   enabled!:             boolean;
   phoneNumber!:         string;
-  socialSecurity!:      number;
+  socialSecurity!:      string;
   defaultBuilding!:     number;
   roles:                Array<Role> = new Array<Role>();
   token!:               string;
