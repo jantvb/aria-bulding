@@ -15,7 +15,7 @@
 
     <mat-form-field appearance="legacy">
       <mat-label>Select Level</mat-label>
-      <mat-select [formControl]="levelControl" required>
+      <mat-select [formControl]="levelControl" (selectionChange)="levelChange($event)" required>
         <mat-option value="1">1</mat-option>
         <mat-option value="2">2</mat-option>
         <mat-option value="3">3</mat-option>

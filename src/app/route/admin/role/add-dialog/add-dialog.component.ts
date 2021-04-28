@@ -45,6 +45,10 @@ export class AddDialogComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  levelChange(event: any) {
+    this.role.level = event.value;
+  }
+
   cancel(): void {
     this.dialogRef.close();
   }
