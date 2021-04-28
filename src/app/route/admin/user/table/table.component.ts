@@ -7,7 +7,9 @@ import { MatTableDataSource } from '@angular/material/table';
 import { User } from 'src/app/model/user.model';
 import { UserService } from 'src/app/service/user.service';
 import { AddDialogComponent } from '../add-dialog/add-dialog.component';
-import Swal from 'sweetalert2';
+import { BuildingService } from 'src/app/service/building.service';
+import { Observable } from 'rxjs';
+import { Building } from 'src/app/model/building.model';
 
 @Component({
   selector: 'app-table-user',
@@ -16,7 +18,7 @@ import Swal from 'sweetalert2';
 })
 export class TableComponent implements OnInit {
 
-  displayedColumns:                     string[] = ['name', 'username', 'defaultBuilding', 'status', 'actions'];
+  displayedColumns:                     string[] = ['name', 'username', 'phone', 'building', 'status', 'actions'];
   dataSource!:                          MatTableDataSource<User>;
 
   @ViewChild(MatPaginator) paginator!:  MatPaginator;
@@ -24,7 +26,10 @@ export class TableComponent implements OnInit {
 
   users:                                Array<User> = new Array<User>();
 
+  buildings: Array<Building> = new Array<Building>();
+
   constructor(private userService: UserService,
+              private buildingService: BuildingService,
               public  dialog:      MatDialog) {}
 
   ngOnInit(): void {
@@ -66,14 +71,6 @@ export class TableComponent implements OnInit {
                          .findIndex(u => u.id === userId),
                       1);
 
-          Swal.fire({
-                        position: 'top-end',
-                        icon: 'success',
-                        title: 'User deleted successfully',
-                        showConfirmButton: true,
-                        timer: 3000
-                    })
-
           this.refreshTable();
 
         }, err => console.log(err));
@@ -94,14 +91,6 @@ export class TableComponent implements OnInit {
             Object.assign(this.users.find(u => u.id === user.id), aU);
 
           }
-
-          Swal.fire({
-                        position: 'top-end',
-                        icon: 'success',
-                        title: 'User saved successfully',
-                        showConfirmButton: true,
-                        timer: 3000
-                    })
 
           this.refreshTable();
 
@@ -133,6 +122,28 @@ export class TableComponent implements OnInit {
       }
 
     });
+  }
+
+  changeEnable(user: User): void {
+    user.enabled = !user.enabled;
+
+    this.createOrUpdate(user);
+  }
+
+  findBuilding(buildingId: number): string {
+
+    if (this.buildings.some(b => b.id === buildingId)) {
+      return this.buildings.filter(b => b.id === buildingId)[0].name;
+    } else {
+      this.buildingService
+          .get(buildingId)
+          .subscribe(b => {
+            if (!this.buildings.some(b => b.id === buildingId)) {
+              this.buildings.push(b);
+            }
+          });
+      return 'No Yet';
+    }
   }
 
   applyFilter(event: Event): void {
