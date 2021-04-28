@@ -82,10 +82,6 @@ export class TableComponent implements OnInit {
 
           this.refreshTable();
 
-          this.snackBar
-              .open('User: ' + user.firstname + ' ' + user.lastname + ' deleted', 'Dismiss',
-                    {duration: 3500}  );
-
         }, err => console.log(err));
   }
 
@@ -115,10 +111,6 @@ export class TableComponent implements OnInit {
         })
 
           this.refreshTable();
-
-          this.snackBar
-              .open('User: ' + aU.firstname + ' ' + aU.lastname +  (user.id ? ' updated' : ' created'), 'Dismiss',
-                    {duration: 3500}  );
 
         }, err => console.log(err));
 
