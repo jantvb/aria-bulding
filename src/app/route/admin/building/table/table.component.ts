@@ -1,5 +1,4 @@
-import { DeleteDialogComponent } from './../../../../common/delete-dialog/delete-dialog.component';
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -134,14 +133,19 @@ export class TableComponent implements OnInit {
 
   openDeleteDialog(building: Building): void {
 
-    const dialogRef = this.dialog.open(DeleteDialogComponent, {data: {id: building.id, name: building.name, type: 'building'}});
-
-    dialogRef.afterClosed().subscribe(result => {
-      if (result !== undefined) {
-        this.delete(result);
+    Swal.fire({
+      title: 'Are you sure you want to delete the building ' + building.description + '?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.delete(building.id);
       }
-
-    });
+    })
   }
 
 }
