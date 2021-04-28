@@ -15,13 +15,13 @@ import Swal from 'sweetalert2';
 })
 export class TableComponent implements OnInit {
 
-  displayedColumns:                       string[] = ['name', 'path', 'created', 'updated', 'actions'];
-  dataSource!:                            MatTableDataSource<Document>;
+  displayedColumns:                     string[] = ['name', 'path', 'created', 'updated', 'actions'];
+  dataSource!:                          MatTableDataSource<Document>;
 
-  @ViewChild(MatPaginator) paginator!:    MatPaginator;
-  @ViewChild(MatSort) sort!:              MatSort;
+  @ViewChild(MatPaginator) paginator!:  MatPaginator;
+  @ViewChild(MatSort) sort!:            MatSort;
 
-  documents:                              Array<Document> = new Array<Document>();
+  documents:                            Array<Document> = new Array<Document>();
 
   constructor(private documentService:  DocumentService,
               public  dialog:           MatDialog) { }
@@ -130,18 +130,18 @@ export class TableComponent implements OnInit {
   openDeleteDialog(document: Document): void {
 
     Swal.fire({
-      title: 'Are you sure you want to delete the document ' + document.name + '?',
-      text: "You won't be able to revert this!",
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, delete it!'
-    }).then((result) => {
-      if (result.isConfirmed) {
-        this.delete(document.id);
-      }
-    })
+                title: 'Are you sure you want to delete the document ' + document.name + '?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+              }).then((result) => {
+                if (result.isConfirmed) {
+                  this.delete(document.id);
+                }
+              })
   }
 
 }
