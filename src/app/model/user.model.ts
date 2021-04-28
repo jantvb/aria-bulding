@@ -8,7 +8,7 @@ export class User {
   firstname!:           string;
   lastname!:            string;
   password!:            string;
-  active!:              number;
+  enabled!:             boolean;
   phoneNumber!:         string;
   socialSecurity!:      number;
   defaultBuilding!:     number;

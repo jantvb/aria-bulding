@@ -3,6 +3,7 @@ import { environment } from './../../environments/environment';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +19,9 @@ export class BuildingService {
   }
 
   get(id: number): Observable<Building> {
-    return this.httpC.get<Building>(this.path + '/' + id);
+    return this.httpC
+               .get<Building>(this.path + '/' + id)
+               .pipe(tap( b => console.log(b)));
   }
 
   createOrUpdate(building: Building): Observable<Building> {

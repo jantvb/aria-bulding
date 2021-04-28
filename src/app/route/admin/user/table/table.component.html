@@ -9,7 +9,7 @@
     <!-- Name Column -->
     <ng-container matColumnDef="name">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> NAME </th>
-      <td mat-cell *matCellDef="let user"> {{user.firstName}} {{user.lastName}} </td>
+      <td mat-cell *matCellDef="let user"> {{user.firstname}} {{user.lastname}} </td>
     </ng-container>
 
     <!-- Email Column -->
@@ -18,23 +18,35 @@
       <td mat-cell *matCellDef="let user"> {{user.username}} </td>
     </ng-container>
 
-    <!-- Default Building Column -->
-    <ng-container matColumnDef="defaultBuilding">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> DEFAULT BUILDING </th>
-      <td mat-cell *matCellDef="let user" > {{user.defaultBuilding}} </td>
+    <!-- Phone Column -->
+    <ng-container matColumnDef="phone">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> PHONE </th>
+      <td mat-cell *matCellDef="let user" > {{user.phoneNumber}} </td>
+    </ng-container>
+
+    <!-- Phone Column -->
+    <ng-container matColumnDef="building">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> BUILDING </th>
+      <td mat-cell *matCellDef="let user" > {{findBuilding(user.defaultBuilding)}} </td>
     </ng-container>
 
 
     <!-- Status Column -->
     <ng-container matColumnDef="status">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> STATUS </th>
-      <td mat-cell *matCellDef="let user" > {{user.active}} </td>
+      <td mat-cell *matCellDef="let user" >
+        <button mat-icon-button [color]="user.enabled ? 'primary' : 'warn'" (click)="changeEnable(user)" >
+          <mat-icon  *ngIf="user.enabled" >check_circle</mat-icon>
+          <mat-icon  *ngIf="!user.enabled" >cancel</mat-icon>
+        </button>
+
+      </td>
     </ng-container>
 
     <!-- Actions Column -->
     <ng-container matColumnDef="actions">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> ACTIONS </th>
-      <td mat-cell *matCellDef="let user">
+      <th class="actionHeader" mat-header-cell *matHeaderCellDef mat-sort-header> ACTIONS </th>
+      <td class="actionBody" mat-cell *matCellDef="let user">
         <div class="example-button-row">
           <div class="example-flex-container">
             <div class="example-button-container">

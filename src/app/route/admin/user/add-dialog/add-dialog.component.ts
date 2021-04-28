@@ -24,7 +24,6 @@ export class AddDialogComponent implements OnInit {
   phoneControl!:                FormControl;
   socialSecurityControl!:       FormControl;
   usernameControl!:             FormControl;
-  passwordControl!:             FormControl;
   roleControl!:                 FormControl;
   defaultBuildingControl!:      FormControl;
 
@@ -65,7 +64,6 @@ export class AddDialogComponent implements OnInit {
     this.socialSecurityControl        = new FormControl(this.user.socialSecurity);
     this.usernameControl              = new FormControl(this.user.username, [Validators.required,
                                                                              Validators.email,]);
-    this.passwordControl              = new FormControl(this.user.password);
     this.roleControl                  = new FormControl(this.user.roles);
     this.defaultBuildingControl       = new FormControl(this.user.defaultBuilding);
 
@@ -75,8 +73,8 @@ export class AddDialogComponent implements OnInit {
       phone:                  this.phoneControl,
       socialSecurity:         this.socialSecurityControl,
       username:               this.usernameControl,
-      password:               this.passwordControl,
-      role:                   this.roleControl
+      role:                   this.roleControl,
+      defaultBuilding:        this.defaultBuildingControl
     });
 
   }
@@ -104,6 +102,10 @@ export class AddDialogComponent implements OnInit {
 
   buildingChanged(event: any): void {
     this.user.defaultBuilding = event.value;
+  }
+
+  roleChanged(event: any): void {
+    this.user.roles = event.value;
   }
 
 }

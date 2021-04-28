@@ -34,27 +34,15 @@
 
     </mat-form-field>
 
-    <mat-form-field appearance="legacy">
-      <mat-label>Password</mat-label>
-      <input matInput [type]="hide ? 'password' : 'text'" placeholder="Password" [formControl]="passwordControl" required>
-      <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-      </button>
-      <mat-error *ngIf="passwordControl.invalid">Please enter your password</mat-error>
-    </mat-form-field>
-
-    <mat-form-field appearance="legacy">
+    <mat-form-field>
       <mat-label>Select Role</mat-label>
-      <mat-select [formControl]="roleControl" required>
-        <div *ngFor = "let role of roles">
-          <mat-option value="{{role.id}}">{{role.name}}</mat-option>
-        </div>
+      <mat-select [formControl]="roleControl" required (selectionChange)="roleChanged($event)" multiple>
+        <mat-option *ngFor = "let role of roles" [value]="role.id">{{role.name}}</mat-option>
       </mat-select>
       <mat-error *ngIf="roleControl.invalid">Please select an user role</mat-error>
     </mat-form-field>
-
-    <mat-form-field appearance="legacy">
-      <mat-label>Default Building</mat-label>
+    <mat-form-field>
+      <mat-label>Building</mat-label>
       <mat-select (selectionChange)="buildingChanged($event)" >
         <mat-option>None</mat-option>
         <mat-option *ngFor="let building of buildings" [value]="building.id">{{building.name}}</mat-option>
