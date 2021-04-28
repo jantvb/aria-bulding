@@ -26,7 +26,10 @@ export class TableComponent implements OnInit {
 
   users:                                Array<User> = new Array<User>();
 
+  buildings: Array<Building> = new Array<Building>();
+
   constructor(private userService: UserService,
+              private buildingService: BuildingService,
               public  dialog:      MatDialog) {}
 
   ngOnInit(): void {
@@ -119,6 +122,28 @@ export class TableComponent implements OnInit {
       }
 
     });
+  }
+
+  changeEnable(user: User): void {
+    user.enabled = !user.enabled;
+
+    this.createOrUpdate(user);
+  }
+
+  findBuilding(buildingId: number): string {
+
+    if (this.buildings.some(b => b.id === buildingId)) {
+      return this.buildings.filter(b => b.id === buildingId)[0].name;
+    } else {
+      this.buildingService
+          .get(buildingId)
+          .subscribe(b => {
+            if (!this.buildings.some(b => b.id === buildingId)) {
+              this.buildings.push(b);
+            }
+          });
+      return 'No Yet';
+    }
   }
 
   applyFilter(event: Event): void {
