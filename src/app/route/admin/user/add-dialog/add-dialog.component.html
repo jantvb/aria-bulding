@@ -17,13 +17,7 @@
       <mat-label>Phone</mat-label>
       <span matPrefix>+1 &nbsp;</span>
       <input type="tel" [textMask]="{mask: maskPhone}" matInput placeholder="555-555-5555" [formControl]="phoneControl" required>
-      <mat-error *ngIf="phoneControl.invalid">Please enter your phone number</mat-error>
-    </mat-form-field>
-
-    <mat-form-field class="example-full-width">
-      <mat-label>Social Security</mat-label>
-      <input type="text" [textMask]="{mask: maskSocialSecurity}" matInput placeholder="XXX-XX-XXXX" [formControl]="socialSecurityControl" required>
-      <mat-error *ngIf="socialSecurityControl.invalid">Please enter your social security number</mat-error>
+      <mat-error *ngIf="phoneControl.invalid">Please enter a phone number</mat-error>
     </mat-form-field>
 
     <mat-form-field appearance="legacy" >

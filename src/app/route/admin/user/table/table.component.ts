@@ -86,7 +86,6 @@ export class TableComponent implements OnInit {
 
   protected createOrUpdate(user: User): void {
 
-    console.log(user);
     this.userService
         .createOrUpdate(user)
         .subscribe(aU => {

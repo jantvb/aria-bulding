@@ -1,3 +1,4 @@
+import { SessionService } from './../../../../service/authService/session.service';
 import { RoleService } from './../../../../service/role.service';
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
@@ -30,23 +31,28 @@ export class AddDialogComponent implements OnInit {
 
   user:                         User = new User();
 
-  title:                        string = 'Create New User';
+  LoggedUser:                   User = new User();
+
+
+  title!:                       string;
 
   roles:                        Array<Role> = new Array<Role>();
 
   hide = true;
 
-  constructor(public dialogRef:         MatDialogRef<AddDialogComponent>,
-                            fb:         FormBuilder,
-              private buildingService:  BuildingService,
-              private roleService:      RoleService,
+  constructor(public dialogRef:                     MatDialogRef<AddDialogComponent>,
+                            fb:                     FormBuilder,
+              private buildingService:              BuildingService,
+              private roleService:                  RoleService,
+              private sessionService:               SessionService,
               @Inject(MAT_DIALOG_DATA) public data: User) {
 
+    this.LoggedUser = sessionService.load();
 
     Object.assign(this.user, data);
 
     if (this.user.id === undefined) {
-      this.title = 'Create New User';
+      this.title = 'Invite New User';
     } else {
       this.title = 'Editing: ' + this.user.firstname + ' ' + this.user.lastname;
     }

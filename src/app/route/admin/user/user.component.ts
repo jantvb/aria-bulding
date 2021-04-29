@@ -8,9 +8,9 @@ import { TableComponent } from './table/table.component';
 })
 export class UserComponent implements OnInit {
 
-  @ViewChild(TableComponent) table!: TableComponent;
+  @ViewChild(TableComponent) table!:    TableComponent;
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit(): void {
   }

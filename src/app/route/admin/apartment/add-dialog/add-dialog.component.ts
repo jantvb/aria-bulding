@@ -63,7 +63,8 @@ export class AddDialogComponent implements OnInit {
   }
 
   buildingChanged(event: any): void {
-    this.apartment.building = event.value;
+    this.apartment.building = new Building();
+    this.apartment.building.id = event.value;
   }
 
   loadBuildings(): void {
