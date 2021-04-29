@@ -3,10 +3,7 @@
     <mat-card-title>Users</mat-card-title>
     <mat-card-subtitle>List View</mat-card-subtitle>
     <div style="margin-left: auto;">
-      <button  mat-fab color="primary" #tooltip="matTooltip" matTooltip="Create New User" (click)="openDialog()">
-        <mat-icon>add_circle</mat-icon>
-      </button>
-      <button *ngIf="loggedUser.role.level === 4 || loggedUser.role.level === 5" mat-fab color="primary" #tooltip="matTooltip" matTooltip="Invite User" (click)="openDialog()">
+      <button *ngIf="loggedUser.role.level !== 6" mat-fab color="primary" #tooltip="matTooltip" matTooltip="Invite User" (click)="openDialog()">
         <mat-icon>send</mat-icon>
       </button>
     </div>

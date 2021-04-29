@@ -51,10 +51,10 @@ export class AddDialogComponent implements OnInit {
 
     Object.assign(this.user, data);
 
-    if (this.user.id === undefined && this.LoggedUser.role.level === 4) {
+    if (this.user.id === undefined) {
       this.title = 'Invite New User';
     } else {
-      this.title = 'Editing: ' + this.user.firstname + ' ' + this.user.lastname;
+      this.title = 'Editing User Invitation: ' + this.user.firstname + ' ' + this.user.lastname;
     }
 
     this.firstNameControl             = new FormControl(this.user.firstname);
