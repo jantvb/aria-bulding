@@ -42,8 +42,8 @@
       <th mat-header-cell *matHeaderCellDef mat-sort-header> STATUS </th>
       <td mat-cell *matCellDef="let user" >
         <button mat-icon-button [color]="user.enabled ? 'primary' : 'warn'" (click)="changeEnable(user)" >
-          <mat-icon  *ngIf="user.enabled" >check_circle</mat-icon>
-          <mat-icon  *ngIf="!user.enabled" >cancel</mat-icon>
+          <mat-icon  *ngIf="user.enabled" matTooltip="Disable User">check_circle</mat-icon>
+          <mat-icon  *ngIf="!user.enabled" matTooltip="Enable User">cancel</mat-icon>
         </button>
 
       </td>
