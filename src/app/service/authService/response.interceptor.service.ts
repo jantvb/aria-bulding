@@ -28,7 +28,7 @@ export class ResponseInterceptor implements HttpInterceptor {
 
                     } else if (error.status === 403) {
 
-                      swal.fire('Something went wrong!', 'Wrong Username or Password', 'error');
+                      swal.fire('Opps, something went wrong!', 'Wrong Username or Password', 'error');
 
                     } else if (error.status === 500) {
 
@@ -39,12 +39,6 @@ export class ResponseInterceptor implements HttpInterceptor {
                       swal.fire('Opps something happen', error.message, 'error');
 
                     }
-
-
-                    // this.snackBar
-                    //       .open(error.message,
-                    //             'Dismiss',
-                    //             {duration: 3500});
 
                     return throwError(error);
                   })
