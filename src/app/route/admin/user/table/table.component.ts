@@ -18,7 +18,7 @@ import Swal from 'sweetalert2';
 })
 export class TableComponent implements OnInit {
 
-  displayedColumns:                     string[] = ['name', 'username', 'role', 'phone', 'defaultBuilding', 'status', 'actions'];
+  displayedColumns:                     string[] = ['name', 'username', 'role', 'phone', 'defaultBuilding', 'buildings', 'status', 'actions'];
   dataSource!:                          MatTableDataSource<User>;
 
   @ViewChild(MatPaginator) paginator!:  MatPaginator;

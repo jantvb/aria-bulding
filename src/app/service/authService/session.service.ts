@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Building } from 'src/app/model/building.model';
 import { Role } from 'src/app/model/role.model';
 import { User } from 'src/app/model/user.model';
 
@@ -15,13 +16,10 @@ export class SessionService {
 
     sessionStorage.setItem('user-aria',
                            JSON.stringify(user));
-
   }
 
   remove(): void {
-
     sessionStorage.clear();
-
   }
 
   load(): User {
@@ -48,6 +46,25 @@ export class SessionService {
   hasToken(): boolean {
     return this.load() !== undefined &&
             this.load().token !== undefined
+  }
+
+  setCurrentBuilding(building: Building): void {
+
+    sessionStorage.removeItem('building-aria');
+
+    sessionStorage.setItem('building-aria',
+                           JSON.stringify(building));
+  }
+
+  loadCurrentBuilding(): Building {
+
+    const strBuilding: string | null = sessionStorage.getItem('building-aria');
+    if (strBuilding !== undefined && strBuilding != null) {
+      return JSON.parse(strBuilding) as Building;
+    } else {
+      return new Building();
+    }
+
   }
 
 }
