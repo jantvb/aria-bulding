@@ -12,6 +12,7 @@ import { MainMenuComponent } from './common/main-menu/main-menu.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatMenuModule } from '@angular/material/menu';
 import { UserMenuComponent } from './common/user-menu/user-menu.component';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { UserMenuComponent } from './common/user-menu/user-menu.component';
     MatListModule,
     MatToolbarModule,
     MatIconModule,
+    MatSelectModule,
     AdminRoutingModule,
     MatDialogModule,
     MatMenuModule

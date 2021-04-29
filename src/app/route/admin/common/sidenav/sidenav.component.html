@@ -1,7 +1,13 @@
 <div class="container" [class.is-mobile]="mobileQuery.matches">
   <mat-toolbar color="primary" class="toolbar">
     <button mat-icon-button (click)="snav.toggle()"><mat-icon>menu</mat-icon></button>
-    <h1 class="app-name">Aria Building</h1>
+    <h1 class="app-name" *ngIf="!hasMoreBuilding()">{{building.name}}</h1>
+    <mat-form-field *ngIf="hasMoreBuilding()">
+      <mat-label>Building</mat-label>
+      <mat-select>
+        <mat-option *ngFor="let building of buildings" [value]="building">{{building.name}}</mat-option>
+      </mat-select>
+    </mat-form-field>
     <span class="spacer"></span>
     <app-user-menu></app-user-menu>
   </mat-toolbar>
