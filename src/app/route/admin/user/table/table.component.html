@@ -21,7 +21,7 @@
     <!-- Email Column -->
     <ng-container matColumnDef="role">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> ROLE </th>
-      <td mat-cell *matCellDef="let user"> {{user.role}} </td>
+      <td mat-cell *matCellDef="let user"> {{user.role && user.role.name ? user.role.name : 'No Role'}} </td>
     </ng-container>
 
     <!-- Phone Column -->
@@ -36,13 +36,27 @@
       <td mat-cell *matCellDef="let user" > {{findBuilding(user.defaultBuilding)}} </td>
     </ng-container>
 
-    <!-- Default Building Column -->
+    <!-- Buildings Column -->
     <ng-container matColumnDef="buildings">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>BUILDINGS</th>
       <td mat-cell *matCellDef="let user" >
-        <button mat-icon-button>
+        <button mat-icon-button
+                [satPopoverAnchor]="p"
+                (click)="popoverOpen(user, p)">
           <mat-icon >store</mat-icon>
         </button>
+
+        <sat-popover  #p
+                      horizontalAlign="after"
+                      verticalAlign="center">
+          <mat-card >
+            <mat-list >
+              <mat-list-item *ngFor="let building of buildings">
+                <mat-checkbox (change)="buildingChange($event, user, building)" [checked]="isBuildingChecked(user, building)">{{building.name}}</mat-checkbox>
+              </mat-list-item>
+             </mat-list>
+          </mat-card>
+        </sat-popover>
       </td>
     </ng-container>
 
@@ -71,7 +85,9 @@
               </button>
             </div>
             <div class="example-button-container">
-              <button mat-mini-fab color="warn" matTooltip="Delete User" (click)="openDeleteDialog(user)">
+              <button mat-mini-fab color="warn"
+                      matTooltip="Delete User"
+                      (click)="openDeleteDialog(user)">
                 <mat-icon>delete</mat-icon>
               </button>
             </div>

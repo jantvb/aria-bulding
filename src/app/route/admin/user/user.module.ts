@@ -19,6 +19,10 @@ import { MatOptionModule } from '@angular/material/core';
 import { TextMaskModule } from 'angular2-text-mask';
 import { ChangePasswordDialogComponent } from './change-password-dialog/change-password-dialog.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatListModule } from '@angular/material/list';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import { SatPopoverModule } from '@ncstate/sat-popover';
+
 
 @NgModule({
   declarations: [
@@ -28,6 +32,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     ChangePasswordDialogComponent
   ],
   imports: [
+    SatPopoverModule,
     TextMaskModule,
     CommonModule,
     UserRoutingModule,
@@ -39,12 +44,14 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatInputModule,
     MatTooltipModule,
     MatCardModule,
+    MatListModule,
+    MatCheckboxModule,
     MatDialogModule,
     MatFormFieldModule,
     ReactiveFormsModule,
     FormsModule,
     MatSelectModule,
-    MatOptionModule
+    MatOptionModule,
   ]
 })
 export class UserModule { }

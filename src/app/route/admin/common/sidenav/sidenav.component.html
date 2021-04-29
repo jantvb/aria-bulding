@@ -4,8 +4,8 @@
     <h1 class="app-name" *ngIf="!hasMoreBuilding()">{{building.name}}</h1>
     <mat-form-field *ngIf="hasMoreBuilding()">
       <mat-label>Building</mat-label>
-      <mat-select>
-        <mat-option *ngFor="let building of buildings" [value]="building">{{building.name}}</mat-option>
+      <mat-select [(value)]="building">
+        <mat-option  *ngFor="let b of buildings" [value]="b">{{b.name}}</mat-option>
       </mat-select>
     </mat-form-field>
     <span class="spacer"></span>

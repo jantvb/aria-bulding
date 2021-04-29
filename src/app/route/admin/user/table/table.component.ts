@@ -8,8 +8,9 @@ import { UserService } from 'src/app/service/user.service';
 import { AddDialogComponent } from '../add-dialog/add-dialog.component';
 import { BuildingService } from 'src/app/service/building.service';
 import { Building } from 'src/app/model/building.model';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import Swal from 'sweetalert2';
+import { SatPopover } from '@ncstate/sat-popover';
+import { MatCheckboxChange } from '@angular/material/checkbox';
 
 @Component({
   selector: 'app-table-user',
@@ -26,7 +27,9 @@ export class TableComponent implements OnInit {
 
   users:                                Array<User> = new Array<User>();
 
+  userBuilding: boolean = false;
   buildings: Array<Building> = new Array<Building>();
+  currentByUser: Array<Building> = new Array();
 
   constructor(private userService:      UserService,
               private buildingService:  BuildingService,
@@ -47,9 +50,17 @@ export class TableComponent implements OnInit {
           Object.assign(this.users, rUser);
 
           this.refreshTable();
+          this.loadBuildings();
 
         }, err => console.log(err));
 
+  }
+
+  private loadBuildings(): void {
+    this.buildingService.list().subscribe(bL => {
+      this.buildings = new Array();
+      Object.assign(this.buildings, bL);
+    })
   }
 
   private refreshTable(): void {
@@ -154,17 +165,15 @@ export class TableComponent implements OnInit {
   findBuilding(buildingId: number): string {
 
     if (buildingId) {
-      if (this.buildings.some(b => b.id === buildingId)) {
-        return this.buildings.filter(b => b.id === buildingId)[0].name;
+      if (this.buildings.length > 0) {
+        const name = this.buildings.find(b => b.id === buildingId)?.name;
+        if (name) {
+          return name;
+        } else {
+          return 'Not Yet';
+        }
       } else {
-        this.buildingService
-            .get(buildingId)
-            .subscribe(b => {
-              if (!this.buildings.some(b => b.id === buildingId)) {
-                this.buildings.push(b);
-              }
-            });
-        return 'No Yet';
+        return 'Not Yet';
       }
     } else {
       return 'No Default Building';
@@ -180,4 +189,83 @@ export class TableComponent implements OnInit {
       this.dataSource.paginator.firstPage();
     }
   }
+
+  buildingChange( event: MatCheckboxChange,
+                  user: User,
+                  building: Building): void {
+
+    if (event.checked) {
+      this.userService
+          .addBuilding(user.id, building.id)
+          .subscribe(u => {
+            user = u;
+
+            const Toast = Swal.mixin({
+              toast: true,
+              position: 'top-end',
+              showConfirmButton: false,
+              timer: 3000,
+              timerProgressBar: true,
+              didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+              }
+            })
+
+            Toast.fire({
+              icon: 'success',
+              title: 'Building Added to: ' + user.username
+            })
+
+          });
+    } else {
+      this.userService
+          .removeBuilding(user.id, building.id)
+          .subscribe(u => {
+            user = u;
+
+            const Toast = Swal.mixin({
+              toast: true,
+              position: 'top-end',
+              showConfirmButton: false,
+              timer: 3000,
+              timerProgressBar: true,
+              didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+              }
+            })
+
+            Toast.fire({
+              icon: 'success',
+              title: 'Building Deleted from: ' + user.username
+            })
+          });
+    }
+  }
+
+  isBuildingChecked(user: User, building: Building): boolean {
+    return this.currentByUser.some(b => b.id === building.id);
+  }
+
+  popoverOpen(user: User, p: SatPopover): void {
+
+    let arrBuilding: Array<Building> = new Array();
+
+    this.userService
+        .listBuildingsByUser(user.id)
+        .subscribe(buildings => {
+
+          Object.assign(arrBuilding, buildings);
+
+          this.currentByUser = arrBuilding;
+
+          this.userBuilding = true;
+
+          p.toggle();
+
+        });
+
+  }
+
 }
