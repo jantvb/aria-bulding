@@ -112,7 +112,8 @@ export class AddDialogComponent implements OnInit {
   }
 
   roleChanged(event: any): void {
-    this.user.role = event.value;
+    this.user.role = new Role();
+    this.user.role.id = event.value;
   }
 
 }
