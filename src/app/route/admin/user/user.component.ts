@@ -1,3 +1,4 @@
+import { SessionService } from 'src/app/service/authService/session.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { User } from 'src/app/model/user.model';
 import { TableComponent } from './table/table.component';
@@ -8,9 +9,13 @@ import { TableComponent } from './table/table.component';
 })
 export class UserComponent implements OnInit {
 
+  loggedUser:      User = new User();
+
   @ViewChild(TableComponent) table!:    TableComponent;
 
-  constructor() {}
+  constructor(private sessionService: SessionService) {
+    this.loggedUser = sessionService.load();
+  }
 
   ngOnInit(): void {
   }

@@ -51,7 +51,7 @@ export class AddDialogComponent implements OnInit {
 
     Object.assign(this.user, data);
 
-    if (this.user.id === undefined) {
+    if (this.user.id === undefined && this.LoggedUser.role.level === 4) {
       this.title = 'Invite New User';
     } else {
       this.title = 'Editing: ' + this.user.firstname + ' ' + this.user.lastname;
@@ -108,6 +108,11 @@ export class AddDialogComponent implements OnInit {
     this.user.phoneNumber     = this.phoneControl.value;
     this.user.socialSecurity  = this.socialSecurityControl.value.replace(/-/gi, '');
     this.user.username        = this.usernameControl.value;
+
+    if(this.user.role === undefined) {
+      this.user.role      = new Role();
+      this.user.role.name = 'GUEST';
+    }
 
     this.dialogRef.close(this.user);
   }

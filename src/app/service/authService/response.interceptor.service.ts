@@ -20,10 +20,15 @@ export class ResponseInterceptor implements HttpInterceptor {
                   tap(),
                   catchError((error: HttpErrorResponse) => {
 
-                    if (error.status === 401 || error.status === 403) {
+                    if (error.status === 401) {
+
                       this.authService.logout();
 
                       swal.fire('Unauthorized or Unauthenticated', error.message, 'error');
+
+                    } else if (error.status === 403) {
+
+                      swal.fire('Something went wrong!', 'Wrong Username or Password', 'error');
 
                     } else if (error.status === 500) {
 

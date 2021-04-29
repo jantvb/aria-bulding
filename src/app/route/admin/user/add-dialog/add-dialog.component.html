@@ -27,7 +27,7 @@
       <mat-error *ngIf="usernameControl.hasError('required')">Plase enter an email</mat-error>
     </mat-form-field>
 
-    <mat-form-field>
+    <mat-form-field *ngIf="LoggedUser.role.level <= 2">
       <mat-label>Select Role</mat-label>
       <mat-select [formControl]="roleControl" required (selectionChange)="roleChanged($event)" >
         <mat-option *ngFor = "let role of roles" [value]="role.id">{{role.name}}</mat-option>
