@@ -11,16 +11,16 @@ import { Building } from 'src/app/model/building.model';
 })
 export class SidenavComponent implements OnDestroy, OnInit {
 
-  building: Building = new Building();
-  buildings: Array<Building> = new Array();
-  mobileQuery:  MediaQueryList;
+  building:                              Building = new Building();
+  buildings:                             Array<Building> = new Array();
+  mobileQuery:                           MediaQueryList;
 
   private _mobileQueryListener: () => void;
 
   constructor(private changeDetectorRef: ChangeDetectorRef,
-              private buildingService: BuildingService,
-              private sessionService: SessionService,
-              media: MediaMatcher) {
+              private buildingService:   BuildingService,
+              private sessionService:    SessionService,
+              media:                     MediaMatcher) {
 
     this.building.name = "No Default Building"
 

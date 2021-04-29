@@ -19,9 +19,7 @@ export class BuildingService {
   }
 
   get(id: number): Observable<Building> {
-    return this.httpC
-               .get<Building>(this.path + '/' + id)
-               .pipe(tap( b => console.log(b)));
+    return this.httpC.get<Building>(this.path + '/' + id);
   }
 
   createOrUpdate(building: Building): Observable<Building> {

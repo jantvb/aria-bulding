@@ -13,14 +13,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserMenuComponent implements OnInit {
 
-  user:         User = new User();
+  loggedUser:                           User = new User();
 
   constructor(private sessionService:   SessionService,
               private authService:      AuthService,
               private router:           Router,
               public  dialog:           MatDialog) {
 
-    this.user =  sessionService.load();
+    this.loggedUser =  sessionService.load();
 
   }
 
