@@ -39,8 +39,8 @@ export class SessionService {
     return this.load().defaultBuilding;
   }
 
-  loadRole(): Array<Role> {
-    return this.load().roles;
+  loadRole(): Role {
+    return this.load().role;
   }
 
   hasToken(): boolean {

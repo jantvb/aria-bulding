@@ -12,7 +12,7 @@ export class User {
   phoneNumber!:         string;
   socialSecurity!:      string;
   defaultBuilding!:     number;
-  roles:                Array<Role> = new Array<Role>();
+  role!:                Role;
   token!:               string;
   buildings:            Array<Building> = new Array<Building>();
 

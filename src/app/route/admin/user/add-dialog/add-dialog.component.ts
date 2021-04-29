@@ -26,7 +26,7 @@ export class AddDialogComponent implements OnInit {
   roleControl!:                 FormControl;
   defaultBuildingControl!:      FormControl;
 
-  buildings?: Array<Building> = new Array();
+  buildings:                    Array<Building> = new Array();
 
   user:                         User = new User();
 
@@ -42,12 +42,6 @@ export class AddDialogComponent implements OnInit {
               private roleService:      RoleService,
               @Inject(MAT_DIALOG_DATA) public data: User) {
 
-    this.roleService
-        .list()
-        .subscribe( rRoles => {
-            this.roles = new Array<Role>();
-            Object.assign(this.roles, rRoles);
-        });
 
     Object.assign(this.user, data);
 
@@ -63,7 +57,7 @@ export class AddDialogComponent implements OnInit {
     this.socialSecurityControl        = new FormControl(this.user.socialSecurity);
     this.usernameControl              = new FormControl(this.user.username, [Validators.required,
                                                                              Validators.email,]);
-    this.roleControl                  = new FormControl(this.user.roles);
+    this.roleControl                  = new FormControl(this.user.role);
     this.defaultBuildingControl       = new FormControl(this.user.defaultBuilding);
 
     this.options = fb.group({
@@ -80,6 +74,7 @@ export class AddDialogComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadBuildings();
+    this.loadRoles();
   }
 
   loadBuildings(): void {
@@ -87,6 +82,13 @@ export class AddDialogComponent implements OnInit {
         .list()
         .subscribe(b => this.buildings = b,
                    err => console.log(err));
+  }
+
+  loadRoles(): void {
+    this.roleService
+        .list()
+        .subscribe(r => this.roles = r,
+          err => console.log(err));
   }
 
   cancel(): void {
@@ -110,15 +112,7 @@ export class AddDialogComponent implements OnInit {
   }
 
   roleChanged(event: any): void {
-    const arr: Array<number> = event.value;
-
-    this.user.roles = [];
-
-    arr.forEach(id => {
-      const r: Role = new Role();
-      r.id = id;
-      this.user.roles.push(r);
-    });
+    this.user.role = event.value;
   }
 
 }
