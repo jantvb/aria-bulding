@@ -3,6 +3,9 @@ import { MediaMatcher } from '@angular/cdk/layout';
 import { BuildingService } from 'src/app/service/building.service';
 import { SessionService } from 'src/app/service/authService/session.service';
 import { Building } from 'src/app/model/building.model';
+import { MatRadioChange } from '@angular/material/radio';
+
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-sidenav',
@@ -39,6 +42,22 @@ export class SidenavComponent implements OnDestroy, OnInit {
         .subscribe(b => {
           this.sessionService.setCurrentBuilding(b);
           this.building = this.sessionService.loadCurrentBuilding();
+          const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+              toast.addEventListener('mouseenter', Swal.stopTimer)
+              toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+          })
+
+          Toast.fire({
+            icon: 'success',
+            title: 'Building Selected: ' + this.building.name
+          })
         });
   }
 
@@ -59,6 +78,12 @@ export class SidenavComponent implements OnDestroy, OnInit {
                                                     .load()
                                                     .buildings
                                                     .some(b => b.id !== this.building.id);
+  }
+
+  buildingChange(event: MatRadioChange, building: Building): void {
+
+    this.loadBuilding(building.id);
+
   }
 
 }

@@ -13,7 +13,9 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatMenuModule } from '@angular/material/menu';
 import { UserMenuComponent } from './common/user-menu/user-menu.component';
 import { MatSelectModule } from '@angular/material/select';
-
+import { SatPopoverModule } from '@ncstate/sat-popover';
+import { MatCardModule } from '@angular/material/card';
+import {MatRadioModule} from '@angular/material/radio';
 @NgModule({
   declarations: [
     SidenavComponent,
@@ -24,6 +26,9 @@ import { MatSelectModule } from '@angular/material/select';
   imports: [
     CommonModule,
     MatSidenavModule,
+    SatPopoverModule,
+    MatRadioModule,
+    MatCardModule,
     MatButtonModule,
     MatListModule,
     MatToolbarModule,

@@ -1,13 +1,29 @@
 <div class="container" [class.is-mobile]="mobileQuery.matches">
   <mat-toolbar color="primary" class="toolbar">
     <button mat-icon-button (click)="snav.toggle()"><mat-icon>menu</mat-icon></button>
-    <h1 class="app-name" *ngIf="!hasMoreBuilding()">{{building.name}}</h1>
-    <mat-form-field *ngIf="hasMoreBuilding()">
-      <mat-label>Building</mat-label>
-      <mat-select [(value)]="building">
-        <mat-option  *ngFor="let b of buildings" [value]="b">{{b.name}}</mat-option>
-      </mat-select>
-    </mat-form-field>
+    <h1 class="app-name" >{{building.name}}</h1>
+    <button mat-icon-button
+            *ngIf="hasMoreBuilding()"
+            [satPopoverAnchor]="p"
+            (click)="p.toggle()">
+      <mat-icon >location_city</mat-icon>
+    </button>
+    <sat-popover  #p
+                  horizontalAlign="center"
+                  verticalAlign="below">
+      <mat-card >
+        <mat-radio-group  class="example-radio-group"
+                          >
+          <mat-radio-button class="example-radio-button"
+                            [checked]="b.id === building.id"
+                            (change)="buildingChange($event, b)"
+                            *ngFor="let b of buildings"
+                            [value]="b.id">
+            {{b.name}}
+          </mat-radio-button>
+        </mat-radio-group>
+      </mat-card>
+    </sat-popover>
     <span class="spacer"></span>
     <app-user-menu></app-user-menu>
   </mat-toolbar>
