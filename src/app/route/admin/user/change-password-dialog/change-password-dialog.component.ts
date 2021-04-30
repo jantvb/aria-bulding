@@ -19,7 +19,19 @@ export class ChangePasswordDialogComponent implements OnInit {
   newPasswordControl!:          FormControl;
   confirmPasswordControl!:      FormControl;
 
-  hide = true;
+  hide  = true;
+
+  Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        showConfirmButton: false,
+                        timer: 3000,
+                        timerProgressBar: true,
+                        didOpen: (toast) => {
+                          toast.addEventListener('mouseenter', Swal.stopTimer)
+                          toast.addEventListener('mouseleave', Swal.resumeTimer)
+                        }
+                      })
 
   constructor(public  dialogRef:      MatDialogRef<ChangePasswordDialogComponent>,
               private userService:    UserService,
@@ -57,18 +69,18 @@ export class ChangePasswordDialogComponent implements OnInit {
                         this.newPasswordControl.value)
         .subscribe(r => {
 
-          Swal.fire({
-                        position: 'top-end',
-                        icon: 'success',
-                        title: 'Password changed successfully',
-                        showConfirmButton: true,
-                        timer: 3000
-                    })
+          this.Toast.fire({
+                            icon: 'success',
+                            title: 'Password changed successfully'
+                          })
 
           this.dialogRef.close();
         }, err => {
-          console.log(err);
-          this.matSnackBar.open('Error trying to change Password: ' + err, 'Dismiss', {duration: 3000});
+          Swal.fire({
+                      icon: 'error',
+                      title: 'Oops, something went wrong!',
+                      text: err
+                    })
         })
   }
 

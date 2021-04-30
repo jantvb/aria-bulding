@@ -1,3 +1,4 @@
+import { SatPopoverModule } from '@ncstate/sat-popover';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { NgModule } from '@angular/core';
@@ -21,7 +22,7 @@ import { ChangePasswordDialogComponent } from './change-password-dialog/change-p
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatListModule } from '@angular/material/list';
 import {MatCheckboxModule} from '@angular/material/checkbox';
-import { SatPopoverModule } from '@ncstate/sat-popover';
+
 
 
 @NgModule({

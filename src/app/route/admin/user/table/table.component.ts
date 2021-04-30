@@ -1,3 +1,4 @@
+import { SatPopover } from '@ncstate/sat-popover';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator} from '@angular/material/paginator';
@@ -9,7 +10,6 @@ import { AddDialogComponent } from '../add-dialog/add-dialog.component';
 import { BuildingService } from 'src/app/service/building.service';
 import { Building } from 'src/app/model/building.model';
 import Swal from 'sweetalert2';
-import { SatPopover } from '@ncstate/sat-popover';
 import { MatCheckboxChange } from '@angular/material/checkbox';
 
 @Component({
@@ -27,9 +27,21 @@ export class TableComponent implements OnInit {
 
   users:                                Array<User> = new Array<User>();
 
-  userBuilding: boolean = false;
-  buildings: Array<Building> = new Array<Building>();
-  currentByUser: Array<Building> = new Array();
+  userBuilding:                         boolean = false;
+  buildings:                            Array<Building> = new Array<Building>();
+  currentByUser:                        Array<Building> = new Array();
+
+  Toast = Swal.mixin({
+                      toast: true,
+                      position: 'top-end',
+                      showConfirmButton: false,
+                      timer: 3000,
+                      timerProgressBar: true,
+                      didOpen: (toast) => {
+                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                      }
+                    })
 
   constructor(private userService:      UserService,
               private buildingService:  BuildingService,
@@ -52,7 +64,7 @@ export class TableComponent implements OnInit {
           this.refreshTable();
           this.loadBuildings();
 
-        }, err => console.log(err));
+        });
 
   }
 
@@ -65,7 +77,7 @@ export class TableComponent implements OnInit {
 
   private refreshTable(): void {
 
-    this.dataSource = new MatTableDataSource(this.users);
+    this.dataSource           = new MatTableDataSource(this.users);
 
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort      = this.sort;
@@ -82,17 +94,14 @@ export class TableComponent implements OnInit {
                          .findIndex(u => u.id === user.id),
                       1);
 
-          Swal.fire({
-                        position: 'top-end',
-                        icon: 'success',
-                        title: 'User deleted successfully',
-                        showConfirmButton: true,
-                        timer: 3000
-                    })
+          this.Toast.fire({
+                            icon: 'success',
+                            title: 'User deleted successfully'
+                          })
 
           this.refreshTable();
 
-        }, err => console.log(err));
+        });
   }
 
   protected createOrUpdate(user: User): void {
@@ -111,17 +120,14 @@ export class TableComponent implements OnInit {
 
           }
 
-          Swal.fire({
-            position: 'top-end',
-            icon: 'success',
-            title: 'User saved successfully',
-            showConfirmButton: true,
-            timer: 3000
-        })
+          this.Toast.fire({
+                            icon: 'success',
+                            title: 'User saved successfully'
+                          })
 
           this.refreshTable();
 
-        }, err => console.log(err));
+        })
 
   }
 
@@ -181,7 +187,7 @@ export class TableComponent implements OnInit {
   }
 
   applyFilter(event: Event): void {
-    const filterValue = (event.target as HTMLInputElement).value;
+    const filterValue      = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
 
     if (this.dataSource.paginator) {
@@ -189,9 +195,7 @@ export class TableComponent implements OnInit {
     }
   }
 
-  buildingChange( event: MatCheckboxChange,
-                  user: User,
-                  building: Building): void {
+  buildingChange(event: MatCheckboxChange, user: User, building: Building): void {
 
     if (event.checked) {
       this.userService
@@ -199,19 +203,7 @@ export class TableComponent implements OnInit {
           .subscribe(u => {
             user = u;
 
-            const Toast = Swal.mixin({
-              toast: true,
-              position: 'top-end',
-              showConfirmButton: false,
-              timer: 3000,
-              timerProgressBar: true,
-              didOpen: (toast) => {
-                toast.addEventListener('mouseenter', Swal.stopTimer)
-                toast.addEventListener('mouseleave', Swal.resumeTimer)
-              }
-            })
-
-            Toast.fire({
+            this.Toast.fire({
               icon: 'success',
               title: 'Building Added to: ' + user.username
             })
@@ -223,19 +215,7 @@ export class TableComponent implements OnInit {
           .subscribe(u => {
             user = u;
 
-            const Toast = Swal.mixin({
-              toast: true,
-              position: 'top-end',
-              showConfirmButton: false,
-              timer: 3000,
-              timerProgressBar: true,
-              didOpen: (toast) => {
-                toast.addEventListener('mouseenter', Swal.stopTimer)
-                toast.addEventListener('mouseleave', Swal.resumeTimer)
-              }
-            })
-
-            Toast.fire({
+            this.Toast.fire({
               icon: 'success',
               title: 'Building Deleted from: ' + user.username
             })

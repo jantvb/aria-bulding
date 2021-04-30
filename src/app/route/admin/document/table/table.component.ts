@@ -23,6 +23,18 @@ export class TableComponent implements OnInit {
 
   documents:                            Array<Document> = new Array<Document>();
 
+  Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        showConfirmButton: false,
+                        timer: 3000,
+                        timerProgressBar: true,
+                        didOpen: (toast) => {
+                          toast.addEventListener('mouseenter', Swal.stopTimer)
+                          toast.addEventListener('mouseleave', Swal.resumeTimer)
+                        }
+                      })
+
   constructor(private documentService:  DocumentService,
               public  dialog:           MatDialog) { }
 
@@ -50,7 +62,7 @@ export class TableComponent implements OnInit {
 
           this.refreshTable();
 
-        }, err => console.log(err));
+        });
   }
 
   protected delete(documentId: number): void {
@@ -64,17 +76,14 @@ export class TableComponent implements OnInit {
                           .findIndex(d => d.id === documentId),
                       1);
 
-          Swal.fire({
-                        position: 'top-end',
+          this.Toast.fire({
                         icon: 'success',
-                        title: 'Document deleted successfully',
-                        showConfirmButton: true,
-                        timer: 3000
-                    })
+                        title: 'Document deleted successfully'
+                      })
 
           this.refreshTable();
 
-        }, err => console.log(err));
+        });
   }
 
   protected createOrUpdate(document: Document): void {
@@ -93,17 +102,14 @@ export class TableComponent implements OnInit {
 
           }
 
-          Swal.fire({
-                        position: 'top-end',
-                        icon: 'success',
-                        title: 'Document saved successfully',
-                        showConfirmButton: true,
-                        timer: 3000
-                    })
+          this.Toast.fire({
+                            icon: 'success',
+                            title: 'Document saved successfully'
+                          })
 
           this.refreshTable();
 
-        }, err => console.log(err));
+        });
   }
 
   applyFilter(event: Event): void {
