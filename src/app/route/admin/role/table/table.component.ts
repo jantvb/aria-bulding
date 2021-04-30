@@ -24,6 +24,18 @@ export class TableComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!:    MatPaginator;
   @ViewChild(MatSort) sort!:              MatSort;
 
+  Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        showConfirmButton: false,
+                        timer: 3000,
+                        timerProgressBar: true,
+                        didOpen: (toast) => {
+                          toast.addEventListener('mouseenter', Swal.stopTimer)
+                          toast.addEventListener('mouseleave', Swal.resumeTimer)
+                        }
+                      })
+
   constructor(private roleService:        RoleService,
               public  dialog:             MatDialog) {}
 
@@ -32,7 +44,7 @@ export class TableComponent implements OnInit {
   }
 
   applyFilter(event: Event): void {
-    const filterValue = (event.target as HTMLInputElement).value;
+    const filterValue      = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
 
     if (this.dataSource.paginator) {
@@ -60,7 +72,7 @@ export class TableComponent implements OnInit {
 
           this.refreshTable();
 
-        }, err => console.log(err));
+        });
   }
 
   protected delete(roleId: number): void {
@@ -74,17 +86,14 @@ export class TableComponent implements OnInit {
                           .findIndex(r => r.id === roleId),
                       1);
 
-          Swal.fire({
-                        position: 'top-end',
+          this.Toast.fire({
                         icon: 'success',
-                        title: 'Role deleted successfully',
-                        showConfirmButton: true,
-                        timer: 3000
-                    })
+                        title: 'Role deleted successfully'
+                      })
 
           this.refreshTable();
 
-        }, err => console.log(err));
+        });
   }
 
   protected createOrUpdate(role: Role): void {
@@ -103,17 +112,14 @@ export class TableComponent implements OnInit {
 
           }
 
-          Swal.fire({
-                        position: 'top-end',
-                        icon: 'success',
-                        title: 'Role saved successfully',
-                        showConfirmButton: true,
-                        timer: 3000
-                    })
+          this.Toast.fire({
+                            icon: 'success',
+                            title: 'Role saved successfully'
+                          })
 
           this.refreshTable();
 
-        }, err => console.log(err));
+        });
   }
 
   openDialog(role: Role): void {

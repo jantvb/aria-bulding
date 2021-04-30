@@ -8,9 +8,7 @@ import { BuildingService } from 'src/app/service/building.service';
 import { AddDialogComponent } from '../add-dialog/add-dialog.component';
 import Swal from 'sweetalert2';
 
-/**
- * @title Data table with sorting, pagination, and filtering.
- */
+
 @Component({
   selector: 'app-table-building',
   styleUrls: ['table.component.scss'],
@@ -27,6 +25,18 @@ export class TableComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!:    MatPaginator;
   @ViewChild(MatSort) sort!:              MatSort;
 
+  Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        showConfirmButton: false,
+                        timer: 3000,
+                        timerProgressBar: true,
+                        didOpen: (toast) => {
+                          toast.addEventListener('mouseenter', Swal.stopTimer)
+                          toast.addEventListener('mouseleave', Swal.resumeTimer)
+                        }
+                      })
+
   constructor(private buildingService:    BuildingService,
               public  dialog:             MatDialog) {}
 
@@ -35,7 +45,7 @@ export class TableComponent implements OnInit {
   }
 
   applyFilter(event: Event): void {
-    const filterValue = (event.target as HTMLInputElement).value;
+    const filterValue      = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
 
     if (this.dataSource.paginator) {
@@ -63,7 +73,7 @@ export class TableComponent implements OnInit {
 
           this.refreshTable();
 
-        }, err => console.log(err));
+        });
   }
 
   protected delete(buildingId: number): void {
@@ -77,17 +87,14 @@ export class TableComponent implements OnInit {
                           .findIndex(b => b.id === buildingId),
                       1);
 
-          Swal.fire({
-                        position: 'top-end',
-                        icon: 'success',
-                        title: 'Building deleted successfully',
-                        showConfirmButton: true,
-                        timer: 3000
-                    })
+          this.Toast.fire({
+                            icon: 'success',
+                            title: 'Building deleted successfully'
+                          })
 
           this.refreshTable();
 
-        }, err => console.log(err));
+        });
   }
 
   protected createOrUpdate(building: Building): void {
@@ -106,17 +113,14 @@ export class TableComponent implements OnInit {
 
           }
 
-          Swal.fire({
-                      position: 'top-end',
-                      icon: 'success',
-                      title: 'Building saved successfully',
-                      showConfirmButton: true,
-                      timer: 3000
-                  })
+          this.Toast.fire({
+                            icon: 'success',
+                            title: 'Building saved successfully'
+                          })
 
           this.refreshTable();
 
-        }, err => console.log(err));
+        });
   }
 
   openDialog(building: Building): void {
