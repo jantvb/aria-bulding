@@ -14,9 +14,21 @@ import Swal from 'sweetalert2';
 })
 export class SidenavComponent implements OnDestroy, OnInit {
 
-  building:                              Building = new Building();
-  buildings:                             Array<Building> = new Array();
-  mobileQuery:                           MediaQueryList;
+  building:                 Building        = new Building();
+  buildings:                Array<Building> = new Array();
+  mobileQuery:              MediaQueryList;
+
+  Toast = Swal.mixin({
+    toast: true,
+    position: 'top-end',
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+      toast.addEventListener('mouseenter', Swal.stopTimer)
+      toast.addEventListener('mouseleave', Swal.resumeTimer)
+    }
+  })
 
   private _mobileQueryListener: () => void;
 
@@ -42,19 +54,8 @@ export class SidenavComponent implements OnDestroy, OnInit {
         .subscribe(b => {
           this.sessionService.setCurrentBuilding(b);
           this.building = this.sessionService.loadCurrentBuilding();
-          const Toast = Swal.mixin({
-            toast: true,
-            position: 'top-end',
-            showConfirmButton: false,
-            timer: 3000,
-            timerProgressBar: true,
-            didOpen: (toast) => {
-              toast.addEventListener('mouseenter', Swal.stopTimer)
-              toast.addEventListener('mouseleave', Swal.resumeTimer)
-            }
-          })
 
-          Toast.fire({
+          this.Toast.fire({
             icon: 'success',
             title: 'Building Selected: ' + this.building.name
           })

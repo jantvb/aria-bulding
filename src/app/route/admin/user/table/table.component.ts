@@ -205,7 +205,7 @@ export class TableComponent implements OnInit {
 
             this.Toast.fire({
               icon: 'success',
-              title: 'Building Added to: ' + user.username
+              title: 'Building added to: ' + user.username
             })
 
           });
@@ -217,7 +217,7 @@ export class TableComponent implements OnInit {
 
             this.Toast.fire({
               icon: 'success',
-              title: 'Building Deleted from: ' + user.username
+              title: 'Building deleted from: ' + user.username
             })
           });
     }
@@ -244,6 +244,10 @@ export class TableComponent implements OnInit {
           p.toggle();
 
         });
+
+  }
+
+  isDefault(this.: number): boolean {
 
   }
 
