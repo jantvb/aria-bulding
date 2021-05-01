@@ -52,7 +52,9 @@
           <mat-card >
             <mat-list >
               <mat-list-item *ngFor="let building of buildings">
-                <mat-checkbox (change)="buildingChange($event, user, building)" [checked]="isBuildingChecked(user, building)">{{building.name}}</mat-checkbox>
+                <mat-checkbox (change)="buildingChange($event, user, building)"
+                              [disabled]="isDefault(user, building)"
+                              [checked]="isBuildingChecked(user, building)">{{building.name}}</mat-checkbox>
               </mat-list-item>
              </mat-list>
           </mat-card>

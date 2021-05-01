@@ -247,8 +247,8 @@ export class TableComponent implements OnInit {
 
   }
 
-  isDefault(this.: number): boolean {
-
+  isDefault(user: User, building: Building): boolean {
+    return building.id === user.defaultBuilding;
   }
 
 }
