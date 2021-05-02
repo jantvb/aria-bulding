@@ -19,7 +19,7 @@ import { Building } from 'src/app/model/building.model';
 })
 export class TableComponent implements OnInit {
 
-  displayedColumns:                         string[] = ['display', 'description', 'building', 'actions'];
+  displayedColumns:                         string[] = ['display', 'description', 'actions'];
   dataSource!:                              MatTableDataSource<Apartment>;
 
   apartments:                               Array<Apartment> = new Array<Apartment>();
