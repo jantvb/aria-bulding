@@ -1,3 +1,4 @@
+import { SessionService } from 'src/app/service/authService/session.service';
 import { BuildingService } from './../../../../service/building.service';
 import { Building } from 'src/app/model/building.model';
 import { Component, Inject, OnInit } from '@angular/core';
@@ -15,7 +16,6 @@ export class AddDialogComponent implements OnInit {
   options!:                   FormGroup;
   displayControl!:            FormControl;
   descriptionControl!:        FormControl;
-  buildingControl!:           FormControl;
 
   title:                      string = 'Create New Apartment';
 
@@ -23,55 +23,45 @@ export class AddDialogComponent implements OnInit {
 
   buildings:                  Array<Building> = new Array<Building>();
 
-  constructor(public dialogRef:         MatDialogRef<AddDialogComponent>,
-              private buildingService:  BuildingService,
-              fb: FormBuilder,
-              @Inject(MAT_DIALOG_DATA) public data: Apartment) {
+  currentBuilding:            Building = new Building();
 
+  constructor(public dialogRef:                     MatDialogRef<AddDialogComponent>,
+              private buildingService:              BuildingService,
+                                   fb:              FormBuilder,
+              @Inject(MAT_DIALOG_DATA) public data: Apartment,
+              private sessionService:               SessionService) {
 
+    this.currentBuilding = sessionService.loadCurrentBuilding();
 
     Object.assign(this.apartment, data);
 
     if (this.apartment.id === undefined) {
-      this.title = 'Create New Apartment';
+      this.title = 'Create new Apartment';
     } else {
-      this.title = 'Editing: ' + this.apartment.display;
+      this.title = 'Editing Apartment: ' + this.apartment.display;
     }
 
     this.displayControl     = new FormControl(this.apartment.display, [Validators.required]);
     this.descriptionControl = new FormControl(this.apartment.description);
-    this.buildingControl    = new FormControl(this.apartment.building, [Validators.required]);
 
     this.options = fb.group({
       display:        this.displayControl,
-      description:    this.descriptionControl,
-      building:       this.buildingControl
+      description:    this.descriptionControl
     });
 
   }
 
-  ngOnInit(): void {
-    this.loadBuildings();
-  }
+  ngOnInit(): void {}
+
 
   cancel(): void {
     this.dialogRef.close();
   }
 
   submit(): void {
+    this.apartment.building    = new Building();
+    this.apartment.building.id = this.currentBuilding.id;
     this.dialogRef.close(this.apartment);
-  }
-
-  buildingChanged(event: any): void {
-    this.apartment.building = new Building();
-    this.apartment.building.id = event.value;
-  }
-
-  loadBuildings(): void {
-    this.buildingService
-        .list()
-        .subscribe(b => this.buildings = b,
-                   err => console.log(err));
   }
 
 }

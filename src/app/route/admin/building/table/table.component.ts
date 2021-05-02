@@ -1,3 +1,4 @@
+import { SessionService } from 'src/app/service/authService/session.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
@@ -21,6 +22,7 @@ export class TableComponent implements OnInit {
   dataSource!:                            MatTableDataSource<Building>;
 
   buildings:                              Array<Building> = new Array<Building>();
+  currentBuilding:                        Building = new Building();
 
   @ViewChild(MatPaginator) paginator!:    MatPaginator;
   @ViewChild(MatSort) sort!:              MatSort;
@@ -38,7 +40,12 @@ export class TableComponent implements OnInit {
                       })
 
   constructor(private buildingService:    BuildingService,
-              public  dialog:             MatDialog) {}
+              public  dialog:             MatDialog,
+              private sessionService:     SessionService) {
+
+    this.currentBuilding = sessionService.loadCurrentBuilding();
+
+  }
 
   ngOnInit(): void {
     this.load();

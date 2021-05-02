@@ -1,4 +1,5 @@
-<h2 mat-dialog-title>{{title}}</h2>
+<mat-card-title>{{title}} </mat-card-title>
+<mat-card-subtitle>{{currentBuilding.name}}</mat-card-subtitle>
 <mat-dialog-content class="mat-typography">
   <form class="example-container" [formGroup]="options">
 
@@ -11,14 +12,6 @@
               [formControl]="displayControl"
               required>
       <mat-error *ngIf="displayControl.invalid">Please enter apartment display</mat-error>
-    </mat-form-field>
-
-    <mat-form-field>
-      <mat-label>Building</mat-label>
-      <mat-select (selectionChange)="buildingChanged($event)" [formControl]="buildingControl" required>
-        <mat-option *ngFor="let building of buildings" [value]="building.id">{{building.name}}</mat-option>
-      </mat-select>
-      <mat-error *ngIf="buildingControl.hasError('required')">Please select a building</mat-error>
     </mat-form-field>
 
     <mat-form-field appearance="legacy" >
