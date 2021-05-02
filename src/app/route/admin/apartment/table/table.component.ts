@@ -1,3 +1,4 @@
+import { BuildingService } from 'src/app/service/building.service';
 import { SessionService } from './../../../../service/authService/session.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
@@ -42,7 +43,8 @@ export class TableComponent implements OnInit {
 
   constructor(private apartmentService:    ApartmentService,
               public  dialog:              MatDialog,
-              private sessionService:      SessionService) {
+              private sessionService:      SessionService,
+              private buildingService:     BuildingService) {
 
     this.currentBuilding = sessionService.loadCurrentBuilding();
 
@@ -50,7 +52,6 @@ export class TableComponent implements OnInit {
 
   ngOnInit(): void {
     this.load();
-    //this.loadApartmentsByCurrentBuilding();
   }
 
   applyFilter(event: Event): void {
@@ -72,40 +73,20 @@ export class TableComponent implements OnInit {
   }
 
   private load(): void {
-    this.apartmentService
-        .list()
+    this.buildingService
+        .listApartmentsByBuilding(this.currentBuilding.id)
         .subscribe( rApartments => {
 
           this.apartments = new Array<Apartment>();
-
+          console.log(rApartments);
           Object.assign(this.apartments, rApartments);
-
+          console.log(this.apartments);
+          this.refreshTable();
 
         });
 
-        for(let aL of this.apartments){
-          if(aL.building.id === this.currentBuilding.id){
-            this.apartmentsByBuilding.push(aL);
-          }
-        }
-
-        Object.assign(this.apartments, this.apartmentsByBuilding);
-        this.refreshTable();
   }
 
-  /*private loadApartmentsByCurrentBuilding(): void {
-
-    for(let aL of this.apartments){
-      if(aL.building.id === this.currentBuilding.id){
-        this.apartmentsByBuilding.push(aL);
-      }
-    }
-
-    Object.assign(this.apartments, this.apartmentsByBuilding);
-
-    this.refreshTable();
-
-  }*/
 
   protected delete(apartmentId: number): void {
 

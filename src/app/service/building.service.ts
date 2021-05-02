@@ -1,3 +1,4 @@
+import { Apartment } from './../model/apartment.model';
 import { Building } from './../model/building.model';
 import { environment } from './../../environments/environment';
 import { Injectable } from '@angular/core';
@@ -28,6 +29,10 @@ export class BuildingService {
 
   delete(id: number): Observable<Building> {
     return this.httpC.delete<Building>(this.path + '/' + id);
+  }
+
+  listApartmentsByBuilding(id: number): Observable <Array<Apartment>> {
+    return this.httpC.get<Array<Apartment>>(this.path + '/' + id);
   }
 
 }
