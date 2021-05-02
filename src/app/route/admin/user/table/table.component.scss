@@ -7,7 +7,7 @@ table {
   width: 100%;
 }
 
-.example-label {
+.label {
   display: table-cell;
   font-size: 14px;
   margin-left: 8px;
@@ -15,17 +15,17 @@ table {
 }
 
 
-.example-button-row .mat-button-base {
+.button-row .mat-button-base {
   margin: 8px 8px 8px 0;
 }
 
-.example-flex-container {
+.flex-container {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
 }
 
-.example-button-container {
+.button-container {
   display: flex;
   justify-content: center;
   width: 120px;

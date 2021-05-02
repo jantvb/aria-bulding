@@ -1,3 +1,4 @@
+import { SessionService } from './../../../../service/authService/session.service';
 import { SatPopover } from '@ncstate/sat-popover';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
@@ -26,6 +27,7 @@ export class TableComponent implements OnInit {
   @ViewChild(MatSort) sort!:            MatSort;
 
   users:                                Array<User> = new Array<User>();
+  loggedUser:                           User = new User();
 
   userBuilding:                         boolean = false;
   buildings:                            Array<Building> = new Array<Building>();
@@ -45,7 +47,12 @@ export class TableComponent implements OnInit {
 
   constructor(private userService:      UserService,
               private buildingService:  BuildingService,
-              public  dialog:           MatDialog) {}
+              public  dialog:           MatDialog,
+              private sessionService:   SessionService) {
+
+    this.loggedUser = sessionService.load();
+
+  }
 
   ngOnInit(): void {
     this.load();

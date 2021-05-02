@@ -42,7 +42,8 @@
       <td mat-cell *matCellDef="let user" >
         <button mat-icon-button
                 [satPopoverAnchor]="p"
-                (click)="popoverOpen(user, p)">
+                (click)="popoverOpen(user, p)"
+                matTooltip="Add or Remove Buildings">
           <mat-icon >location_city</mat-icon>
         </button>
 
@@ -79,14 +80,15 @@
     <ng-container matColumnDef="actions">
       <th class="actionHeader" mat-header-cell *matHeaderCellDef mat-sort-header> ACTIONS </th>
       <td class="actionBody" mat-cell *matCellDef="let user">
-        <div class="example-button-row">
-          <div class="example-flex-container">
-            <div class="example-button-container">
+        <div class="button-row">
+          <div class="flex-container">
+            <div class="button-container">
               <button mat-mini-fab color="primary" matTooltip="Edit User" (click)="openDialog(user)">
                 <mat-icon>edit</mat-icon>
               </button>
             </div>
-            <div class="example-button-container">
+
+            <div *ngIf="user.id !== loggedUser.id" class="button-container">
               <button mat-mini-fab color="warn"
                       matTooltip="Delete User"
                       (click)="openDeleteDialog(user)">

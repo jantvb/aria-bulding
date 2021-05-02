@@ -1,3 +1,4 @@
+import { SessionService } from './../../../../service/authService/session.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
@@ -7,6 +8,7 @@ import { Apartment } from 'src/app/model/apartment.model';
 import { ApartmentService } from 'src/app/service/apartment.service';
 import { AddDialogComponent } from '../add-dialog/add-dialog.component';
 import Swal from 'sweetalert2';
+import { Building } from 'src/app/model/building.model';
 
 
 @Component({
@@ -20,6 +22,8 @@ export class TableComponent implements OnInit {
   dataSource!:                              MatTableDataSource<Apartment>;
 
   apartments:                               Array<Apartment> = new Array<Apartment>();
+  apartmentsByBuilding:                     Array<Apartment> = new Array<Apartment>();
+  currentBuilding:                          Building = new Building();
 
   @ViewChild(MatPaginator) paginator!:      MatPaginator;
   @ViewChild(MatSort) sort!:                MatSort;
@@ -37,10 +41,16 @@ export class TableComponent implements OnInit {
                       })
 
   constructor(private apartmentService:    ApartmentService,
-              public  dialog:              MatDialog) {}
+              public  dialog:              MatDialog,
+              private sessionService:      SessionService) {
+
+    this.currentBuilding = sessionService.loadCurrentBuilding();
+
+  }
 
   ngOnInit(): void {
     this.load();
+    //this.loadApartmentsByCurrentBuilding();
   }
 
   applyFilter(event: Event): void {
@@ -70,11 +80,32 @@ export class TableComponent implements OnInit {
 
           Object.assign(this.apartments, rApartments);
 
-          this.refreshTable();
-
 
         });
+
+        for(let aL of this.apartments){
+          if(aL.building.id === this.currentBuilding.id){
+            this.apartmentsByBuilding.push(aL);
+          }
+        }
+
+        Object.assign(this.apartments, this.apartmentsByBuilding);
+        this.refreshTable();
   }
+
+  /*private loadApartmentsByCurrentBuilding(): void {
+
+    for(let aL of this.apartments){
+      if(aL.building.id === this.currentBuilding.id){
+        this.apartmentsByBuilding.push(aL);
+      }
+    }
+
+    Object.assign(this.apartments, this.apartmentsByBuilding);
+
+    this.refreshTable();
+
+  }*/
 
   protected delete(apartmentId: number): void {
 
