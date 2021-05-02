@@ -78,9 +78,8 @@ export class TableComponent implements OnInit {
         .subscribe( rApartments => {
 
           this.apartments = new Array<Apartment>();
-          console.log(rApartments);
           Object.assign(this.apartments, rApartments);
-          console.log(this.apartments);
+
           this.refreshTable();
 
         });

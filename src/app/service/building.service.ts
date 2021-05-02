@@ -32,7 +32,7 @@ export class BuildingService {
   }
 
   listApartmentsByBuilding(id: number): Observable <Array<Apartment>> {
-    return this.httpC.get<Array<Apartment>>(this.path + '/' + id);
+    return this.httpC.get<Array<Apartment>>(this.path + '/' + id + '/apartment');
   }
 
 }
