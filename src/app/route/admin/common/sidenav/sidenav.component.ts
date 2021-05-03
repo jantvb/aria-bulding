@@ -19,16 +19,16 @@ export class SidenavComponent implements OnDestroy, OnInit {
   mobileQuery:              MediaQueryList;
 
   Toast = Swal.mixin({
-    toast: true,
-    position: 'top-end',
-    showConfirmButton: false,
-    timer: 3000,
-    timerProgressBar: true,
-    didOpen: (toast) => {
-      toast.addEventListener('mouseenter', Swal.stopTimer)
-      toast.addEventListener('mouseleave', Swal.resumeTimer)
-    }
-  })
+                      toast: true,
+                      position: 'top-end',
+                      showConfirmButton: false,
+                      timer: 3000,
+                      timerProgressBar: true,
+                      didOpen: (toast) => {
+                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                      }
+                    })
 
   private _mobileQueryListener: () => void;
 
@@ -37,7 +37,7 @@ export class SidenavComponent implements OnDestroy, OnInit {
               private sessionService:    SessionService,
               media:                     MediaMatcher) {
 
-    this.building.name = "No Default Building"
+    this.building.name = "No Default Building";
 
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();

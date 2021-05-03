@@ -5,15 +5,15 @@
     <button mat-icon-button
             *ngIf="hasMoreBuilding()"
             [satPopoverAnchor]="p"
-            (click)="p.toggle()">
+            (click)="p.toggle()"
+            matTooltip="Change current Building">
       <mat-icon >location_city</mat-icon>
     </button>
     <sat-popover  #p
                   horizontalAlign="center"
                   verticalAlign="below">
       <mat-card >
-        <mat-radio-group  class="example-radio-group"
-                          >
+        <mat-radio-group  class="example-radio-group">
           <mat-radio-button class="example-radio-button"
                             [checked]="b.id === building.id"
                             (change)="buildingChange($event, b)"
