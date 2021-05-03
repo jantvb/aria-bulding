@@ -36,7 +36,7 @@
     </mat-sidenav>
 
     <mat-sidenav-content>
-      <router-outlet></router-outlet>
+      <router-outlet *ngIf="buildingReady"></router-outlet>
     </mat-sidenav-content>
   </mat-sidenav-container>
 </div>

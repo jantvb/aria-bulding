@@ -18,6 +18,8 @@ export class SidenavComponent implements OnDestroy, OnInit {
   buildings:                Array<Building> = new Array();
   mobileQuery:              MediaQueryList;
 
+  buildingReady: boolean = false;
+
   Toast = Swal.mixin({
                       toast: true,
                       position: 'top-end',
@@ -49,16 +51,21 @@ export class SidenavComponent implements OnDestroy, OnInit {
   }
 
   loadBuilding(buildingId: number): void {
+    this.buildingReady = false;
     this.buildingService
         .get(buildingId)
         .subscribe(b => {
+
           this.sessionService.setCurrentBuilding(b);
           this.building = this.sessionService.loadCurrentBuilding();
+
+          this.buildingReady = true;
 
           this.Toast.fire({
             icon: 'success',
             title: 'Building Selected: ' + this.building.name
-          })
+          });
+
         });
 
 
