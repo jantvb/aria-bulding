@@ -4,8 +4,8 @@ import { BuildingService } from 'src/app/service/building.service';
 import { SessionService } from 'src/app/service/authService/session.service';
 import { Building } from 'src/app/model/building.model';
 import { MatRadioChange } from '@angular/material/radio';
-
 import Swal from 'sweetalert2';
+import { TableComponent } from '../../apartment/table/table.component';
 
 @Component({
   selector: 'app-sidenav',
@@ -60,6 +60,8 @@ export class SidenavComponent implements OnDestroy, OnInit {
             title: 'Building Selected: ' + this.building.name
           })
         });
+
+
   }
 
   ngOnInit(): void {
@@ -84,7 +86,13 @@ export class SidenavComponent implements OnDestroy, OnInit {
   buildingChange(event: MatRadioChange, building: Building): void {
 
     this.loadBuilding(building.id);
+    this.refresh();
 
   }
+
+  refresh(): void {
+    window.location.reload();
+  }
+
 
 }
