@@ -18,7 +18,7 @@ export class SidenavComponent implements OnDestroy, OnInit {
   buildings:                Array<Building> = new Array();
   mobileQuery:              MediaQueryList;
 
-  buildingReady: boolean = false;
+  buildingReady:            boolean         = false;
 
   Toast = Swal.mixin({
                       toast: true,
