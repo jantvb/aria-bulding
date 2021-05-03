@@ -86,12 +86,7 @@ export class SidenavComponent implements OnDestroy, OnInit {
   buildingChange(event: MatRadioChange, building: Building): void {
 
     this.loadBuilding(building.id);
-    this.refresh();
 
-  }
-
-  refresh(): void {
-    window.location.reload();
   }
 
 
