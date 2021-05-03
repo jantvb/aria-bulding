@@ -16,6 +16,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { SatPopoverModule } from '@ncstate/sat-popover';
 import { MatCardModule } from '@angular/material/card';
 import {MatRadioModule} from '@angular/material/radio';
+import { MatTooltipModule } from '@angular/material/tooltip';
+
 @NgModule({
   declarations: [
     SidenavComponent,
@@ -36,7 +38,8 @@ import {MatRadioModule} from '@angular/material/radio';
     MatSelectModule,
     AdminRoutingModule,
     MatDialogModule,
-    MatMenuModule
+    MatMenuModule,
+    MatTooltipModule
   ]
 
 })
