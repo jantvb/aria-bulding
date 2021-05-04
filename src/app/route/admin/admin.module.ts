@@ -15,7 +15,7 @@ import { UserMenuComponent } from './common/user-menu/user-menu.component';
 import { MatSelectModule } from '@angular/material/select';
 import { SatPopoverModule } from '@ncstate/sat-popover';
 import { MatCardModule } from '@angular/material/card';
-import {MatRadioModule} from '@angular/material/radio';
+import { MatRadioModule } from '@angular/material/radio';
 import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({

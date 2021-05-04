@@ -13,6 +13,16 @@
     </mat-form-field>
 
     <mat-form-field appearance="legacy" >
+      <mat-label>Number of floors</mat-label>
+      <input  matInput
+              type="text"
+              placeholder="Number of floors"
+              [formControl]="numberOfFloorsControl"
+              required>
+      <mat-error *ngIf="numberOfFloorsControl.invalid">Please enter a number of floors</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="legacy" >
       <mat-label>Description</mat-label>
       <input  matInput
               type="text"

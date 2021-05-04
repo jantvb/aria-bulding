@@ -12,6 +12,7 @@ export class AddDialogComponent implements OnInit {
 
   options!:                 FormGroup;
   nameControl!:             FormControl;
+  numberOfFloorsControl!:   FormControl;
   descriptionControl!:      FormControl;
 
   title:                    string = 'Create New Building';
@@ -33,11 +34,13 @@ export class AddDialogComponent implements OnInit {
     }
 
     this.nameControl              = new FormControl(this.building.name);
+    this.numberOfFloorsControl    = new FormControl();
     this.descriptionControl       = new FormControl(this.building.description);
 
     this.options = fb.group({
-      name:             this.nameControl,
-      description:      this.descriptionControl
+      name:                     this.nameControl,
+      numberOfFloorsControl:    this.numberOfFloorsControl,
+      description:              this.descriptionControl
     });
 
   }
@@ -52,5 +55,7 @@ export class AddDialogComponent implements OnInit {
   submit(): void {
     this.dialogRef.close(this.building);
   }
+
+
 
 }

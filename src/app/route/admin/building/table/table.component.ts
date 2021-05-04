@@ -1,3 +1,4 @@
+import { Floor } from './../../../../model/floor.model';
 import { SessionService } from 'src/app/service/authService/session.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
