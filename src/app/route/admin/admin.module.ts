@@ -17,15 +17,13 @@ import { SatPopoverModule } from '@ncstate/sat-popover';
 import { MatCardModule } from '@angular/material/card';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { FloorComponent } from './floor/floor.component';
 
 @NgModule({
   declarations: [
     SidenavComponent,
     AdminComponent,
     MainMenuComponent,
-    UserMenuComponent,
-    FloorComponent
+    UserMenuComponent
   ],
   imports: [
     CommonModule,
