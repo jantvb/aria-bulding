@@ -9,7 +9,8 @@ const routes: Routes = [
     { path: 'role',       loadChildren: () => import('./role/role.module').then(m => m.RoleModule) },
     { path: 'document',   loadChildren: () => import('./document/document.module').then(m => m.DocumentModule) },
     { path: 'apartment',  loadChildren: () => import('./apartment/apartment.module').then(m => m.ApartmentModule) },
-    { path: 'building',   loadChildren: () => import('./building/building.module').then(m => m.BuildingModule) }
+    { path: 'building',   loadChildren: () => import('./building/building.module').then(m => m.BuildingModule) },
+    { path: 'floor',      loadChildren: () => import('./floor/floor.module').then(m => m.FloorModule) }
   ]}
 ];
 
