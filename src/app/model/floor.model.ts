@@ -4,7 +4,8 @@ export class Floor {
 
   id!:                number;
   name!:              string;
-  apartments:         Array<Apartment> = new Array<Apartment>();
   type!:              number;
+  description!:       string;
+  apartments:         Array<Apartment> = new Array<Apartment>();
 
 }

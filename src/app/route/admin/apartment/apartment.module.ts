@@ -1,3 +1,4 @@
+import { TableComponent } from './table/table.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ApartmentComponent } from './apartment.component';
@@ -7,7 +8,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ApartmentRoutingModule } from './apartment-routing.module';
 import { AddDialogComponent } from './add-dialog/add-dialog.component';
-import { TableComponent } from './table/table.component';
 import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';

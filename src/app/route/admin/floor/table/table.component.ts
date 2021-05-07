@@ -1,3 +1,6 @@
+import { Building } from './../../../../model/building.model';
+import { SessionService } from './../../../../service/authService/session.service';
+import { BuildingService } from 'src/app/service/building.service';
 import { MatDialog } from '@angular/material/dialog';
 import { FloorService } from './../../../../service/floor.service';
 import { MatSort } from '@angular/material/sort';
@@ -20,6 +23,8 @@ export class TableComponent implements OnInit {
 
   floors:                                 Array<Floor> = new Array<Floor>();
 
+  currentBuilding:                        Building = new Building();
+
   @ViewChild(MatPaginator) paginator!:    MatPaginator;
   @ViewChild(MatSort) sort!:              MatSort;
 
@@ -36,7 +41,13 @@ export class TableComponent implements OnInit {
                       })
 
   constructor(private floorService:       FloorService,
-              public  dialog:             MatDialog) {}
+              public  dialog:             MatDialog,
+              private buildingService:    BuildingService,
+              private sessionService:     SessionService) {
+
+    this.currentBuilding = sessionService.loadCurrentBuilding();
+
+  }
 
   ngOnInit(): void {
     this.load();
@@ -61,12 +72,11 @@ export class TableComponent implements OnInit {
   }
 
   private load(): void {
-    this.floorService
-        .list()
+    this.buildingService
+        .listFloorsByBuilding(this.currentBuilding.id)
         .subscribe( rFloors => {
 
           this.floors = new Array<Floor>();
-
           Object.assign(this.floors, rFloors);
 
           this.refreshTable();

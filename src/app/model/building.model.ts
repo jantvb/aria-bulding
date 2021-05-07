@@ -9,6 +9,6 @@ export class Building {
   description!:         string;
   apartments:           Array<Apartment> = new Array<Apartment>();
   users:                Array<User>      = new Array<User>();
-  floor!:               Floor;
+  floors:               Array<Floor>     = new Array<Floor>();
 
 }

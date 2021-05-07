@@ -1,3 +1,4 @@
+import { Floor } from './../model/floor.model';
 import { Apartment } from './../model/apartment.model';
 import { Building } from './../model/building.model';
 import { environment } from './../../environments/environment';
@@ -33,6 +34,10 @@ export class BuildingService {
 
   listApartmentsByBuilding(id: number): Observable <Array<Apartment>> {
     return this.httpC.get<Array<Apartment>>(this.path + '/' + id + '/apartment');
+  }
+
+  listFloorsByBuilding(id: number): Observable <Array<Floor>> {
+    return this.httpC.get<Array<Floor>>(this.path + '/' + id + '/floor');
   }
 
 }

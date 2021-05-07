@@ -19,7 +19,7 @@ import Swal from 'sweetalert2';
 export class TableComponent implements OnInit {
 
 
-  displayedColumns:                       string[] = ['name', 'description', 'actions'];
+  displayedColumns:                       string[] = ['name', 'numberOfFloors', 'description', 'actions'];
   dataSource!:                            MatTableDataSource<Building>;
 
   buildings:                              Array<Building> = new Array<Building>();
@@ -159,5 +159,9 @@ export class TableComponent implements OnInit {
                 }
               })
   }
+
+
+
+
 
 }
