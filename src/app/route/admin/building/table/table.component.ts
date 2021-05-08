@@ -9,6 +9,7 @@ import { Building } from 'src/app/model/building.model';
 import { BuildingService } from 'src/app/service/building.service';
 import { AddDialogComponent } from '../add-dialog/add-dialog.component';
 import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -19,7 +20,7 @@ import Swal from 'sweetalert2';
 export class TableComponent implements OnInit {
 
 
-  displayedColumns:                       string[] = ['name', 'numberOfFloors', 'description', 'actions'];
+  displayedColumns:                       string[] = ['name', 'floors', 'description', 'actions'];
   dataSource!:                            MatTableDataSource<Building>;
 
   buildings:                              Array<Building> = new Array<Building>();
@@ -42,6 +43,7 @@ export class TableComponent implements OnInit {
 
   constructor(private buildingService:    BuildingService,
               public  dialog:             MatDialog,
+              private router:             Router,
               private sessionService:     SessionService) {
 
     this.currentBuilding = sessionService.loadCurrentBuilding();
@@ -141,6 +143,15 @@ export class TableComponent implements OnInit {
       }
 
     });
+  }
+
+  goToFloors(building: Building): void {
+
+    if (building.id !== this.sessionService.loadCurrentBuilding().id) {
+      this.sessionService.setCurrentBuilding(building);
+    }
+
+    this.router.navigate(['/admin/floor']);
   }
 
   openDeleteDialog(building: Building): void {
