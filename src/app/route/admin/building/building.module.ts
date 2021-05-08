@@ -17,13 +17,15 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
 import { MatOptionModule } from '@angular/material/core';
+import { EditNumberOfFloorsDialogComponent } from './edit-number-of-floors-dialog/edit-number-of-floors-dialog.component';
 
 
 @NgModule({
   declarations: [
     BuildingComponent,
     AddDialogComponent,
-    TableComponent
+    TableComponent,
+    EditNumberOfFloorsDialogComponent
   ],
   imports: [
     CommonModule,

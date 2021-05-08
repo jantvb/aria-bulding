@@ -15,7 +15,11 @@
     <!-- DISPLAY Column -->
     <ng-container matColumnDef="numberOfFloors">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> NUMBER OF FLOORS </th>
-      <td mat-cell *matCellDef="let building"> {{building}} </td>
+      <td mat-cell *matCellDef="let building">
+        <button mat-mini-fab color="primary" matTooltip="Edit number of Floors">
+          {{building.floors.length}}
+        </button>
+      </td>
     </ng-container>
 
     <!-- Description Column -->
