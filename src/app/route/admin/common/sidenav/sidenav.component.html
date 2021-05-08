@@ -1,7 +1,7 @@
 <div class="container" [class.is-mobile]="mobileQuery.matches">
   <mat-toolbar color="primary" class="toolbar">
     <button mat-icon-button (click)="snav.toggle()"><mat-icon>menu</mat-icon></button>
-    <h1 class="app-name" >{{building.name}}</h1>
+    <h1 class="app-name" >{{currentBuilding.name}}</h1>
     <button mat-icon-button
             *ngIf="hasMoreBuilding()"
             [satPopoverAnchor]="p"
@@ -13,7 +13,7 @@
       <mat-card>
         <mat-radio-group class="example-radio-group">
           <mat-radio-button class="example-radio-button"
-                            [checked]="b.id === building.id"
+                            [checked]="b.id === currentBuilding.id"
                             (change)="buildingChange($event, b)"
                             *ngFor="let b of buildings"
                             [value]="b.id">

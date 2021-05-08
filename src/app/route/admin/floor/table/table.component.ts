@@ -18,12 +18,13 @@ import { AddDialogComponent } from '../add-dialog/add-dialog.component';
 })
 export class TableComponent implements OnInit {
 
-  displayedColumns:                       string[] = ['name', 'type', 'description', 'actions'];
+  displayedColumns:                       string[]      = ['name', 'type', 'description', 'actions'];
   dataSource!:                            MatTableDataSource<Floor>;
 
-  floors:                                 Array<Floor> = new Array<Floor>();
+  floors:                                 Array<Floor>  = new Array<Floor>();
 
-  currentBuilding:                        Building = new Building();
+  currentBuilding:                        Building      = new Building();
+
 
   @ViewChild(MatPaginator) paginator!:    MatPaginator;
   @ViewChild(MatSort) sort!:              MatSort;

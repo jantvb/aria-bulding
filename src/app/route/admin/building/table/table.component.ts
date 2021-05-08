@@ -20,11 +20,15 @@ import { Router } from '@angular/router';
 export class TableComponent implements OnInit {
 
 
-  displayedColumns:                       string[] = ['name', 'floors', 'description', 'actions'];
+  displayedColumns:                       string[]        = ['name', 'floors', 'description', 'actions'];
   dataSource!:                            MatTableDataSource<Building>;
 
   buildings:                              Array<Building> = new Array<Building>();
-  currentBuilding:                        Building = new Building();
+  currentBuilding:                        Building        = new Building();
+
+  buildingReady:                          boolean         = false;
+
+  building:                               Building        = new Building();
 
   @ViewChild(MatPaginator) paginator!:    MatPaginator;
   @ViewChild(MatSort) sort!:              MatSort;
@@ -149,6 +153,7 @@ export class TableComponent implements OnInit {
 
     if (building.id !== this.sessionService.loadCurrentBuilding().id) {
       this.sessionService.setCurrentBuilding(building);
+      this.loadBuilding(this.sessionService.loadCurrentBuilding().id);
     }
 
     this.router.navigate(['/admin/floor']);
@@ -169,6 +174,27 @@ export class TableComponent implements OnInit {
                   this.delete(building.id);
                 }
               })
+  }
+
+  loadBuilding(buildingId: number): void {
+    this.buildingReady = false;
+    this.buildingService
+        .get(buildingId)
+        .subscribe(b => {
+
+          this.sessionService.setCurrentBuilding(b);
+          this.building = this.sessionService.loadCurrentBuilding();
+
+          this.buildingReady = true;
+
+          this.Toast.fire({
+            icon: 'success',
+            title: 'Building Selected: ' + this.building.name
+          });
+
+        });
+
+
   }
 
 

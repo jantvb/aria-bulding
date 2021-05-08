@@ -5,7 +5,6 @@ import { SessionService } from 'src/app/service/authService/session.service';
 import { Building } from 'src/app/model/building.model';
 import { MatRadioChange } from '@angular/material/radio';
 import Swal from 'sweetalert2';
-import { TableComponent } from '../../apartment/table/table.component';
 
 @Component({
   selector: 'app-sidenav',
@@ -14,7 +13,7 @@ import { TableComponent } from '../../apartment/table/table.component';
 })
 export class SidenavComponent implements OnDestroy, OnInit {
 
-  building:                 Building        = new Building();
+  currentBuilding:          Building        = new Building();
   buildings:                Array<Building> = new Array();
   mobileQuery:              MediaQueryList;
 
@@ -39,7 +38,7 @@ export class SidenavComponent implements OnDestroy, OnInit {
               private sessionService:    SessionService,
               media:                     MediaMatcher) {
 
-    this.building.name = "No Default Building";
+    this.currentBuilding.name = "No Default Building";
 
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
@@ -57,13 +56,13 @@ export class SidenavComponent implements OnDestroy, OnInit {
         .subscribe(b => {
 
           this.sessionService.setCurrentBuilding(b);
-          this.building = this.sessionService.loadCurrentBuilding();
+          this.currentBuilding = this.sessionService.loadCurrentBuilding();
 
           this.buildingReady = true;
 
           this.Toast.fire({
             icon: 'success',
-            title: 'Building Selected: ' + this.building.name
+            title: 'Building Selected: ' + this.currentBuilding.name
           });
 
         });
@@ -74,7 +73,8 @@ export class SidenavComponent implements OnDestroy, OnInit {
   ngOnInit(): void {
 
     this.loadBuilding(this.sessionService.load().defaultBuilding);
-    this.buildings = this.sessionService.load().buildings;
+    this.currentBuilding  = this.sessionService.loadCurrentBuilding();
+    this.buildings        = this.sessionService.load().buildings;
 
   }
 
@@ -87,7 +87,7 @@ export class SidenavComponent implements OnDestroy, OnInit {
                                  .length > 0 && this.sessionService
                                                     .load()
                                                     .buildings
-                                                    .some(b => b.id !== this.building.id);
+                                                    .some(b => b.id !== this.currentBuilding.id);
   }
 
   buildingChange(event: MatRadioChange, building: Building): void {
