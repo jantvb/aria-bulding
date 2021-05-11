@@ -202,15 +202,33 @@ export class TableComponent implements OnInit {
 
   openResetDialog(): void {
 
-    let numberOfFloors = 0;
+    let numberOfFloors;
     const dialogRef = this.dialog.open(ResetDialogComponent, {data: numberOfFloors});
 
     dialogRef.afterClosed().subscribe(result => {
       if (result !== undefined) {
-        this.createOrUpdate(result);
+        this.addFloors(result);
       }
 
     });
+  }
+
+  protected addFloors(numberOfFloors: number): void {
+
+    this.buildingService
+        .addFloors(this.currentBuilding.id, numberOfFloors)
+        .subscribe(() => {
+
+          this.Toast.fire({
+                            icon: 'success',
+                            title: 'The floors were reseted successfully'
+                          })
+
+          this.load();
+
+
+        });
+
   }
 
 }

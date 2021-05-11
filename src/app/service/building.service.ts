@@ -45,7 +45,7 @@ export class BuildingService {
   }
 
   addFloors(id: number, numberOfFloors: number): Observable<Building> {
-    return this.httpC.patch<Building>(this.path + '/' + id + '/floor');
+    return this.httpC.patch<Building>(this.path + '/' + id + '/floor', undefined);
   }
 
 }
