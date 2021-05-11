@@ -40,4 +40,12 @@ export class BuildingService {
     return this.httpC.get<Array<Floor>>(this.path + '/' + id + '/floor');
   }
 
+  removeFloors(id: number): Observable<Building> {
+    return this.httpC.delete<Building>(this.path + '/' + id + '/floor');
+  }
+
+  addFloors(id: number, numberOfFloors: number): Observable<Building> {
+    return this.httpC.patch<Building>(this.path + '/' + id + '/floor');
+  }
+
 }

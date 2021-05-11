@@ -16,13 +16,15 @@ import { CommonModule } from '@angular/common';
 import { FloorRoutingModule } from './floor-routing.module';
 import { AddDialogComponent } from './add-dialog/add-dialog.component';
 import { TableComponent } from './table/table.component';
+import { ResetDialogComponent } from './reset-dialog/reset-dialog.component';
 
 
 @NgModule({
   declarations: [
     AddDialogComponent,
     TableComponent,
-    FloorComponent
+    FloorComponent,
+    ResetDialogComponent
   ],
   imports: [
     CommonModule,

@@ -1,4 +1,5 @@
-<h2 mat-dialog-title>{{title}}</h2>
+<mat-card-title>{{title}} </mat-card-title>
+<mat-card-subtitle>{{currentBuilding.name}}</mat-card-subtitle>
 <mat-dialog-content class="mat-typography">
   <form class="example-container" [formGroup]="options">
 
@@ -21,6 +22,11 @@
         <mat-option value="3">MIX</mat-option>
       </mat-select>
       <mat-error *ngIf="typeControl.invalid">Please select a type of floor</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="legacy" >
+      <mat-label>Description</mat-label>
+      <input matInput type="text" [(ngModel)]="floor.description" placeholder="Description" [formControl]="descriptionControl">
     </mat-form-field>
 
   </form>

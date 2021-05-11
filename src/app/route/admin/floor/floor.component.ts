@@ -3,6 +3,7 @@ import { SessionService } from './../../../service/authService/session.service';
 import { Floor } from 'src/app/model/floor.model';
 import { TableComponent } from './../floor/table/table.component';
 import { Component, OnInit, ViewChild } from '@angular/core';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-floor',
@@ -11,9 +12,21 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 })
 export class FloorComponent implements OnInit {
 
-  currentBuilding:                   Building = new Building();
+  currentBuilding:                    Building = new Building();
 
-  @ViewChild(TableComponent) table!: TableComponent;
+  @ViewChild(TableComponent) table!:  TableComponent;
+
+  Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        showConfirmButton: false,
+                        timer: 3000,
+                        timerProgressBar: true,
+                        didOpen: (toast) => {
+                          toast.addEventListener('mouseenter', Swal.stopTimer)
+                          toast.addEventListener('mouseleave', Swal.resumeTimer)
+                        }
+  })
 
   constructor(private sessionService:      SessionService) {
     this.currentBuilding = sessionService.loadCurrentBuilding();
@@ -24,6 +37,14 @@ export class FloorComponent implements OnInit {
 
   openDialog() {
     this.table.openDialog(new Floor());
+  }
+
+  openRemoveFloorsDialog() {
+    this.table.openRemoveFloorsDialog();
+  }
+
+  openResetDialog() {
+    this.table.openResetDialog();
   }
 
 }

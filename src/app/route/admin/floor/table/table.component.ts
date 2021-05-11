@@ -1,3 +1,4 @@
+import { ResetDialogComponent } from './../reset-dialog/reset-dialog.component';
 import { Building } from './../../../../model/building.model';
 import { SessionService } from './../../../../service/authService/session.service';
 import { BuildingService } from 'src/app/service/building.service';
@@ -160,6 +161,56 @@ export class TableComponent implements OnInit {
                   }
                 })
 
+  }
+
+  openRemoveFloorsDialog(): void {
+
+    Swal.fire({
+                title: 'Are you sure you want to remove all floors of building ' + this.currentBuilding.name + '?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, remove them all!'
+              }).then((result) => {
+                if (result.isConfirmed) {
+                  this.removeFloors(this.currentBuilding.id);
+                }
+              })
+
+  }
+
+  protected removeFloors(buildingId: number): void {
+
+    this.buildingService
+        .removeFloors(buildingId)
+        .subscribe(() => {
+
+          this.Toast.fire({
+                            icon: 'success',
+                            title: 'All floors were removed successfully'
+                          })
+
+          this.floors = new Array<Floor>();
+
+          this.refreshTable();
+
+
+        });
+  }
+
+  openResetDialog(): void {
+
+    let numberOfFloors = 0;
+    const dialogRef = this.dialog.open(ResetDialogComponent, {data: numberOfFloors});
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result !== undefined) {
+        this.createOrUpdate(result);
+      }
+
+    });
   }
 
 }

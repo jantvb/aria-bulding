@@ -16,8 +16,7 @@
 
     <mat-form-field appearance="legacy" >
       <mat-label>Description</mat-label>
-      <input matInput type="text" [(ngModel)]="apartment.description" placeholder="Description" [formControl]="descriptionControl" required>
-      <mat-error *ngIf="descriptionControl.invalid">Please enter apartment description</mat-error>
+      <input matInput type="text" [(ngModel)]="apartment.description" placeholder="Description" [formControl]="descriptionControl">
     </mat-form-field>
 
   </form>

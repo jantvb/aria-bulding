@@ -39,6 +39,7 @@ export class SidenavComponent implements OnDestroy, OnInit {
               media:                     MediaMatcher) {
 
     this.currentBuilding.name = "No Default Building";
+    this.currentBuilding      = this.sessionService.loadCurrentBuilding();
 
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
@@ -73,9 +74,6 @@ export class SidenavComponent implements OnDestroy, OnInit {
   ngOnInit(): void {
 
     this.loadBuilding(this.sessionService.load().defaultBuilding);
-    this.currentBuilding  = this.sessionService.loadCurrentBuilding();
-    this.buildings        = this.sessionService.load().buildings;
-
   }
 
   hasMoreBuilding(): boolean {
