@@ -18,10 +18,9 @@ export class ResetDialogComponent implements OnInit {
 
 
 
-  constructor(public dialogRef:                     MatDialogRef<ResetDialogComponent>,
+  constructor(public  dialogRef:                    MatDialogRef<ResetDialogComponent>,
               private sessionService:               SessionService,
-                                  fb:               FormBuilder,
-              @Inject(MAT_DIALOG_DATA) public data: number) {
+                      fb:                           FormBuilder) {
 
     this.currentBuilding          = sessionService.loadCurrentBuilding();
 
@@ -41,7 +40,7 @@ export class ResetDialogComponent implements OnInit {
   }
 
   submit(): void {
-    this.dialogRef.close(this.data);
+    this.dialogRef.close(this.numberOfFloorsControl.value);
   }
 
 }
