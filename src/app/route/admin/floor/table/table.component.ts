@@ -215,16 +215,14 @@ export class TableComponent implements OnInit {
 
     this.buildingService
         .addFloors(this.currentBuilding.id, numberOfFloors)
-        .subscribe(() => {
-
+        .subscribe((building) => {
+          console.log(building);
           this.Toast.fire({
                             icon: 'success',
                             title: 'The floors were reseted successfully'
                           })
 
           this.load();
-
-
         });
 
   }
