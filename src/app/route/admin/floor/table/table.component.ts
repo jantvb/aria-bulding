@@ -201,9 +201,7 @@ export class TableComponent implements OnInit {
   }
 
   openResetDialog(): void {
-
-    let numberOfFloors;
-    const dialogRef = this.dialog.open(ResetDialogComponent, {data: numberOfFloors});
+    const dialogRef = this.dialog.open(ResetDialogComponent);
 
     dialogRef.afterClosed().subscribe(result => {
       if (result !== undefined) {
