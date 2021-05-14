@@ -9,7 +9,7 @@ import { Building } from 'src/app/model/building.model';
   templateUrl: './reset-dialog.component.html',
   styleUrls: ['./reset-dialog.component.scss']
 })
-export class ResetDialogComponent implements OnInit {
+export class ResetDialogComponent {
 
   options!:                   FormGroup;
   numberOfFloorsControl!:     FormControl;
@@ -21,7 +21,6 @@ export class ResetDialogComponent implements OnInit {
   constructor(public  dialogRef:                    MatDialogRef<ResetDialogComponent>,
               private sessionService:               SessionService,
                       fb:                           FormBuilder) {
-
     this.currentBuilding          = sessionService.loadCurrentBuilding();
 
     this.numberOfFloorsControl    = new FormControl();
@@ -30,9 +29,6 @@ export class ResetDialogComponent implements OnInit {
       numberOfFloors:         this.numberOfFloorsControl
     });
 
-  }
-
-  ngOnInit(): void {
   }
 
   cancel(): void {
