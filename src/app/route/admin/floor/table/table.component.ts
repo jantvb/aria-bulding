@@ -215,7 +215,7 @@ export class TableComponent implements OnInit {
 
     this.buildingService
         .addFloors(this.currentBuilding.id, numberOfFloors)
-        .subscribe((building) => {
+        .subscribe(building => {
           console.log(building);
           this.Toast.fire({
                             icon: 'success',
