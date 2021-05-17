@@ -11,6 +11,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import Swal from 'sweetalert2';
 import { AddDialogComponent } from '../add-dialog/add-dialog.component';
+import { IFloorsForm } from './../../../../interface/ifloors-form';
 
 @Component({
   selector: 'app-table-floor',
@@ -205,18 +206,23 @@ export class TableComponent implements OnInit {
   openResetDialog(): void {
     const dialogRef = this.dialog.open(ResetDialogComponent);
 
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe(r => {
 
-      if (result !== undefined && result > 0) {
+      const result: IFloorsForm = r as IFloorsForm;
 
-        this.floors = new Array<Floor>();
+      if (result !== undefined) {
 
-        for (let index = 0; index < result; index++) {
+        console.log(result.floor13);
+        console.log(result.numberOfFloors);
 
-          this.floor = new Floor();
+        // this.floors = new Array<Floor>();
 
-        }
-        this.addFloors(result);
+        // for (let index = 0; index < result; index++) {
+
+        //   this.floor = new Floor();
+
+        // }
+        // this.addFloors(result);
       }
 
     });
