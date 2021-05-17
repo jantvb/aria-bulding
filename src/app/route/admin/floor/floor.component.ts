@@ -44,7 +44,22 @@ export class FloorComponent implements OnInit {
   }
 
   openResetDialog() {
-    this.table.openResetDialog();
+
+    Swal.fire({
+                title: 'Are you sure you want to reset all the floors in the building ' + this.currentBuilding.name +'?',
+                text: 'If you do, you will not be able to retrieve the information you currently have',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+              }).then((result) => {
+                if (result.isConfirmed) {
+                  this.table.openResetDialog();
+                }
+              })
+
+
   }
 
 }

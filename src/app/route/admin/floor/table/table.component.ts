@@ -24,6 +24,8 @@ export class TableComponent implements OnInit {
 
   floors:                                 Array<Floor>  = new Array<Floor>();
 
+  floor:                                  Floor         = new Floor();
+
   currentBuilding:                        Building      = new Building();
 
 
@@ -204,7 +206,16 @@ export class TableComponent implements OnInit {
     const dialogRef = this.dialog.open(ResetDialogComponent);
 
     dialogRef.afterClosed().subscribe(result => {
-      if (result !== undefined) {
+
+      if (result !== undefined && result > 0) {
+
+        this.floors = new Array<Floor>();
+
+        for (let index = 0; index < result; index++) {
+
+          this.floor = new Floor();
+
+        }
         this.addFloors(result);
       }
 
@@ -216,7 +227,6 @@ export class TableComponent implements OnInit {
     this.buildingService
         .addFloors(this.currentBuilding.id, numberOfFloors)
         .subscribe(building => {
-          console.log(building);
           this.Toast.fire({
                             icon: 'success',
                             title: 'The floors were reseted successfully'

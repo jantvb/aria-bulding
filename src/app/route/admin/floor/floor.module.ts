@@ -1,3 +1,4 @@
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { FloorComponent } from './floor.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatOptionModule } from '@angular/material/core';
@@ -41,7 +42,8 @@ import { ResetDialogComponent } from './reset-dialog/reset-dialog.component';
     ReactiveFormsModule,
     MatSelectModule,
     MatOptionModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatCheckboxModule
   ]
 })
 export class FloorModule { }

@@ -11,6 +11,11 @@
       <mat-error *ngIf="numberOfFloorsControl.invalid">Please enter a number of floors</mat-error>
     </mat-form-field>
 
+    <mat-form-field appearance="legacy" >
+      <mat-checkbox [formControl]="floor13Control">Use floor 13?</mat-checkbox>
+    </mat-form-field>
+
+
   </form>
 </mat-dialog-content>
 <mat-dialog-actions align="end">

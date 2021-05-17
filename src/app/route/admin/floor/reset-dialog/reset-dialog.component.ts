@@ -1,7 +1,7 @@
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { SessionService } from './../../../../service/authService/session.service';
 import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { Building } from 'src/app/model/building.model';
 
 @Component({
@@ -13,18 +13,23 @@ export class ResetDialogComponent {
 
   options!:                   FormGroup;
   numberOfFloorsControl!:     FormControl;
+  floor13Control!:            FormControl;
 
   currentBuilding:            Building = new Building();
 
+
   constructor(public  dialogRef:                    MatDialogRef<ResetDialogComponent>,
               private sessionService:               SessionService,
-                      fb:                           FormBuilder) {
+                      fb:                           FormBuilder,
+              @Inject(MAT_DIALOG_DATA) public data: {numberOfFloor: number, floor13: boolean}) {
     this.currentBuilding          = sessionService.loadCurrentBuilding();
 
     this.numberOfFloorsControl    = new FormControl();
+    this.floor13Control           = new FormControl();
 
     this.options = fb.group({
-      numberOfFloors:         this.numberOfFloorsControl
+      numberOfFloors:         this.numberOfFloorsControl,
+      floor13:                this.floor13Control
     });
 
   }
@@ -34,7 +39,9 @@ export class ResetDialogComponent {
   }
 
   submit(): void {
-    this.dialogRef.close(this.numberOfFloorsControl.value);
+    this.data.numberOfFloor = this.numberOfFloorsControl.value;
+    this.data.floor13       = this.floor13Control.value;
+    this.dialogRef.close(this.data);
   }
 
 }
