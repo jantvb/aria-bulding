@@ -3,7 +3,7 @@ import { Apartment } from 'src/app/model/apartment.model';
 
 export class Floor {
 
-  id!:                number;
+  id?:                number;
   name!:              string;
   type!:              number;
   description!:       string;
