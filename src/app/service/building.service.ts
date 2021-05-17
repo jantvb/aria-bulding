@@ -45,7 +45,7 @@ export class BuildingService {
   }
 
   addFloors(id: number, floors: Array<Floor> ): Observable<Building> {
-    return this.httpC.post<Building>(this.path + '/' + id + '/floor/');
+    return this.httpC.post<Building>(this.path + '/' + id + '/floor', floors);
   }
 
 }
