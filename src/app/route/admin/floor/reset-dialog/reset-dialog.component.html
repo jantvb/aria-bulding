@@ -1,6 +1,6 @@
 <h2 mat-dialog-title>Reset Floors</h2>
 <mat-dialog-content class="mat-typography">
-  <form class="example-container" [formGroup]="options">
+  <form class="container" [formGroup]="options">
 
     <mat-form-field appearance="legacy" >
       <mat-label>Number of Floors</mat-label>
@@ -11,9 +11,9 @@
       <mat-error *ngIf="numberOfFloorsControl.invalid">Please enter a number of floors</mat-error>
     </mat-form-field>
 
-    <mat-form-field appearance="legacy" >
-      <mat-checkbox [formControl]="floor13Control">Use floor 13?</mat-checkbox>
-    </mat-form-field>
+
+      <mat-checkbox [formControl]="floor13Control" color="primary">Use floor 13?</mat-checkbox>
+
 
 
   </form>

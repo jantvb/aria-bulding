@@ -52,7 +52,7 @@ export class FloorComponent implements OnInit {
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, delete it!'
+                confirmButtonText: 'Yes, reset it!'
               }).then((result) => {
                 if (result.isConfirmed) {
                   this.table.openResetDialog();

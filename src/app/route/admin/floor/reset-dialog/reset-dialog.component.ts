@@ -16,7 +16,7 @@ export class ResetDialogComponent {
   numberOfFloorsControl!:     FormControl;
   floor13Control!:            FormControl;
 
-  result: IFloorsForm = {floor13: false, numberOfFloors: 1};
+  result:                     IFloorsForm = {floor13: false, numberOfFloors: 1};
 
   currentBuilding:            Building = new Building();
 
@@ -42,8 +42,8 @@ export class ResetDialogComponent {
   }
 
   submit(): void {
-    this.result.numberOfFloors = this.numberOfFloorsControl.value;
-    this.result.floor13       = this.floor13Control.value;
+    this.result.numberOfFloors  = this.numberOfFloorsControl.value;
+    this.result.floor13         = this.floor13Control.value;
     this.dialogRef.close(this.result);
   }
 
