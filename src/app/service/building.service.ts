@@ -44,8 +44,8 @@ export class BuildingService {
     return this.httpC.delete<Building>(this.path + '/' + id + '/floor');
   }
 
-  addFloors(id: number, numberOfFloors: number): Observable<Building> {
-    return this.httpC.patch<Building>(this.path + '/' + id + '/floor/' + numberOfFloors, undefined);
+  addFloors(id: number, floors: Array<Floor> ): Observable<Building> {
+    return this.httpC.post<Building>(this.path + '/' + id + '/floor/');
   }
 
 }

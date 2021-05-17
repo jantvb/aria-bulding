@@ -234,16 +234,16 @@ export class TableComponent implements OnInit {
 
 
 
-        // this.addFloors(result);
+         this.addFloors(this.floors);
       }
 
     });
   }
 
-  protected addFloors(numberOfFloors: number): void {
+  protected addFloors(floors: Array<Floor>): void {
 
     this.buildingService
-        .addFloors(this.currentBuilding.id, numberOfFloors)
+        .addFloors(this.currentBuilding.id, floors)
         .subscribe(building => {
           this.Toast.fire({
                             icon: 'success',
