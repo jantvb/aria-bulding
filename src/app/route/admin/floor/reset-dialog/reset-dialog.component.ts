@@ -14,9 +14,10 @@ export class ResetDialogComponent {
 
   options!:                   FormGroup;
   numberOfFloorsControl!:     FormControl;
+  prefixControl!:             FormControl;
   floor13Control!:            FormControl;
 
-  result:                     IFloorsForm = {floor13: false, numberOfFloors: 1};
+  result:                     IFloorsForm = {floor13: false, prefix: '', numberOfFloors: 1};
 
   currentBuilding:            Building = new Building();
 
@@ -28,10 +29,12 @@ export class ResetDialogComponent {
     this.currentBuilding          = sessionService.loadCurrentBuilding();
 
     this.numberOfFloorsControl    = new FormControl();
+    this.prefixControl            = new FormControl();
     this.floor13Control           = new FormControl(false);
 
     this.options = fb.group({
       numberOfFloors:         this.numberOfFloorsControl,
+      prefix:                 this.prefixControl,
       floor13:                this.floor13Control
     });
 
@@ -44,6 +47,7 @@ export class ResetDialogComponent {
   submit(): void {
 
     this.result.numberOfFloors  = this.numberOfFloorsControl.value;
+    this.result.prefix          = this.prefixControl.value;
     this.result.floor13         = this.floor13Control.value;
     this.dialogRef.close(this.result);
   }
