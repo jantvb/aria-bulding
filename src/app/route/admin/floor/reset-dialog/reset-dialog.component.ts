@@ -1,7 +1,7 @@
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogRef } from '@angular/material/dialog';
 import { SessionService } from './../../../../service/authService/session.service';
 import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
-import { Component, Inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { Building } from 'src/app/model/building.model';
 import { IFloorsForm } from './../../../../interface/ifloors-form';
 
@@ -28,7 +28,7 @@ export class ResetDialogComponent {
     this.currentBuilding          = sessionService.loadCurrentBuilding();
 
     this.numberOfFloorsControl    = new FormControl();
-    this.floor13Control           = new FormControl();
+    this.floor13Control           = new FormControl(false);
 
     this.options = fb.group({
       numberOfFloors:         this.numberOfFloorsControl,
@@ -42,6 +42,7 @@ export class ResetDialogComponent {
   }
 
   submit(): void {
+
     this.result.numberOfFloors  = this.numberOfFloorsControl.value;
     this.result.floor13         = this.floor13Control.value;
     this.dialogRef.close(this.result);
